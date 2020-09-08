@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { fetchTodos, deleteTodo, addTodo } from '../actions';
-import './App.css';
-import Card from './Card';
+import { fetchTodos, deleteTodo, addTodo } from 'actions';
+import 'components/App.css';
+import Card from 'components/Card';
 
 class App extends React.Component {
   state = {

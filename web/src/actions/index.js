@@ -1,2 +1,2 @@
-export * from './todos';
-export * from './types';
+export * from 'actions/todos';
+export * from 'actions/types';

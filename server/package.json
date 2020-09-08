@@ -6,7 +6,12 @@
     "nodemon": "1.18.3"
   },
   "scripts": {
-    "dev": "nodemon src/index.js",
+    "dev": "nodemon src/index.js --ignore src/__tests__",
+    "test": "jest",
     "start": "node src/index.js"
+  },
+  "devDependencies": {
+    "jest": "^26.4.2",
+    "supertest": "^4.0.2"
   }
 }
