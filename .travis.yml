@@ -5,7 +5,7 @@ env:
   global:
     - GIT_SHA=$(git rev-parse HEAD)
 before_install:
-  - curl -L https://aka.ms/InstallAzureCli | bash
+  - curl -L -s https://aka.ms/InstallAzureCli | bash
   - az aks install-cli
   - echo "$AZ_PASS" | az login -u $AZ_USERNAME --password-stdin
   # - read -sp "Azure password: " AZ_PASS && echo && az login -u $AZ_USERNAME -p $AZ_PASS
