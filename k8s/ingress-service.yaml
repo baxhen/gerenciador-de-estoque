@@ -21,5 +21,5 @@ spec:
           - path: /api/?(.*)
             # UPDATE THIS LINE ABOVE
             backend:
-              serviceName: web-cluster-ip-service
+              serviceName: server-cluster-ip-service
               servicePort: 5000

@@ -1,0 +1,24 @@
+sudo: required
+services:
+  - docker
+env:
+  global:
+    - GIT_SHA=$(git rev-parse HEAD) 
+before_install:
+  - curl -L https://aka.ms/InstallAzureCli | bash
+  - az aks install-cli
+  - read -sp "Azure password: " AZ_PASS && echo && az login -u $AZ_USERNAME -p $AZ_PASS
+  - az aks get-credentials --resource-group basicArchJs --name basicArchJsCluster
+  - echo "$AZ_CR_PASSWORD" | docker login -u "$AZ_CR_USERNAME" --password-stdin "$AZ_CR_LOGIN_URL"
+  - docker build -t baxhenbasicarchjs.azurecr.io/basic-arch-js-web -f ./web/Dockerfile.dev ./web
+  - docker build -t baxhenbasicarchjs.azurecr.io/basic-arch-js-server -f ./server/Dockerfile.dev ./server
+
+script: 
+  - docker run -e CI=true baxhenbasicarchjs.azurecr.io/basic-arch-js-web npm run test
+  # - docker run -e CI=true baxhenbasicarchjs.azurecr.io/basic-arch-js-server npm run test
+
+deploy:
+  provider: script
+  script: bash ./deploy.sh
+  on:
+    branch: master
