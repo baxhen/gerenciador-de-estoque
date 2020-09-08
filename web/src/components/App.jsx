@@ -31,10 +31,7 @@ class App extends React.Component {
     return (
       <>
         <header>
-          <h3>
-            Todo List - Using Node Backend, ReactJs, Docker, Kubernetes and
-            Travis CI
-          </h3>
+          <h3>Todo List</h3>
         </header>
         <section id="todo">
           <div className="container">
