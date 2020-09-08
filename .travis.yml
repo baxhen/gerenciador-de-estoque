@@ -5,7 +5,7 @@ env:
   global:
     - GIT_SHA=$(git rev-parse HEAD)
 before_install:
-  - docker run mcr.microsoft.com/azure-cli
+  - curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash >/dev/null
   # - curl -L https://aka.ms/InstallAzureCli | bash >/dev/null
   - az aks install-cli
   # - read -sp "Azure password: " AZ_PASS && echo && az login -u $AZ_USERNAME -p $AZ_PASS
