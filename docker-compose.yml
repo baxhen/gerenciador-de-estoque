@@ -1,0 +1,30 @@
+version: '3'
+services:
+  api:
+    # depends_on:
+    #   - postgres
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./server
+    volumes:
+      - /app/node_modules
+      - ./server:/app
+  web:
+    stdin_open: true
+    restart: always
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./web
+    volumes:
+      - /app/node_modules
+      - ./web:/app
+  nginx-proxy:
+    depends_on:
+      - api
+      - web
+    restart: always
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./nginx
+    ports:
+      - '3000:80'
