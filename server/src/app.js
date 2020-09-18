@@ -2,6 +2,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const morgan = require('morgan');
+// const passport = require('passport');
 
 class AppController {
   constructor() {
@@ -12,6 +14,7 @@ class AppController {
 
   middlewares() {
     this.express.use(cors());
+    this.express.use(morgan('combined'));
     this.express.use(bodyParser.json());
   }
 

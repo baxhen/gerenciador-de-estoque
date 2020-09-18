@@ -1,5 +1,18 @@
 const app = require('./app');
+const mongoose = require('mongoose');
+const { mongoUri } = require('./config/config');
 
-app.listen(5000, (err) => {
-  console.log('Listening');
+mongoose.connect(mongoUri, {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true,
+});
+mongoose.connection.on('connected', () => {
+  console.log('Connected to mongo instance');
+  app.listen(5000, (err) => {
+    console.log('Listening');
+  });
+});
+mongoose.connection.on('error', (err) => {
+  console.error('Error connecting to mongo', err);
 });

@@ -1,5 +1,4 @@
 export const ActionTypes = {
-  ADD_TODO: 'ADD_TODO',
-  FETCH_TODOS: 'FETCH_TODOS',
-  DELETE_TODO: 'DELETE_TODO',
+  AUTH_USER: 'AUTH_USER',
+  AUTH_ERROR: 'AUTH_ERROR',
 };
