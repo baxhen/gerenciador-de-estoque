@@ -8,6 +8,8 @@ import { makeStyles } from '@material-ui/styles';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import { linksConfig, headerConfig } from './configObjects';
+
 function ElevationScroll(props) {
   const { children } = props;
 
@@ -47,29 +49,6 @@ function Header(props) {
   const [value, setValue] = useState(0);
 
   /***************************************** Config Objects **********************************************/
-
-  const headerConfig = [
-    {
-      cond: 'Quando o usuário esta autenticado',
-      // condition: { first: props.authenticated, second: true },
-      logoTab: { label: 'Logo Aqui', to: '/feature' },
-      tabs: [
-        { label: 'Feature', to: '/feature', className: classes.tab },
-        { label: 'Sign Out', to: '/signout', className: classes.lastTab },
-      ],
-    },
-    {
-      cond: 'Quando o usuário não esta autenticado',
-      // condition: { first: props.authenticated, second: false },
-      logoTab: { label: 'Logo Aqui', to: '/' },
-      tabs: [
-        { label: 'Home', to: '/', className: classes.tab },
-        { label: 'Sign Up', to: '/signup', className: classes.tab },
-        { label: 'Sign In', to: '/signin', className: classes.lastTab },
-      ],
-    },
-  ];
-
   const headerConditions = [
     {
       first: props.authenticated,
@@ -86,7 +65,6 @@ function Header(props) {
       },
     },
   ];
-
   /*******************************************************************************************************/
 
   const handleChange = (e, value) => {
@@ -126,7 +104,7 @@ function Header(props) {
                   return (
                     <Tab
                       key={label}
-                      className={className}
+                      className={classes[className]}
                       label={label}
                       component={Link}
                       to={to}
@@ -152,12 +130,6 @@ function Header(props) {
   }
 
   useEffect(() => {
-    const linksConfig = [
-      { path: '/', linkValue: 0 },
-      { path: '/feature', linkValue: 0 },
-      { path: '/signout', linkValue: 1 },
-      { path: '/signin', linkValue: 2 },
-    ];
     const { pathname } = window.location;
 
     linksConfig.forEach(
