@@ -46,94 +46,125 @@ function Header(props) {
 
   const [value, setValue] = useState(0);
 
+  /***************************************** Config Objects **********************************************/
+
+  const headerConfig = [
+    {
+      cond: 'Quando o usuário esta autenticado',
+      // condition: { first: props.authenticated, second: true },
+      logoTab: { label: 'Logo Aqui', to: '/feature' },
+      tabs: [
+        { label: 'Feature', to: '/feature', className: classes.tab },
+        { label: 'Sign Out', to: '/signout', className: classes.lastTab },
+      ],
+    },
+    {
+      cond: 'Quando o usuário não esta autenticado',
+      // condition: { first: props.authenticated, second: false },
+      logoTab: { label: 'Logo Aqui', to: '/' },
+      tabs: [
+        { label: 'Home', to: '/', className: classes.tab },
+        { label: 'Sign Up', to: '/signup', className: classes.tab },
+        { label: 'Sign In', to: '/signin', className: classes.lastTab },
+      ],
+    },
+  ];
+
+  const headerConditions = [
+    {
+      first: props.authenticated,
+
+      action: () => {
+        return renderHeader('Quando o usuário esta autenticado');
+      },
+    },
+    {
+      first: !props.authenticated,
+
+      action: () => {
+        return renderHeader('Quando o usuário não esta autenticado');
+      },
+    },
+  ];
+
+  /*******************************************************************************************************/
+
   const handleChange = (e, value) => {
     setValue(value);
   };
 
-  function renderLinks() {
-    if (props.authenticated) {
-      return (
-        <>
-          <ElevationScroll>
-            <AppBar position="fixed">
-              <Toolbar disableGutters>
-                <Tab label="Logo Aqui" component={Link} to="/" />
-                <Tabs
-                  value={value}
-                  onChange={handleChange}
-                  className={classes.tabContainer}
-                  indicatorColor="primary"
-                >
-                  <Tab
-                    className={classes.tab}
-                    label="Feature"
-                    component={Link}
-                    to="/feature"
-                  />
-                  <Tab
-                    className={classes.lastTab}
-                    label="Sign Out"
-                    component={Link}
-                    to="/signout"
-                  />
-                </Tabs>
-              </Toolbar>
-            </AppBar>
-          </ElevationScroll>
-          <div className={classes.toolbarMargin}></div>
-        </>
-      );
-    } else {
-      return (
-        <>
-          <ElevationScroll>
-            <AppBar position="fixed">
-              <Toolbar disableGutters>
-                <Tab label="Logo Aqui" component={Link} to="/" />
+  const renderHeader = (condition) => {
+    const [headerToRender] = headerConfig.filter(({ cond }) => {
+      return condition === cond;
+    });
 
-                <Tabs
-                  value={value}
-                  onChange={handleChange}
-                  className={classes.tabContainer}
-                  indicatorColor="primary"
-                >
-                  <Tab
-                    className={classes.tab}
-                    label="Sign Up"
-                    component={Link}
-                    to="/signup"
-                  />
-                  <Tab
-                    className={classes.lastTab}
-                    label="Sign In"
-                    component={Link}
-                    to="/signin"
-                  />
-                </Tabs>
-                {/* <Link to="/signup">Sign Up</Link>
-                <Link to="/signin">Sign In</Link> */}
-              </Toolbar>
-            </AppBar>
-          </ElevationScroll>
-          <div className={classes.toolbarMargin}></div>
-        </>
-      );
-    }
+    const {
+      logoTab: { label, to },
+      tabs,
+    } = headerToRender;
+
+    return (
+      <>
+        <ElevationScroll>
+          <AppBar position="fixed">
+            <Toolbar disableGutters>
+              <Tab
+                label={label}
+                component={Link}
+                to={to}
+                onClick={() => {
+                  setValue(0);
+                }}
+              />
+              <Tabs
+                value={value >= tabs.length ? 0 : value}
+                onChange={handleChange}
+                className={classes.tabContainer}
+                indicatorColor="primary"
+              >
+                {tabs.map(({ label, to, className }) => {
+                  return (
+                    <Tab
+                      key={label}
+                      className={className}
+                      label={label}
+                      component={Link}
+                      to={to}
+                    />
+                  );
+                })}
+              </Tabs>
+            </Toolbar>
+          </AppBar>
+        </ElevationScroll>
+        <div className={classes.toolbarMargin}></div>
+      </>
+    );
+  };
+
+  function renderLinks() {
+    const [header] = headerConditions.filter(({ first, action }) => {
+      if (first) return action();
+      return null;
+    });
+
+    return header.action();
   }
 
   useEffect(() => {
-    if (
-      (window.location.pathname === '/signup' && value !== 0) ||
-      (window.location.pathname === '/feature' && value !== 0)
-    ) {
-      setValue(0);
-    } else if (
-      (window.location.pathname === '/signin' && value !== 1) ||
-      (window.location.pathname === '/signout' && value !== 1)
-    ) {
-      setValue(1);
-    }
-  }, []);
+    const linksConfig = [
+      { path: '/', linkValue: 0 },
+      { path: '/feature', linkValue: 0 },
+      { path: '/signout', linkValue: 1 },
+      { path: '/signin', linkValue: 2 },
+    ];
+    const { pathname } = window.location;
+
+    linksConfig.forEach(
+      ({ path, linkValue }) =>
+        pathname === path && value !== linkValue && setValue(linkValue)
+    );
+  }, [value]);
 
   return <div className="header">{renderLinks()}</div>;
 }
