@@ -14,6 +14,7 @@ export const headerConfig = [
     logoTab: { label: 'Logo Aqui', to: '/' },
     tabs: [
       { label: 'Home', to: '/', className: 'tab' },
+      { label: 'About Us', to: '/about', className: 'tab' },
       { label: 'Sign Up', to: '/signup', className: 'tab' },
       { label: 'Sign In', to: '/signin', className: 'lastTab' },
     ],

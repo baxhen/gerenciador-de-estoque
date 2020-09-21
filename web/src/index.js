@@ -5,6 +5,7 @@ import { Route } from 'react-router-dom';
 import Root from 'Root';
 import App from 'components/App';
 import Landing from 'components/Landing';
+import About from 'components/About';
 import Feature from 'components/Feature';
 import Signup from 'components/auth/Signup';
 import Signout from 'components/auth/Signout';
@@ -18,6 +19,7 @@ ReactDOM.render(
       <Route path="/feature" component={Feature} />
       <Route path="/signout" component={Signout} />
       <Route path="/signin" component={Signin} />
+      <Route path="/about" component={About} />
     </App>
   </Root>,
   document.querySelector('#root')

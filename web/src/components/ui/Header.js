@@ -79,29 +79,29 @@ const useStyles = makeStyles((theme) => ({
   },
   appBar: {
     zIndex: theme.zIndex.modal + 1,
+    height: '64px',
   },
 }));
 
-function Header(props) {
+function Header({ value, setValue, authenticated }) {
   const classes = useStyles();
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.down('md'));
+  const matches = useMediaQuery(theme.breakpoints.down('xs'));
   const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
 
   const [openDrawer, setOpenDrawer] = useState(false);
-  const [value, setValue] = useState(0);
 
   /***************************************** Config Objects **********************************************/
   const headerConditions = [
     {
-      first: props.authenticated,
+      first: authenticated,
 
       action: () => {
         return renderHeader('Quando o usuário esta autenticado');
       },
     },
     {
-      first: !props.authenticated,
+      first: !authenticated,
 
       action: () => {
         return renderHeader('Quando o usuário não esta autenticado');
@@ -225,7 +225,7 @@ function Header(props) {
       ({ path, linkValue }) =>
         pathname === path && value !== linkValue && setValue(linkValue)
     );
-  }, [value]);
+  }, [value, setValue]);
 
   return <div className="header">{renderLinks()}</div>;
 }
