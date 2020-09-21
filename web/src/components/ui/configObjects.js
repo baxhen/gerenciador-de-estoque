@@ -24,5 +24,6 @@ export const linksConfig = [
   { path: '/', linkValue: 0 },
   { path: '/feature', linkValue: 0 },
   { path: '/signout', linkValue: 1 },
+  { path: '/signup', linkValue: 1 },
   { path: '/signin', linkValue: 2 },
 ];

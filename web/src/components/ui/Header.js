@@ -5,6 +5,15 @@ import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { makeStyles } from '@material-ui/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useTheme } from '@material-ui/styles';
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -26,6 +35,10 @@ function ElevationScroll(props) {
 const useStyles = makeStyles((theme) => ({
   toolbarMargin: {
     ...theme.mixins.toolbar,
+    marginBottom: '0.65em',
+    [theme.breakpoints.down('xs')]: {
+      marginBottom: '1.1em',
+    },
   },
   tabContainer: {
     marginLeft: 'auto',
@@ -41,11 +54,41 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: '25px',
     marginRight: '25px',
   },
+  drawerIconContainer: {
+    marginLeft: 'auto',
+    '&:hover': {
+      backgroundColor: 'transparent',
+    },
+  },
+  drawerIcon: {
+    height: '50px',
+    width: '50px',
+  },
+  drawer: {
+    backgroundColor: theme.palette.common.blue,
+  },
+  drawerItem: {
+    ...theme.typography.tab,
+    color: 'white',
+    opacity: 0.7,
+  },
+  drawerSelectedItem: {
+    '& .MuiListItemText-root': {
+      opacity: 1,
+    },
+  },
+  appBar: {
+    zIndex: theme.zIndex.modal + 1,
+  },
 }));
 
 function Header(props) {
   const classes = useStyles();
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('md'));
+  const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
 
+  const [openDrawer, setOpenDrawer] = useState(false);
   const [value, setValue] = useState(0);
 
   /***************************************** Config Objects **********************************************/
@@ -71,6 +114,68 @@ function Header(props) {
     setValue(value);
   };
 
+  const renderTabs = (tabs) => (
+    <Tabs
+      value={value >= tabs.length ? 0 : value}
+      onChange={handleChange}
+      className={classes.tabContainer}
+      indicatorColor="primary"
+    >
+      {tabs.map(({ label, to, className }) => (
+        <Tab
+          key={label}
+          className={classes[className]}
+          label={label}
+          component={Link}
+          to={to}
+        />
+      ))}
+    </Tabs>
+  );
+  const renderDrawer = (tabs) => (
+    <>
+      <SwipeableDrawer
+        disableBackdropTransition={!iOS}
+        disableDiscovery={iOS}
+        open={openDrawer}
+        onClose={() => setOpenDrawer(false)}
+        onOpen={() => setOpenDrawer(true)}
+        classes={{ paper: classes.drawer }}
+      >
+        <div className={classes.toolbarMargin}></div>
+
+        <List disablePadding>
+          {tabs.map(({ label, to }, i) => (
+            <ListItem
+              divider
+              button
+              key={label}
+              component={Link}
+              to={to}
+              onClick={() => {
+                setOpenDrawer(false);
+                setValue(i);
+              }}
+              selected={value === i}
+              classes={{ selected: classes.drawerSelectedItem }}
+            >
+              <ListItemText className={classes.drawerItem} disableTypography>
+                {label}
+              </ListItemText>
+            </ListItem>
+          ))}
+        </List>
+      </SwipeableDrawer>
+      <IconButton
+        onClick={() => setOpenDrawer(!openDrawer)}
+        disableRipple
+        className={classes.drawerIconContainer}
+      >
+        <MenuIcon className={classes.drawerIcon} />
+      </IconButton>
+    </>
+  );
+
   const renderHeader = (condition) => {
     const [headerToRender] = headerConfig.filter(({ cond }) => {
       return condition === cond;
@@ -84,7 +189,7 @@ function Header(props) {
     return (
       <>
         <ElevationScroll>
-          <AppBar position="fixed">
+          <AppBar position="fixed" className={classes.appBar}>
             <Toolbar disableGutters>
               <Tab
                 label={label}
@@ -94,24 +199,8 @@ function Header(props) {
                   setValue(0);
                 }}
               />
-              <Tabs
-                value={value >= tabs.length ? 0 : value}
-                onChange={handleChange}
-                className={classes.tabContainer}
-                indicatorColor="primary"
-              >
-                {tabs.map(({ label, to, className }) => {
-                  return (
-                    <Tab
-                      key={label}
-                      className={classes[className]}
-                      label={label}
-                      component={Link}
-                      to={to}
-                    />
-                  );
-                })}
-              </Tabs>
+
+              {matches ? renderDrawer(tabs) : renderTabs(tabs)}
             </Toolbar>
           </AppBar>
         </ElevationScroll>
