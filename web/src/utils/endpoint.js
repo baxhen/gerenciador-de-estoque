@@ -1,3 +1,7 @@
+// *important*
+// remover api se rodar sem o docker compose
+// de { url: 'api', subUrl: 'login' } para { url: 'login', subUrl: '' }
+
 export const URLS = {
   LOGIN: { url: 'api', subUrl: 'login' },
   SIGN_UP: { url: 'api', subUrl: 'signup' },
