@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
   },
   link: {
+    position: 'absolute',
     color: 'white',
     fontFamily: 'Arial',
     fontSize: '0.75rem',
@@ -38,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
   socialContainer: {
     position: 'absolute',
     marginTop: '2.6rem',
+    width: 'auto',
     right: '1em',
   },
 }));
@@ -48,8 +50,8 @@ export default function Footer({ value, setValue }) {
   const allTabs = [...tabs2];
   return (
     <footer className={classes.footer}>
-      <Hidden xsDown>
-        <Grid container justify="center" className={classes.mainContainer}>
+      <Grid container justify="center" className={classes.mainContainer}>
+        <Hidden xsDown>
           {allTabs.map(({ label, to }, i) => (
             <Grid key={label + to} item className={classes.gridItem}>
               <Grid container direction="column">
@@ -65,41 +67,44 @@ export default function Footer({ value, setValue }) {
               </Grid>
             </Grid>
           ))}
-        </Grid>
-      </Hidden>
-
-      <Grid
-        container
-        justify="flex-end"
-        spacing={2}
-        className={classes.socialContainer}
-      >
+        </Hidden>
         <Grid
-          item
-          component={'a'}
-          href="https://www.facebook.com"
-          rel="noopener noreferrer"
-          target="_blank"
+          container
+          justify="flex-end"
+          spacing={2}
+          className={classes.socialContainer}
         >
-          <img src={facebook} alt="facebook logo" className={classes.icon} />
-        </Grid>
-        <Grid
-          item
-          component={'a'}
-          href="https://www.twitter.com"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <img src={twitter} alt="twitter logo" className={classes.icon} />
-        </Grid>
-        <Grid
-          item
-          component={'a'}
-          href="https://www.instagram.com"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <img src={instagram} alt="instagram logo" className={classes.icon} />
+          <Grid
+            item
+            component={'a'}
+            href="https://www.facebook.com"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <img src={facebook} alt="facebook logo" className={classes.icon} />
+          </Grid>
+          <Grid
+            item
+            component={'a'}
+            href="https://www.twitter.com"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <img src={twitter} alt="twitter logo" className={classes.icon} />
+          </Grid>
+          <Grid
+            item
+            component={'a'}
+            href="https://www.instagram.com"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <img
+              src={instagram}
+              alt="instagram logo"
+              className={classes.icon}
+            />
+          </Grid>
         </Grid>
       </Grid>
     </footer>
