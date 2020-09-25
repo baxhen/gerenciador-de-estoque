@@ -27,6 +27,15 @@ const useStyles = withStyles(
         fontSize: 50,
       },
     },
+    forgotPassword: {
+      '&:hover': {
+        textDecoration: 'none',
+        color: theme.palette.primary.light,
+      },
+    },
+    linkContainer: {
+      color: 'primary',
+    },
   }),
   { withTheme: true }
 );

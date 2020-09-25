@@ -6,6 +6,8 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
+import { Link } from '@material-ui/core';
+import { Link as RouterLink } from 'react-router-dom';
 
 class LoginPage extends Component {
   state = {
@@ -21,7 +23,7 @@ class LoginPage extends Component {
       this.setState({ error: true });
     }
   }
-
+  preventDefault = (event) => event.preventDefault();
   render() {
     const {
       handleSubmit,
@@ -76,6 +78,18 @@ class LoginPage extends Component {
                     />
                   </Grid>
                 ))}
+                <Grid item container justify="flex-end">
+                  <Typography className={classes.linkContainer}>
+                    <Link
+                      variant="body2"
+                      className={classes.forgotPassword}
+                      component={RouterLink}
+                      onClick={this.preventDefault}
+                    >
+                      Esqueceu a senha?
+                    </Link>
+                  </Typography>
+                </Grid>
                 <Grid item container justify="center">
                   <Button
                     variant="contained"
