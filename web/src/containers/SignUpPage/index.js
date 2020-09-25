@@ -5,9 +5,11 @@ import { reduxForm } from 'redux-form';
 import { signUserUp } from '../AuthContainer/meta/actions';
 import SignUp from './components/SignUp';
 import useStyles from './components/styles';
+import { validate, formFields } from './meta/validate';
 
 const mapStateToProps = ({ auth: { errorMessage } }) => ({
   errorMessage,
+  formFields,
 });
 
 function mapDispatchToProps(dispatch) {
@@ -17,6 +19,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
-const signupForm = reduxForm({ form: 'signup' });
+const signupForm = reduxForm({ validate, form: 'signup' });
 
 export default compose(withConnect, signupForm, useStyles)(SignUp);

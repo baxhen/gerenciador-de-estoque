@@ -1,11 +1,11 @@
-export const getTitleAsArray = title => {
+export const getTitleAsArray = (title) => {
   if (title && typeof title === 'string' && title.length > 2) {
     return title.split('\\s');
   }
   return ['', ''];
 };
 
-export const cutFirstWord = title => {
+export const cutFirstWord = (title) => {
   const word = [];
   if (
     title &&
@@ -20,7 +20,7 @@ export const cutFirstWord = title => {
   return [title, ''];
 };
 
-export const getTrailingZero = number => {
+export const getTrailingZero = (number) => {
   if ((number && typeof number === 'string') || typeof number === 'number') {
     const stringNumber = number.toString();
     if (stringNumber.length === 1) {
@@ -31,15 +31,15 @@ export const getTrailingZero = number => {
   return '';
 };
 
-export const isValidArray = array => Array.isArray(array) && array.length > 0;
+export const isValidArray = (array) => Array.isArray(array) && array.length > 0;
 
 export const isGoodString = (string, length) =>
   string && typeof string === 'string' && string.length > (length || 0);
 
-export const isValidObject = obj =>
+export const isValidObject = (obj) =>
   obj && typeof obj === 'object' && obj === Object(obj) && obj !== null;
 
-export const isDOMElement = element => element && element instanceof Element;
+export const isDOMElement = (element) => element && element instanceof Element;
 
 export function isGoodFunction(functionToCheck) {
   return (
@@ -47,10 +47,10 @@ export function isGoodFunction(functionToCheck) {
   );
 }
 
-export const getTimeString = times => {
+export const getTimeString = (times) => {
   let timeString = '';
   if (isValidObject(times)) {
-    Object.keys(times).map(key => {
+    Object.keys(times).map((key) => {
       timeString = `${timeString} ${times[key]} ${key}`;
       return key;
     });
@@ -58,18 +58,30 @@ export const getTimeString = times => {
   return timeString;
 };
 
-export const getHoursAndMinutes = date => {
+export const getHoursAndMinutes = (date) => {
   if (isValidObject(date) && date.isValid && date.isValid()) {
     return date.format('HH:mm');
   }
   return '';
 };
 
-export const getDateOnly = date => {
+export const getDateOnly = (date) => {
   if (isValidObject(date) && date.isValid && date.isValid()) {
     return date.format('DD.MM.YYYY ');
   }
   return '';
 };
 
-export const isValidGetResponse = response => isValidObject(response) && response.rows && response.count !== undefined;
+export const isValidGetResponse = (response) =>
+  isValidObject(response) && response.rows && response.count !== undefined;
+
+const re = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+export const validateEmail = (email) => {
+  const isInvalid = re.test(email) === false;
+
+  if (isInvalid) {
+    return 'Email invalido';
+  }
+  return;
+};

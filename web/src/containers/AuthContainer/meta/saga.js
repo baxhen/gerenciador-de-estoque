@@ -11,7 +11,7 @@ import {
 } from '../../../utils/cookies';
 import { history } from '../../../history';
 
-function* handleGetAuth() {
+function* handleSignIn() {
   try {
     const loginPage = yield select(makeSelectLoginPage());
     const request = { email: loginPage.email, password: loginPage.password };
@@ -48,7 +48,7 @@ function* handleLogOut() {
 
 export default function* () {
   yield all([
-    yield takeLatest(constants.GET_AUTH, handleGetAuth),
+    yield takeLatest(constants.GET_AUTH, handleSignIn),
     yield takeLatest(constants.LOGOUT, handleLogOut),
     yield takeLatest(constants.SIGN_UP, handleSignUp),
   ]);
