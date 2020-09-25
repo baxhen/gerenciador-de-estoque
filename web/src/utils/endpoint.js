@@ -3,8 +3,8 @@
 // de { url: 'api', subUrl: 'login' } para { url: 'login', subUrl: '' }
 
 export const URLS = {
-  LOGIN: { url: 'api', subUrl: 'login' },
-  SIGN_UP: { url: 'api', subUrl: 'signup' },
+  LOGIN: { url: 'login', subUrl: '' },
+  SIGN_UP: { url: 'signup', subUrl: '' },
 };
 
 export const getEndpointURL = (key) => {
