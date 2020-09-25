@@ -4,7 +4,7 @@ export const styles = makeStyles((theme) => ({
   footer: {
     backgroundColor: theme.palette.common.blue,
     width: '100%',
-    height: '17.5vh',
+    height: '20vh',
     zIndex: 1302,
     position: 'relative',
   },

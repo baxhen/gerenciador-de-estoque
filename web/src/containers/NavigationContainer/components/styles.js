@@ -47,6 +47,6 @@ export const styles = makeStyles((theme) => ({
   },
   appBar: {
     zIndex: theme.zIndex.modal + 1,
-    height: '64px',
+    height: '10vh',
   },
 }));

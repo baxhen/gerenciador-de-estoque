@@ -5,7 +5,7 @@ const useStyles = withStyles(
     background: {
       backgroundPosition: 'center',
       backgroundSize: 'cover',
-      height: '27.8em',
+      height: '70vh',
       [theme.breakpoints.down('xs')]: {
         height: '38em',
       },
