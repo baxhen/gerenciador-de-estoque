@@ -8,6 +8,7 @@ import LoginPage from './containers/LoginPage';
 import LogOutContainer from './containers/LogOutContainer';
 import SignUpPage from './containers/SignUpPage';
 import FeaturePage from 'containers/FeaturePage';
+import RecoverPasswordPage from 'containers/RecoverPasswordPage';
 
 ReactDOM.render(
   <Root>
@@ -18,6 +19,7 @@ ReactDOM.render(
       <Route exact path="/signout" component={LogOutContainer} />
       <Route exact path="/about" component={() => <div>About Us</div>} />
       <Route exact path="/feature" component={FeaturePage} />
+      <Route exact path="/recoverPassword" component={RecoverPasswordPage} />
     </App>
   </Root>,
   document.getElementById('root')

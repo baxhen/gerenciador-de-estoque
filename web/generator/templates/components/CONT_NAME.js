@@ -4,7 +4,7 @@ import { styles } from './styles';
 const useStyles = styles;
 
 function CONT_CAMEL_NAME() {
-  classes = useStyles();
+  const classes = useStyles();
   return <div />;
 }
 

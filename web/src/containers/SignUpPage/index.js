@@ -5,7 +5,8 @@ import { reduxForm } from 'redux-form';
 import { signUserUp } from '../AuthContainer/meta/actions';
 import SignUp from './components/SignUp';
 import useStyles from './components/styles';
-import { validate, formFields } from './meta/validate';
+import { validate } from './meta/validate';
+import { formFields } from './meta/configObjects';
 
 const mapStateToProps = ({ auth: { errorMessage } }) => ({
   errorMessage,

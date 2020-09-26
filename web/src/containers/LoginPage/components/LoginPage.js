@@ -1,5 +1,5 @@
-import { InputTextField } from 'components/ReduxForm/TextInput/InputTextField';
 import React, { Component, memo } from 'react';
+import { InputTextField } from 'components/ReduxForm/TextInput/InputTextField';
 import { Field } from 'redux-form';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
@@ -23,7 +23,7 @@ class LoginPage extends Component {
       this.setState({ error: true });
     }
   }
-  preventDefault = (event) => event.preventDefault();
+
   render() {
     const {
       handleSubmit,
@@ -84,7 +84,7 @@ class LoginPage extends Component {
                       variant="body2"
                       className={classes.forgotPassword}
                       component={RouterLink}
-                      onClick={this.preventDefault}
+                      to="/recoverPassword"
                     >
                       Esqueceu a senha?
                     </Link>

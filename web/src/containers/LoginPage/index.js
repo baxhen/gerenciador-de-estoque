@@ -10,7 +10,8 @@ import { reduxForm } from 'redux-form';
 import LoginPage from './components/LoginPage';
 import { getAuth } from '../AuthContainer/meta/actions';
 import useStyles from './components/styles';
-import { validate, formFields } from './meta/validate';
+import { validate } from './meta/validate';
+import { formFields } from './meta/configObjects';
 import { withMediaQuery } from 'components/HighOrderComponents/withMediaQuery';
 
 const mapStateToProps = ({ auth: { errorMessage } }) => ({
