@@ -3,17 +3,19 @@ import { compose } from 'redux';
 import { reduxForm } from 'redux-form';
 
 import RecoverPassword from './components/RecoverPassword';
+import { selectRecoverPasswordMessage } from 'containers/AuthContainer/meta/selectors';
+import { recoverPassword } from 'containers/AuthContainer/meta/actions';
 import { formFields } from './meta/configObjects';
 import { validate } from './meta/validade';
 
-const mapStateToProps = ({ auth: { errorMessage } }) => ({
-  errorMessage,
+const mapStateToProps = (state) => ({
+  recoverPasswordMessage: selectRecoverPasswordMessage(state),
   formFields,
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    dispatchRecoverPassword: (email) => console.log('implement action', email),
+    dispatchRecoverPassword: () => dispatch(recoverPassword()),
   };
 };
 

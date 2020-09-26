@@ -24,7 +24,8 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: 1,
     fontSize: 55,
     [theme.breakpoints.down('xs')]: {
-      fontSize: 50,
+      fontSize: 45,
+      maxWidth: 306,
     },
   },
 }));

@@ -11,10 +11,11 @@ import { styles } from './styles';
 
 const useStyles = styles;
 
-function Footer({ value, setValue, headerConfig }) {
+function Footer({ setValue, headerConfig }) {
   const classes = useStyles();
   const [, tabs2] = headerConfig.map(({ tabs }) => tabs);
   const allTabs = [...tabs2];
+
   return (
     <footer className={classes.footer}>
       <Hidden xsDown>

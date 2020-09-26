@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 function Feature() {
   return <div>Feature</div>;
 }
 
-export default Feature;
+export default memo(Feature);

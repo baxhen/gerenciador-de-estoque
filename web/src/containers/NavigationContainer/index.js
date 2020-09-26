@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { getAuth } from '../AuthContainer/meta/selectors';
+import { selectIsAuthenticated } from '../AuthContainer/meta/selectors';
 import {
   headerConfig,
   linksConfig,
@@ -9,7 +9,7 @@ import Navigation from './components/Navigation';
 const mapStateToProps = (state) => ({
   headerConfig,
   linksConfig,
-  auth: getAuth(state),
+  isAuthenticated: selectIsAuthenticated(state),
 });
 
 const mapDispatchToProps = {};

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { styles } from './styles';
 
 const useStyles = styles;
@@ -8,4 +8,4 @@ function CONT_CAMEL_NAME() {
   return <div />;
 }
 
-export default CONT_CAMEL_NAME;
+export default memo(CONT_CAMEL_NAME);

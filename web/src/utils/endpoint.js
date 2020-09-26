@@ -5,6 +5,7 @@
 export const URLS = {
   LOGIN: { url: 'login', subUrl: '' },
   SIGN_UP: { url: 'signup', subUrl: '' },
+  RECOVER_PASSWORD: { url: 'recoverPassword', subUrl: '' },
 };
 
 export const getEndpointURL = (key) => {

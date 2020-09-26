@@ -7,12 +7,11 @@
  *
  */
 
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, memo } from 'react';
+// import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 
-import { getAuth } from '../AuthContainer/meta/selectors';
 import NavigationContainer from '../NavigationContainer';
 import FooterContainer from '../FooterContainer';
 import { ThemeProvider } from '@material-ui/core';
@@ -24,19 +23,15 @@ function App({ children }) {
     <ThemeProvider theme={theme}>
       <NavigationContainer value={value} setValue={setValue} />
       {children}
-      <FooterContainer value={value} setValue={setValue} />
+      <FooterContainer setValue={setValue} />
     </ThemeProvider>
   );
 }
 
-App.propTypes = {
-  auth: PropTypes.object,
-};
+App.propTypes = {};
 
-const mapStateToProps = (state) => ({
-  auth: getAuth(state),
-});
+const mapStateToProps = (state) => ({});
 
 const withConnect = connect(mapStateToProps);
 
-export default compose(withConnect)(App);
+export default compose(withConnect, memo)(App);

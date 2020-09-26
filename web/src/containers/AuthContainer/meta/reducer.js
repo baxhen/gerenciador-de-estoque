@@ -25,6 +25,12 @@ const Auth = (state = initialState, action) =>
       case constants.GET_AUTH_ERROR:
         draft.errorMessage = action.payload.message;
         break;
+      case constants.RECOVER_PASSWORD_SUCCESS:
+        draft.recoverPasswordMessage = action.payload.message;
+        break;
+      case constants.RECOVER_PASSWORD_ERROR:
+        draft.recoverPasswordMessage = action.payload.message;
+        break;
       default:
         break;
     }

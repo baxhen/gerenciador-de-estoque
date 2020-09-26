@@ -22,3 +22,16 @@ export const logOut = () => {
     type: constants.LOGOUT,
   };
 };
+
+export const recoverPassword = () => ({
+  type: constants.RECOVER_PASSWORD,
+});
+
+export const recoverPasswordSuccess = (payload) => ({
+  type: constants.RECOVER_PASSWORD_SUCCESS,
+  payload,
+});
+export const recoverPasswordError = (payload) => ({
+  type: constants.RECOVER_PASSWORD_ERROR,
+  payload,
+});

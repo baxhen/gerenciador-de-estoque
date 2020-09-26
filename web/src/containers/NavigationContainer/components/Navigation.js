@@ -36,7 +36,7 @@ function Navigation({
   linksConfig,
   value,
   setValue,
-  auth: { isAuthenticated },
+  isAuthenticated,
 }) {
   const classes = useStyles();
   const theme = useTheme();

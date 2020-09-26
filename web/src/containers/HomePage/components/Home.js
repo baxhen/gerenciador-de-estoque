@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Grid } from '@material-ui/core';
 
 import { styles } from './styles';
@@ -14,4 +14,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default memo(Home);
