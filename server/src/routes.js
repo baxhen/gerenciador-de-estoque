@@ -7,7 +7,7 @@ const requireAuth = passport.authenticate('jwt', { session: false });
 const requireLogIn = passport.authenticate('local', { session: false });
 
 routes.get('/', requireAuth, (req, res) => {
-  res.send('hi there');
+  res.send({ message: 'this is a protected content' });
 });
 routes.post('/login', requireLogIn, Authentication.signin);
 routes.post('/signup', Authentication.signup);

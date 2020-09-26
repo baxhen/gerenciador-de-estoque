@@ -41,7 +41,7 @@ export default createMuiTheme({
         '&:before': {
           borderBottom: `2px solid ${arcBlue}`,
         },
-        '&:hover:not($disable):not($focused):not($error):before': {
+        '&:hover:not($disabled):not($focused):not($error):before': {
           borderBottom: `2px solid ${arcBlue}`,
         },
       },

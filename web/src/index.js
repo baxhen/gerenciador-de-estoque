@@ -4,13 +4,13 @@ import App from './containers/App';
 import Root from './Root';
 import { Route } from 'react-router-dom';
 
-import LoginPage from './containers/LoginPage';
-import LogOutContainer from './containers/LogOutContainer';
-import SignUpPage from './containers/SignUpPage';
-import FeaturePage from 'containers/FeaturePage';
-import RecoverPasswordPage from 'containers/RecoverPasswordPage';
-import HomePage from 'containers/HomePage';
-import AboutPage from 'containers/AboutPage';
+import LoginPage from './containers/LoginPage/dynamic';
+import LogOutContainer from './containers/LogOutContainer/dynamic';
+import SignUpPage from './containers/SignUpPage/dynamic';
+import FeaturePage from 'containers/FeaturePage/dynamic';
+import RecoverPasswordPage from 'containers/RecoverPasswordPage/dynamic';
+import HomePage from 'containers/HomePage/dynamic';
+import AboutPage from 'containers/AboutPage/dynamic';
 
 ReactDOM.render(
   <Root>
