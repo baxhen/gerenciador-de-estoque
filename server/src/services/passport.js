@@ -38,7 +38,7 @@ const localLogin = new LocalStrategy(localOptions, (email, password, done) => {
 
 // Setup options for JWT Strategy
 const jwtOptions = {
-  jwtFromRequest: ExtractJwt.fromHeader('Authorization'),
+  jwtFromRequest: ExtractJwt.fromHeader('authorization'),
   secretOrKey: config.secret,
 };
 // Create JWT strategy
@@ -46,6 +46,7 @@ const jwtLogin = new Strategy(jwtOptions, (payload, done) => {
   // se if user id and payload exists in our database
   // if it does, call 'done' with that other
   // otherwise, call done without a user object
+  console.log(config);
   User.findById(payload.sub, (err, user) => {
     if (err) {
       return done(err, false);
