@@ -24,13 +24,16 @@ const localLogin = new LocalStrategy(localOptions, (email, password, done) => {
 
     user.comparePassword(password, function (err, isMatch) {
       if (err) {
+        console.log('step 1');
         return done(err);
       }
 
       if (!isMatch) {
+        console.log('step 2');
         return done(null, false);
       }
 
+      console.log('step 3');
       return done(null, user);
     });
   });
@@ -46,7 +49,6 @@ const jwtLogin = new Strategy(jwtOptions, (payload, done) => {
   // se if user id and payload exists in our database
   // if it does, call 'done' with that other
   // otherwise, call done without a user object
-  console.log(config);
   User.findById(payload.sub, (err, user) => {
     if (err) {
       return done(err, false);

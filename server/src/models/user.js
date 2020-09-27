@@ -5,8 +5,11 @@ const bcrypt = require('bcryptjs');
 // define our model
 
 const userSchema = new Schema({
-  email: { type: String, unique: true, lowercase: true },
-  password: String,
+  email: { type: String, required: true, unique: true, lowercase: true },
+  password: { type: String, required: true },
+  passwordResetToken: { type: String },
+  passwordResetExpires: { type: Date },
+  createdAt: { type: Date, default: Date.now },
 });
 
 // on save hook, encrypt password
@@ -26,10 +29,13 @@ userSchema.pre('save', function (next) {
 });
 
 userSchema.methods.comparePassword = function (candidatePassword, callback) {
+  console.log(candidatePassword, this.password);
   bcrypt.compare(candidatePassword, this.password, function (err, isMatch) {
     if (err) {
+      console.log('step 4');
       return callback(err);
     }
+    console.log('step 5', isMatch);
     callback(null, isMatch);
   });
 };

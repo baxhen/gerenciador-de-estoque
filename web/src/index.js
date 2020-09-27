@@ -9,6 +9,7 @@ import LogOutContainer from './containers/LogOutContainer/dynamic';
 import SignUpPage from './containers/SignUpPage/dynamic';
 import FeaturePage from 'containers/FeaturePage/dynamic';
 import RecoverPasswordPage from 'containers/RecoverPasswordPage/dynamic';
+import ResetPasswordPage from 'containers/ResetPasswordPage/dynamic';
 import HomePage from 'containers/HomePage/dynamic';
 import AboutPage from 'containers/AboutPage/dynamic';
 
@@ -22,6 +23,7 @@ ReactDOM.render(
       <Route exact path="/about" component={AboutPage} />
       <Route exact path="/feature" component={FeaturePage} />
       <Route exact path="/recoverPassword" component={RecoverPasswordPage} />
+      <Route exact path="/resetPassword/:token" component={ResetPasswordPage} />
     </App>
   </Root>,
   document.getElementById('root')

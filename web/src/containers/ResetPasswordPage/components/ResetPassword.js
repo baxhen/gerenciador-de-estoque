@@ -10,28 +10,31 @@ import Typography from '@material-ui/core/Typography';
 import FormControl from '@material-ui/core/FormControl';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
+import { useParams } from 'react-router-dom';
 import { CircularProgress, useMediaQuery } from '@material-ui/core';
 
-function RecoverPassword(props) {
+function ResetPassword(props) {
   const classes = useStyles();
   const theme = useTheme();
+  const { token } = useParams();
   const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
   const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
   const matchesMD = useMediaQuery(theme.breakpoints.down('md'));
   const {
     handleSubmit,
-    recoverPasswordMessage,
+    resetPasswordMessage,
     pristine,
     submitting,
     formFields,
-    dispatchRecoverPassword,
+    dispatchResetPassword,
     history,
   } = props;
 
   const [open, setOpen] = useState(false);
 
-  const onSubmit = () => {
-    dispatchRecoverPassword();
+  const onSubmit = (formProps) => {
+    formProps.token = token;
+    dispatchResetPassword();
     setOpen(!open);
   };
 
@@ -52,7 +55,7 @@ function RecoverPassword(props) {
         <Grid container direction="column">
           <Grid item>
             <Typography variant="h2" className={classes.title}>
-              Redefinir Senha
+              Criar Nova Senha
             </Typography>
             <Typography
               variant="body1"
@@ -62,7 +65,7 @@ function RecoverPassword(props) {
                 marginBottom: '2em',
               }}
             >
-              Digite o email cadastrado
+              Digite o email cadastrado e sua nova senha
             </Typography>
           </Grid>
 
@@ -87,7 +90,7 @@ function RecoverPassword(props) {
                   disabled={pristine || submitting}
                   type="submit"
                 >
-                  Recuperar Senha
+                  Redefinir Senha
                 </Button>
               </Grid>
             </Grid>
@@ -119,17 +122,15 @@ function RecoverPassword(props) {
         }}
       >
         <DialogContent>
-          {recoverPasswordMessage ? (
+          {resetPasswordMessage ? (
             <Grid container direction="column">
               <Grid item>
                 <Typography variant="h4" gutterBottom>
-                  Email Enviado
+                  Senha Redefinida
                 </Typography>
               </Grid>
               <Grid item>
-                <Typography variant="body1">
-                  {recoverPasswordMessage}
-                </Typography>
+                <Typography variant="body1">{resetPasswordMessage}</Typography>
               </Grid>
             </Grid>
           ) : (
@@ -141,4 +142,4 @@ function RecoverPassword(props) {
   );
 }
 
-export default memo(RecoverPassword);
+export default memo(ResetPassword);

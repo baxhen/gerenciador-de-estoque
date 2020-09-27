@@ -11,5 +11,12 @@ const selectIsAuthenticated = (state) => selectAuth(state).isAuthenticated;
 
 const selectRecoverPasswordMessage = (state) =>
   selectAuth(state).recoverPasswordMessage;
+const selectResetPasswordMessage = (state) =>
+  selectAuth(state).resetPasswordMessage;
 
-export { selectAuth, selectIsAuthenticated, selectRecoverPasswordMessage };
+export {
+  selectAuth,
+  selectIsAuthenticated,
+  selectRecoverPasswordMessage,
+  selectResetPasswordMessage,
+};
