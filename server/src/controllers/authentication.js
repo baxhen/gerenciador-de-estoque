@@ -35,6 +35,7 @@ exports.forgotPassword = async (req, res, next) => {
       {
         to: email,
         from: 'leo292629@gmail.com',
+        subject: 'Redefinição de Senha',
         template: 'auth/forgotPassword',
         context: { link },
       },
@@ -88,7 +89,7 @@ exports.resetPassword = async (req, res) => {
   try {
     const user = await User.findOne({ email });
     if (!user) return res.status(400).send({ message: 'User not found' });
-    console.log(token, user.passwordResetToken);
+
     if (token !== user.passwordResetToken)
       return res.status(400).send({ message: 'Invalid token' });
 

@@ -32,10 +32,8 @@ userSchema.methods.comparePassword = function (candidatePassword, callback) {
   console.log(candidatePassword, this.password);
   bcrypt.compare(candidatePassword, this.password, function (err, isMatch) {
     if (err) {
-      console.log('step 4');
       return callback(err);
     }
-    console.log('step 5', isMatch);
     callback(null, isMatch);
   });
 };
