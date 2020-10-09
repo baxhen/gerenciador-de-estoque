@@ -61,9 +61,10 @@ function* handleRecoverPassword() {
     );
   } catch (error) {
     console.log(error);
+    const message = error.response.data.error;
     yield put(
       actions.recoverPasswordError({
-        message: error,
+        message,
       })
     );
   }

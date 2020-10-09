@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const User = require('../models/user');
 const config = require('../config/config');
-const mailer = require('../modules/mailer');
+const Mailer = require('../services/Mailer');
 
 function tokenForUser(user) {
   const timestamp = new Date().getTime();
@@ -30,26 +30,27 @@ exports.forgotPassword = async (req, res, next) => {
         passwordResetExpires,
       },
     });
-    const link = `${config.webUrl}/resetPassword/${passwordResetToken}`;
-    mailer.sendMail(
-      {
-        to: email,
-        from: 'leo292629@gmail.com',
-        subject: 'Redefinição de Senha',
-        template: 'auth/forgotPassword',
-        context: { link },
-      },
-      (err) => {
-        if (err) {
-          console.log(err);
-          return res
-            .status(400)
-            .send({ message: 'could not send forgot password email' });
-        }
 
-        res.send({ message: 'Email enviado com sucesso' });
+    const link = `${config.webUrl}/resetPassword/${passwordResetToken}`;
+    const Email = new Mailer({      
+      local:{
+        email:'reboucas.beraby@gmail.com',
+        link
+      },
+      templateName:'resetPassword',  
+    })
+    
+    Email.sendEmail().then((err) => {
+      if (err) {
+        console.log(err);
+        return res
+          .status(400)
+          .send({ message: 'could not send forgot password email' });
       }
-    );
+
+      res.send({ message: 'Email enviado com sucesso' });
+    })
+   
   } catch (error) {
     console.log(error);
     res.status(400).send({ message: 'Error on forgot password, try again' });
