@@ -3,10 +3,10 @@
 // de { url: 'api', subUrl: 'login' } para { url: 'login', subUrl: '' }
 
 export const URLS = {
-  LOGIN: { url: 'login', subUrl: '' },
-  SIGN_UP: { url: 'signup', subUrl: '' },
-  RECOVER_PASSWORD: { url: 'forgot_password', subUrl: '' },
-  RESET_PASSWORD: { url: 'reset_password', subUrl: '' },
+  LOGIN: { url: 'api', subUrl: 'login' },
+  SIGN_UP: { url: 'api', subUrl: 'signup' },
+  RECOVER_PASSWORD: { url: 'api', subUrl: 'forgot_password' },
+  RESET_PASSWORD: { url: 'api', subUrl: 'reset_password' },
 };
 
 export const getEndpointURL = (key) => {

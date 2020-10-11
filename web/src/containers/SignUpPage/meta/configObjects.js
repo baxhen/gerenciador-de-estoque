@@ -1,5 +1,12 @@
 export const formFields = [
   {
+    label: 'Nome',
+    name: 'username',
+    type: 'text',
+    className: 'input',
+    noValueError: 'Digite seu nome',
+  },
+  {
     label: 'Email',
     name: 'email',
     type: 'email',

@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 const path = require('path');
-const EmailTemplate = require('email-templates').EmailTemplate
+const EmailTemplate = require('email-templates')
 const config = require('../config/config');
 const { user, pass } = config;
 
@@ -13,7 +13,7 @@ class Mailer{
     this.templateName = data.templateName    
     this.createTransport = this.createTransport.bind(this)
     this.sendEmail = this.sendEmail.bind(this) 
-    this.loadTemplate = this.loadTemplate.bind(this) 
+   
 
     this.createTransport()    
   }
@@ -30,30 +30,33 @@ class Mailer{
 
   async sendEmail() {
     try {
+    const email = new EmailTemplate({    
+      views: {
+        options: {
+          extension: 'hbs' 
+        }
+    }})
 
-    await this.loadTemplate()
-    const {email, subject, html, text} = this.local
+
+    const html = await email.render(path.join(__dirname, '..', 'templates', this.templateName+'/html'),this.local)
+    const subject = await email.render(path.join(__dirname, '..', 'templates', this.templateName+'/subject'),this.local)
+    const text = await email.render(path.join(__dirname, '..', 'templates', this.templateName+'/text'),this.local)
+
+
     await this.transport.sendMail({
-      to:email,
-      subject,
+      to:this.local.email,
       html,
+      subject,
       text
-    }) 
+    })
+
     return null 
       
     } catch (error) {
-      console.log(error)
+      // console.log(error)
       return error.message
     }
     
-  }
-
-  async loadTemplate() {
-    let template = new EmailTemplate(path.join(__dirname,'..','templates', this.templateName))
-    const result =  await template.render(this.local)
-    this.local.html = result.html
-    this.local.text = result.text
-    this.local.subject = result.subject
   }
 
 

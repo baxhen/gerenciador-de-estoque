@@ -34,8 +34,10 @@ exports.forgotPassword = async (req, res, next) => {
     const link = `${config.webUrl}/resetPassword/${passwordResetToken}`;
     const Email = new Mailer({      
       local:{
-        email:'reboucas.beraby@gmail.com',
-        link
+        email,
+        link,
+        username:user.username
+
       },
       templateName:'resetPassword',  
     })
@@ -57,10 +59,10 @@ exports.forgotPassword = async (req, res, next) => {
   }
 };
 exports.signup = (req, res, next) => {
-  const { email, password } = req.body;
+  const { email, password, username } = req.body;
 
-  if (!email || !password) {
-    res.status(422).send({ error: 'You must provide email and password' });
+  if (!email || !password || !username) {
+    res.status(422).send({ error: 'You must provide email, password and a username' });
   }
   // see if a user already exists
   User.findOne({ email }, async (err, existingUser) => {
@@ -74,7 +76,7 @@ exports.signup = (req, res, next) => {
       res.status(422).send({ error: 'Email is in use' });
     }
     // if a user does not exists crete and save user record
-    const user = new User({ email, password });
+    const user = new User({ email, password, username });
 
     try {
       await user.save();

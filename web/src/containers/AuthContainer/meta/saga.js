@@ -31,7 +31,7 @@ function* handleSignIn() {
 function* handleSignUp() {
   try {
     const signUpPage = yield select(makeSelectSignUp());
-    const request = { email: signUpPage.email, password: signUpPage.password };
+    const request = { email: signUpPage.email, password: signUpPage.password, username: signUpPage.username };
     const action = getEndpointURL('SIGN_UP');
     const response = yield call(networkService.postData, action, request);
     yield call(saveDataToStorage, response);
