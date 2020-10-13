@@ -61,7 +61,7 @@ function* handleRecoverPassword() {
     );
   } catch (error) {
     console.log(error);
-    const message = error.response.data.error;
+    const message = error.response.data.message;
     yield put(
       actions.recoverPasswordError({
         message,
@@ -84,10 +84,10 @@ function* handleResetPassword() {
       })
     );
   } catch (error) {
-    console.log(error);
+    console.log(error.response);
     yield put(
       actions.resetPasswordFeedback({
-        message: error,
+        message: error.response.data.message,
       })
     );
   }

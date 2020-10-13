@@ -126,7 +126,7 @@ function ResetPassword(props) {
             <Grid container direction="column">
               <Grid item>
                 <Typography variant="h4" gutterBottom>
-                  Senha Redefinida
+                  Redefinição de Senha
                 </Typography>
               </Grid>
               <Grid item>

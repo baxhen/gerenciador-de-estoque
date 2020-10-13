@@ -94,7 +94,10 @@ exports.resetPassword = async (req, res) => {
     if (!user) return res.status(400).send({ message: 'User not found' });
 
     if (token !== user.passwordResetToken)
-      return res.status(400).send({ message: 'Invalid token' });
+      return res.status(400).send({ message: 'Token inválido' });
+
+    if(+Date.now() > +user.passwordResetExpires)
+      return res.status(400).send({ message: 'Token expirado, solicite um novo token.' });
 
     const now = new Date();
 
