@@ -16,7 +16,7 @@ import { CircularProgress, useMediaQuery } from '@material-ui/core';
 function ResetPassword(props) {
   const classes = useStyles();
   const theme = useTheme();
-  const { token } = useParams();
+  const { token, email } = useParams();
   const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
   const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
   const matchesMD = useMediaQuery(theme.breakpoints.down('md'));
@@ -34,6 +34,7 @@ function ResetPassword(props) {
 
   const onSubmit = (formProps) => {
     formProps.token = token;
+    formProps.email = email;
     dispatchResetPassword();
     setOpen(!open);
   };
@@ -65,7 +66,7 @@ function ResetPassword(props) {
                 marginBottom: '2em',
               }}
             >
-              Digite o email cadastrado e sua nova senha
+              Cadastre a sua nova senha
             </Typography>
           </Grid>
 

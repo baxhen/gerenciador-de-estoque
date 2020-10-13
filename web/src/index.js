@@ -23,7 +23,7 @@ ReactDOM.render(
       <Route exact path="/about" component={AboutPage} />
       <Route exact path="/feature" component={FeaturePage} />
       <Route exact path="/recoverPassword" component={RecoverPasswordPage} />
-      <Route exact path="/resetPassword/:token" component={ResetPasswordPage} />
+      <Route exact path="/resetPassword/:token/:email" component={ResetPasswordPage} />
     </App>
   </Root>,
   document.getElementById('root')

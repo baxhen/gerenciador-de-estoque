@@ -17,7 +17,7 @@ exports.forgotPassword = async (req, res, next) => {
   try {
     const user = await User.findOne({ email });
 
-    if (!user) return res.status(400).send({ message: 'User not found' });
+    if (!user) return res.status(400).send({ message: 'Usuário não cadastrado na nossa base de dados.' });
 
     const passwordResetToken = crypto.randomBytes(20).toString('hex');
 
@@ -31,7 +31,7 @@ exports.forgotPassword = async (req, res, next) => {
       },
     });
 
-    const link = `${config.webUrl}/resetPassword/${passwordResetToken}`;
+    const link = `${config.webUrl}/resetPassword/${passwordResetToken}/${email}`;
     const Email = new Mailer({      
       local:{
         email,
@@ -94,7 +94,7 @@ exports.resetPassword = async (req, res) => {
     if (!user) return res.status(400).send({ message: 'User not found' });
 
     if (token !== user.passwordResetToken)
-      return res.status(400).send({ message: 'Token inválido' });
+      return res.status(400).send({ message: 'Token inválido, para cada atualização de senha é necessário um token único' });
 
     if(+Date.now() > +user.passwordResetExpires)
       return res.status(400).send({ message: 'Token expirado, solicite um novo token.' });
@@ -107,6 +107,7 @@ exports.resetPassword = async (req, res) => {
         .send({ message: 'Expired token, generate a new one' });
 
     user.password = password;
+    user.passwordResetToken = ''
 
     await user.save();
 
