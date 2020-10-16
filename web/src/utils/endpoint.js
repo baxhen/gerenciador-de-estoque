@@ -7,6 +7,7 @@ export const URLS = {
   SIGN_UP: { url: 'api', subUrl: 'signup' },
   RECOVER_PASSWORD: { url: 'api', subUrl: 'forgot_password' },
   RESET_PASSWORD: { url: 'api', subUrl: 'reset_password' },
+  VERIFY_EMAIL: { url: 'api', subUrl: 'verify_email' },
 };
 
 export const getEndpointURL = (key) => {

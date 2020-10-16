@@ -8,9 +8,10 @@ const userSchema = new Schema({
   email: { type: String, required: true, unique: true, lowercase: true },
   password: { type: String, required: true },
   username: { type: String },
-  passwordResetToken: { type: String },
-  passwordResetExpires: { type: Date },
+  authenticationToken: { type: String },
+  authenticationTokenExpires: { type: Date },
   createdAt: { type: Date, default: Date.now },
+  isVerified: {type:Boolean, default: false }
 });
 
 // on save hook, encrypt password

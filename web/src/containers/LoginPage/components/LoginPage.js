@@ -19,7 +19,7 @@ class LoginPage extends Component {
   };
 
   componentDidUpdate(lastProps) {
-    if (this.props.errorMessage !== lastProps.errorMessage) {
+    if (this.props.signUpErrorMessage !== lastProps.signUpErrorMessage) {
       this.setState({ error: true });
     }
   }
@@ -28,7 +28,7 @@ class LoginPage extends Component {
     const {
       handleSubmit,
       classes,
-      errorMessage,
+      signUpErrorMessage,
       pristine,
       submitting,
       formFields,
@@ -102,7 +102,7 @@ class LoginPage extends Component {
                 </Grid>
               </Grid>
               <FormHelperText style={{ textAlign: 'center' }}>
-                {errorMessage}
+                {signUpErrorMessage}
               </FormHelperText>
             </FormControl>
           </Grid>

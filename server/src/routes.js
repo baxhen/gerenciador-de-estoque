@@ -13,5 +13,6 @@ routes.post('/login', requireLogIn, Authentication.signin);
 routes.post('/forgot_password', Authentication.forgotPassword);
 routes.post('/signup', Authentication.signup);
 routes.post('/reset_password', Authentication.resetPassword);
+routes.post('/verify_email', Authentication.verifyEmail);
 
 module.exports = routes;

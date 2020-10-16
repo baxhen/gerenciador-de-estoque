@@ -13,10 +13,19 @@ const selectRecoverPasswordMessage = (state) =>
   selectAuth(state).recoverPasswordMessage;
 const selectResetPasswordMessage = (state) =>
   selectAuth(state).resetPasswordMessage;
+const selectSignUpSuccessMessage = (state) =>
+  selectAuth(state).signUpSuccessMessage;
+const selectSignUpErrorMessage = (state) =>
+  selectAuth(state).signUpErrorMessage;
+const selectVerifyEmailMessage = (state) =>
+  selectAuth(state).verifyEmailMessage;
 
 export {
   selectAuth,
   selectIsAuthenticated,
   selectRecoverPasswordMessage,
   selectResetPasswordMessage,
+  selectSignUpSuccessMessage,
+  selectSignUpErrorMessage,
+  selectVerifyEmailMessage
 };

@@ -10,7 +10,12 @@ function tokenForUser(user) {
 }
 
 exports.signin = (req, res, next) => {
-  res.send({ token: tokenForUser(req.user) });
+  if(req.user.isVerified){
+    res.send({ token: tokenForUser(req.user) });
+  } else {
+    res.status(401).send({ message:'Conta desativada, verifique seu email para ativar'})
+  }
+
 };
 exports.forgotPassword = async (req, res, next) => {
   const { email } = req.body;
@@ -19,19 +24,19 @@ exports.forgotPassword = async (req, res, next) => {
 
     if (!user) return res.status(400).send({ message: 'Usuário não cadastrado na nossa base de dados.' });
 
-    const passwordResetToken = crypto.randomBytes(20).toString('hex');
+    const authenticationToken = crypto.randomBytes(20).toString('hex');
 
-    const passwordResetExpires = new Date();
-    passwordResetExpires.setHours(passwordResetExpires.getHours() + 1);
+    const authenticationTokenExpires = new Date();
+    authenticationTokenExpires.setHours(authenticationTokenExpires.getHours() + 1);
 
     await User.findByIdAndUpdate(user.id, {
       $set: {
-        passwordResetToken,
-        passwordResetExpires,
+        authenticationToken,
+        authenticationTokenExpires,
       },
     });
 
-    const link = `${config.webUrl}/resetPassword/${passwordResetToken}/${email}`;
+    const link = `${config.webUrl}/resetPassword/${authenticationToken}/${email}`;
     const Email = new Mailer({      
       local:{
         email,
@@ -73,17 +78,53 @@ exports.signup = (req, res, next) => {
     }
 
     if (existingUser) {
-      res.status(422).send({ error: 'Email is in use' });
+      res.status(422).send({ message: 'Email já cadastrado' });
     }
-    // if a user does not exists crete and save user record
+    // if a user does not exists create and save user record
     const user = new User({ email, password, username });
 
     try {
       await user.save();
-      res.send({ token: tokenForUser(user) });
+      // get the email and send a link to verify the email
+      // res.send({ token: tokenForUser(user) });
     } catch (error) {
       console.log('Signup', error.message);
     }
+    const authenticationToken = crypto.randomBytes(20).toString('hex');
+
+    const authenticationTokenExpires = new Date();
+    authenticationTokenExpires.setHours(authenticationTokenExpires.getHours() + 24);
+
+    try {
+      await User.findByIdAndUpdate(user.id, {
+        $set: {
+          authenticationToken: authenticationToken,
+          authenticationTokenExpires: authenticationTokenExpires,
+        },
+      });
+    } catch (error) {
+      console.log('SaveToken', error.message);
+    }
+    const link = `${config.webUrl}/verifyEmail/${authenticationToken}/${email}`;
+    const Email = new Mailer({      
+      local:{
+        email,
+        link,
+        username:user.username
+      },
+      templateName:'verifyEmail',  
+    })
+    
+    Email.sendEmail().then((err) => {
+      if (err) {
+        console.log(err);
+        return res
+          .status(400)
+          .send({ message: 'could not send verify account email' });
+      }
+
+      res.send({ message: 'Verifique a sua caixa de entrada. Enviamos um link para validar o seu email.' });
+    })
   });
 };
 exports.resetPassword = async (req, res) => {
@@ -93,21 +134,16 @@ exports.resetPassword = async (req, res) => {
     const user = await User.findOne({ email });
     if (!user) return res.status(400).send({ message: 'User not found' });
 
-    if (token !== user.passwordResetToken)
+    if (token !== user.authenticationToken)
       return res.status(400).send({ message: 'Token inválido, para cada atualização de senha é necessário um token único' });
-
-    if(+Date.now() > +user.passwordResetExpires)
+      
+    const now = new Date();
+    if(+now > +user.authenticationTokenExpires)
       return res.status(400).send({ message: 'Token expirado, solicite um novo token.' });
 
-    const now = new Date();
-
-    if (now > user.passwordResetExpires)
-      return res
-        .status(400)
-        .send({ message: 'Expired token, generate a new one' });
 
     user.password = password;
-    user.passwordResetToken = ''
+    user.authenticationToken = ''
 
     await user.save();
 
@@ -117,3 +153,33 @@ exports.resetPassword = async (req, res) => {
     res.status(400).send({ message: 'Cannot reset password, try again' });
   }
 };
+
+exports.verifyEmail = async (req,res) =>{
+  const { token, email } = req.body
+
+  try {
+    const user = await User.findOne({ email });
+    if (!user) return res.status(400).send({ message: 'User not found' });
+
+    if (!user.authenticationToken)
+      return res.status(400).send({ message: 'Sua conta já esta ativada pode fazer login, caso não esteja peça ajuda na central de atendimento.' });
+      
+    const now = new Date();
+    if(+now > +user.authenticationTokenExpires)
+      return res.status(400).send({ message: 'Token expirado, solicite um novo token.' });
+
+      user.isVerified = true
+      user.authenticationToken = ''
+
+      await user.save();
+
+      res.send({ message: 'Email verificado com sucesso' });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({ message: 'Cannot verify email, try again' })
+  }
+  
+
+    
+
+}

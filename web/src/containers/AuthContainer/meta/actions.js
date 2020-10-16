@@ -17,6 +17,10 @@ export const getAuthError = (payload) => ({
   type: constants.GET_AUTH_ERROR,
   payload,
 });
+export const getAuthFeedback = (payload) => ({
+  type: constants.GET_AUTH_FEEDBACK,
+  payload,
+});
 export const logOut = () => {
   return {
     type: constants.LOGOUT,
@@ -41,5 +45,13 @@ export const resetPassword = () => ({
 
 export const resetPasswordFeedback = (payload) => ({
   type: constants.RESET_PASSWORD_FEEDBACK,
+  payload,
+});
+export const verifyEmail = () => ({
+  type: constants.VERIFY_EMAIL,
+});
+
+export const verifyEmailFeedback = (payload) => ({
+  type: constants.VERIFY_EMAIL_FEEDBACK,
   payload,
 });

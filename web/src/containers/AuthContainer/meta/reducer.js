@@ -16,14 +16,17 @@ const Auth = (state = initialState, action) =>
       case constants.GET_AUTH_SUCCESS:
         draft.token = action.payload.token;
         draft.isAuthenticated = true;
-        delete draft.errorMessage;
+        delete draft.signUpErrorMessage;
         break;
       case constants.LOGOUT:
         delete draft.token;
         draft.isAuthenticated = false;
         break;
+      case constants.GET_AUTH_FEEDBACK:
+        draft.signUpSuccessMessage = action.payload.message;
+        break;
       case constants.GET_AUTH_ERROR:
-        draft.errorMessage = action.payload.message;
+        draft.signUpErrorMessage = action.payload.message;
         break;
       case constants.RECOVER_PASSWORD_SUCCESS:
         draft.recoverPasswordMessage = action.payload.message;
@@ -33,6 +36,9 @@ const Auth = (state = initialState, action) =>
         break;
       case constants.RESET_PASSWORD_FEEDBACK:
         draft.resetPasswordMessage = action.payload.message;
+        break;
+      case constants.VERIFY_EMAIL_FEEDBACK:
+        draft.verifyEmailMessage = action.payload.message;
         break;
       default:
         break;

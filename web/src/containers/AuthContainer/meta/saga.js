@@ -6,6 +6,7 @@ import makeSelectLoginPage from '../../LoginPage/meta/selectors';
 import makeSelectSignUp from '../../SignUpPage/meta/selectors';
 import makeSelectRecoverPasswordPage from '../../RecoverPasswordPage/meta/selectors';
 import makeSelectResetPasswordPage from '../../ResetPasswordPage/meta/selectors';
+import makeSelectVerifyEmailPage from '../../VerifyEmailPage/meta/selectors'
 import { getEndpointURL } from '../../../utils/endpoint';
 import {
   clearDataFromStorage,
@@ -22,10 +23,10 @@ function* handleSignIn() {
     yield call(saveDataToStorage, response);
     yield put(actions.getAuthSuccess(response));
     history.push('/feature');
-  } catch (error) {
-    error.response.data === 'Unauthorized'
-      ? yield put(actions.getAuthError({ message: 'Credenciais Inválidas' }))
-      : console.log('Saga AuthContainer', error.response);
+  } catch (error) { 
+    error.response.data.message
+      ? yield put(actions.getAuthError({ message: error.response.data.message}))
+      : yield put(actions.getAuthError({ message: 'Credenciais Inválidas' }))
   }
 }
 function* handleSignUp() {
@@ -33,12 +34,11 @@ function* handleSignUp() {
     const signUpPage = yield select(makeSelectSignUp());
     const request = { email: signUpPage.email, password: signUpPage.password, username: signUpPage.username };
     const action = getEndpointURL('SIGN_UP');
-    const response = yield call(networkService.postData, action, request);
-    yield call(saveDataToStorage, response);
-    yield put(actions.getAuthSuccess(response));
-    history.push('/feature');
+    const response = yield call(networkService.postData, action, request);  
+    const { message } = response;
+    yield put(actions.getAuthFeedback({ message }));  
   } catch (error) {
-    const message = error.response.data.error;
+    const { message } = error.response.data;
     yield put(actions.getAuthError({ message }));
   }
 }
@@ -92,6 +92,29 @@ function* handleResetPassword() {
     );
   }
 }
+function* handleVerifyEmail() {
+  try {
+    const {email, token} = yield select(
+      makeSelectVerifyEmailPage()
+    );
+    const request = { email, token };
+    const action = getEndpointURL('VERIFY_EMAIL');
+    const { message } = yield call(networkService.postData, action, request);
+
+    yield put(
+      actions.verifyEmailFeedback({
+        message,
+      })
+    );
+  } catch (error) {
+    console.log(error.response);
+    yield put(
+      actions.verifyEmailFeedback({
+        message: error.response.data.message,
+      })
+    );
+  }
+}
 
 export default function* () {
   yield all([
@@ -100,5 +123,6 @@ export default function* () {
     yield takeLatest(constants.SIGN_UP, handleSignUp),
     yield takeLatest(constants.RECOVER_PASSWORD, handleRecoverPassword),
     yield takeLatest(constants.RESET_PASSWORD, handleResetPassword),
+    yield takeLatest(constants.VERIFY_EMAIL, handleVerifyEmail),
   ]);
 }
