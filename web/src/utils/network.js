@@ -2,9 +2,8 @@ import axios from 'axios';
 import { BASE_URL } from './environment';
 
 axios.interceptors.response.use((response) => response.data);
-
 function network() {
-  const baseUrl = BASE_URL;
+  const baseUrl = BASE_URL + '/';
   const headers = {};
 
   function setCredentials(token) {

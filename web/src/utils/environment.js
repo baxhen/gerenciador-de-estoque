@@ -3,6 +3,6 @@
 // const BASE_URL = 'http://localhost:5000/';
 
 // quando rodar com docker-compose
-const BASE_URL = 'https://aa4994952d37.ngrok.io/';
+const BASE_URL = 'https://2c9e889f0100.ngrok.io';
 
 export { BASE_URL };

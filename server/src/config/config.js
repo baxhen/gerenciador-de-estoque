@@ -1,8 +1,8 @@
 module.exports = {
-  secret: 'uyrxvzhjnkgvwquaisdozjn2qwdasxz',
-  webUrl: 'https://aa4994952d37.ngrok.io',
-  user: 'leo292629@gmail.com',
-  pass: 'Xuan1234',
-  mongoUri:
-    'mongodb+srv://admin:u901eSfoSpr4YcQy@auth.xj11d.azure.mongodb.net/auth?retryWrites=true&w=majority',
+  secret: process.env.JWT_SECRET || console.log('JWT_SECRET is not provided',JWT_SECRET),
+  webUrl: process.env.WEB_URL || console.log('WEB_URL is not provided'),
+  user: process.env.EMAIL || console.log('EMAIL is not provided'),
+  pass: process.env.EMAIL_PASSWORD || console.log('EMAIL_PASSWORD is not provided'),
+  mongoUri:process.env.MONGO_URI || console.log('MONGO_URI is not provided'),
 };
+
