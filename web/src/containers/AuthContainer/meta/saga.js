@@ -6,7 +6,6 @@ import makeSelectLoginPage from '../../LoginPage/meta/selectors';
 import makeSelectSignUp from '../../SignUpPage/meta/selectors';
 import makeSelectRecoverPasswordPage from '../../RecoverPasswordPage/meta/selectors';
 import makeSelectResetPasswordPage from '../../ResetPasswordPage/meta/selectors';
-import makeSelectVerifyEmailPage from '../../VerifyEmailPage/meta/selectors'
 import { getEndpointURL } from '../../../utils/endpoint';
 import {
   clearDataFromStorage,
@@ -92,11 +91,9 @@ function* handleResetPassword() {
     );
   }
 }
-function* handleVerifyEmail() {
+function* handleVerifyEmail(payload) {
   try {
-    const {email, token} = yield select(
-      makeSelectVerifyEmailPage()
-    );
+    const {email, token} = payload.payload
     const request = { email, token };
     const action = getEndpointURL('VERIFY_EMAIL');
     const { message } = yield call(networkService.postData, action, request);

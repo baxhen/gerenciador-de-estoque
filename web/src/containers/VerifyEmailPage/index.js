@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { selectVerifyEmailMessage } from 'containers/AuthContainer/meta/selectors';
 import { verifyEmail } from 'containers/AuthContainer/meta/actions';
 import VerifyEmail from './components/VerifyEmail';
-import { verifyEmailDefault } from './meta/actions'
+
 
 
 
@@ -14,8 +14,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    dispatchVerifyEmail: () => dispatch(verifyEmail()),
-    dispatchVerifyEmailDefault: (payload) => dispatch(verifyEmailDefault(payload)),
+    dispatchVerifyEmail: (payload) => dispatch(verifyEmail(payload)),
   };
 };
 

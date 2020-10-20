@@ -47,8 +47,9 @@ export const resetPasswordFeedback = (payload) => ({
   type: constants.RESET_PASSWORD_FEEDBACK,
   payload,
 });
-export const verifyEmail = () => ({
+export const verifyEmail = (payload) => ({
   type: constants.VERIFY_EMAIL,
+  payload
 });
 
 export const verifyEmailFeedback = (payload) => ({

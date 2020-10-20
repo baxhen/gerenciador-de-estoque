@@ -16,33 +16,25 @@ function VerifyEmail(props) {
   const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
   const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
   const matchesMD = useMediaQuery(theme.breakpoints.down('md'));
-  const { 
-    verifyEmailMessage,  
+  const {
+    verifyEmailMessage,
     dispatchVerifyEmail,
-    dispatchVerifyEmailDefault,
     history,
   } = props;
 
   const [open, setOpen] = useState(false);
 
 
-  
-  
+
+
   const onDialogClose = () => {
     setOpen(!open);
     history.push('/login');
   };
-  
-  useEffect(()=>{
-    dispatchVerifyEmailDefault({ token, email })
-    setOpen(!open);
-    const handler = setTimeout(()=>{
-      dispatchVerifyEmail();
-    },1000)
 
-    return ()=> {
-      clearTimeout(handler)
-    }
+  useEffect(()=>{
+    dispatchVerifyEmail({ token, email })
+    setOpen(!open);
     // eslint-disable-next-line
   },[])
   return (
@@ -69,7 +61,7 @@ function VerifyEmail(props) {
             >
               Estamos Verificando a sua conta
             </Typography>
-          </Grid>     
+          </Grid>
         </Grid>
       </Grid>
       <Dialog
