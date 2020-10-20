@@ -37,16 +37,16 @@ exports.forgotPassword = async (req, res, next) => {
     });
 
     const link = `${config.webUrl}/resetPassword/${authenticationToken}/${email}`;
-    const Email = new Mailer({      
+    const Email = new Mailer({
       local:{
         email,
         link,
         username:user.username
 
       },
-      templateName:'resetPassword',  
+      templateName:'resetPassword',
     })
-    
+
     Email.sendEmail().then((err) => {
       if (err) {
         console.log(err);
@@ -57,7 +57,7 @@ exports.forgotPassword = async (req, res, next) => {
 
       res.send({ message: 'Email enviado com sucesso' });
     })
-   
+
   } catch (error) {
     console.log(error);
     res.status(400).send({ message: 'Error on forgot password, try again' });
@@ -106,15 +106,15 @@ exports.signup = (req, res, next) => {
       console.log('SaveToken', error.message);
     }
     const link = `${config.webUrl}/verifyEmail/${authenticationToken}/${email}`;
-    const Email = new Mailer({      
+    const Email = new Mailer({
       local:{
         email,
         link,
         username:user.username
       },
-      templateName:'verifyEmail',  
+      templateName:'verifyEmail',
     })
-    
+
     Email.sendEmail().then((err) => {
       if (err) {
         console.log(err);
@@ -136,7 +136,7 @@ exports.resetPassword = async (req, res) => {
 
     if (token !== user.authenticationToken)
       return res.status(400).send({ message: 'Token inválido, para cada atualização de senha é necessário um token único' });
-      
+
     const now = new Date();
     if(+now > +user.authenticationTokenExpires)
       return res.status(400).send({ message: 'Token expirado, solicite um novo token.' });
@@ -163,23 +163,28 @@ exports.verifyEmail = async (req,res) =>{
 
     if (!user.authenticationToken)
       return res.status(400).send({ message: 'Sua conta já esta ativada pode fazer login, caso não esteja peça ajuda na central de atendimento.' });
-      
+
+    if (token !== user.authenticationToken)
+      return res.status(400).send({ message: 'Token inválido, para cada atualização de senha é necessário um token único' });
+
     const now = new Date();
     if(+now > +user.authenticationTokenExpires)
       return res.status(400).send({ message: 'Token expirado, solicite um novo token.' });
 
-      user.isVerified = true
-      user.authenticationToken = ''
+    await User.findByIdAndUpdate(user.id, {
+      $set: {
+        isVerified: true,
+        authenticationToken: '',
+      },
+    });
 
-      await user.save();
-
-      res.send({ message: 'Email verificado com sucesso' });
+    res.send({ message: 'Email verificado com sucesso' });
   } catch (error) {
     console.log(error);
     res.status(400).send({ message: 'Cannot verify email, try again' })
   }
-  
 
-    
+
+
 
 }
