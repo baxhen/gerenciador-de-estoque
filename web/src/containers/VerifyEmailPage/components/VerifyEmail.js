@@ -93,7 +93,7 @@ function VerifyEmail(props) {
             <Grid container direction="column">
               <Grid item>
                 <Typography variant="h4" gutterBottom>
-                  Redefinição de Senha
+                  Verificação de Email
                 </Typography>
               </Grid>
               <Grid item>

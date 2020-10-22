@@ -1,12 +1,12 @@
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const User = require('../models/user');
-const config = require('../config/config');
+const { companyName, secret, webUrl, facebookUrl, centralAjudaUrl } = require('../config/config');
 const Mailer = require('../services/Mailer');
 
 function tokenForUser(user) {
   const timestamp = new Date().getTime();
-  return jwt.sign({ sub: user.id, iat: timestamp }, config.secret);
+  return jwt.sign({ sub: user.id, iat: timestamp }, secret);
 }
 
 exports.signin = (req, res, next) => {
@@ -36,12 +36,15 @@ exports.forgotPassword = async (req, res, next) => {
       },
     });
 
-    const link = `${config.webUrl}/resetPassword/${authenticationToken}/${email}`;
+    const link = `${webUrl}/resetPassword/${authenticationToken}/${email}`;
     const Email = new Mailer({
       local:{
         email,
         link,
-        username:user.username
+        username:user.username,
+        companyName,
+        facebookUrl,
+        centralAjudaUrl
 
       },
       templateName:'resetPassword',
@@ -105,12 +108,15 @@ exports.signup = (req, res, next) => {
     } catch (error) {
       console.log('SaveToken', error.message);
     }
-    const link = `${config.webUrl}/verifyEmail/${authenticationToken}/${email}`;
+    const link = `${webUrl}/verifyEmail/${authenticationToken}/${email}`;
     const Email = new Mailer({
       local:{
         email,
         link,
-        username:user.username
+        username:user.username,
+        companyName,
+        facebookUrl,
+        centralAjudaUrl
       },
       templateName:'verifyEmail',
     })
