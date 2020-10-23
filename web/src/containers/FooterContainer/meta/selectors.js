@@ -1,7 +1,7 @@
-import { initialState } from './reducer';
+import { initialState } from './reducer'
 /**
  * Get Footer
  * @param state
  * @returns {Object}
  */
-export const get = state => state.Footer || initialState;
+export const get = (state) => state.Footer || initialState

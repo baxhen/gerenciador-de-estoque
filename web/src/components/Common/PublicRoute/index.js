@@ -4,8 +4,8 @@
  *
  */
 
-import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import React from 'react'
+import { Route, Redirect } from 'react-router-dom'
 
 // import PropTypes from 'prop-types';
 // import styled from 'styled-components';
@@ -20,7 +20,7 @@ function PublicRoute({
   return (
     <Route
       exact={exact}
-      render={props =>
+      render={(props) =>
         isAuthenticated ? (
           <Redirect to="/" />
         ) : (
@@ -28,7 +28,7 @@ function PublicRoute({
         )
       }
     />
-  );
+  )
 }
 
-export default PublicRoute;
+export default PublicRoute

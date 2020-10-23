@@ -1,4 +1,4 @@
-import { withStyles } from '@material-ui/styles';
+import { withStyles } from '@material-ui/styles'
 
 const useStyles = withStyles(
   (theme) => ({
@@ -37,7 +37,7 @@ const useStyles = withStyles(
       color: 'primary',
     },
   }),
-  { withTheme: true }
-);
+  { withTheme: true },
+)
 
-export default useStyles;
+export default useStyles

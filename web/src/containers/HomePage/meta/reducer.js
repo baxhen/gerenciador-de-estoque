@@ -1,15 +1,14 @@
-import produce from 'immer';
+import produce from 'immer'
 
-export const initialState = {
-};
+export const initialState = {}
 
 /* eslint-disable no-param-reassign */
 const Home = (state = initialState, action) =>
-    produce(state, draft => {
-        switch (action.type) {
-            default:
-                break;
-        }
-    });
+  produce(state, (draft) => {
+    switch (action.type) {
+      default:
+        break
+    }
+  })
 
-export default Home;
+export default Home

@@ -1,4 +1,4 @@
-import LoginPage from 'containers/LoginPage/Loadable';
+import LoginPage from 'containers/LoginPage/Loadable'
 
 export const menuContent = [
   {
@@ -12,4 +12,4 @@ export const menuContent = [
     showInNav: true,
     icon: 'AccountBox',
   },
-];
+]

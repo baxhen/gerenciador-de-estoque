@@ -1,7 +1,7 @@
-import { initialState } from './reducer';
+import { initialState } from './reducer'
 
-const getApp = state => state.app || initialState;
+const getApp = (state) => state.app || initialState
 
-const selectTheme = state => getApp(state).theme;
+const selectTheme = (state) => getApp(state).theme
 
-export { selectTheme };
+export { selectTheme }

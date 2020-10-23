@@ -1,11 +1,11 @@
-import React, { memo } from 'react';
-import { styles } from './styles';
+import React, { memo } from 'react'
+import { styles } from './styles'
 
-const useStyles = styles;
+const useStyles = styles
 
 function CONT_CAMEL_NAME() {
-  const classes = useStyles();
-  return <div />;
+  const classes = useStyles()
+  return <div className={classes} />
 }
 
-export default memo(CONT_CAMEL_NAME);
+export default memo(CONT_CAMEL_NAME)

@@ -1,20 +1,20 @@
-import React, { memo } from 'react';
-import { Link } from 'react-router-dom';
+import React, { memo } from 'react'
+import { Link } from 'react-router-dom'
 
-import Grid from '@material-ui/core/Grid';
-import Hidden from '@material-ui/core/Hidden';
+import Grid from '@material-ui/core/Grid'
+import Hidden from '@material-ui/core/Hidden'
 
-import facebook from '../../../assets/facebook.svg';
-import instagram from '../../../assets/instagram.svg';
-import twitter from '../../../assets/twitter.svg';
-import { styles } from './styles';
+import facebook from '../../../assets/facebook.svg'
+import instagram from '../../../assets/instagram.svg'
+import twitter from '../../../assets/twitter.svg'
+import { styles } from './styles'
 
-const useStyles = styles;
+const useStyles = styles
 
 function Footer({ setValue, headerConfig }) {
-  const classes = useStyles();
-  const [, tabs2] = headerConfig.map(({ tabs }) => tabs);
-  const allTabs = [...tabs2];
+  const classes = useStyles()
+  const [, tabs2] = headerConfig.map(({ tabs }) => tabs)
+  const allTabs = [...tabs2]
 
   return (
     <footer className={classes.footer}>
@@ -73,7 +73,7 @@ function Footer({ setValue, headerConfig }) {
         </Grid>
       </Grid>
     </footer>
-  );
+  )
 }
 
-export default memo(Footer);
+export default memo(Footer)

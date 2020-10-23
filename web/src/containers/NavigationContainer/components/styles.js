@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles'
 
 export const styles = makeStyles((theme) => ({
   toolbarMargin: {
@@ -49,4 +49,4 @@ export const styles = makeStyles((theme) => ({
     zIndex: theme.zIndex.modal + 1,
     height: '10vh',
   },
-}));
+}))

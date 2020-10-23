@@ -7,31 +7,31 @@
  *
  */
 
-import React, { useState, memo } from 'react';
+import React, { useState, memo } from 'react'
 // import PropTypes from 'prop-types';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
+import { compose } from 'redux'
+import { connect } from 'react-redux'
 
-import NavigationContainer from '../NavigationContainer';
-import FooterContainer from '../FooterContainer';
-import { ThemeProvider } from '@material-ui/core';
-import theme from './meta/theme';
+import NavigationContainer from '../NavigationContainer'
+import FooterContainer from '../FooterContainer'
+import { ThemeProvider } from '@material-ui/core'
+import theme from './meta/theme'
 
 function App({ children }) {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(0)
   return (
     <ThemeProvider theme={theme}>
       <NavigationContainer value={value} setValue={setValue} />
       {children}
       <FooterContainer setValue={setValue} />
     </ThemeProvider>
-  );
+  )
 }
 
-App.propTypes = {};
+App.propTypes = {}
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({})
 
-const withConnect = connect(mapStateToProps);
+const withConnect = connect(mapStateToProps)
 
-export default compose(withConnect, memo)(App);
+export default compose(withConnect, memo)(App)

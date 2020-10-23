@@ -1,7 +1,7 @@
-import { initialState } from './reducer';
+import { initialState } from './reducer'
 /**
  * Get Navigation
  * @param state
  * @returns {Object}
  */
-export const get = state => state.Navigation || initialState;
+export const get = (state) => state.Navigation || initialState

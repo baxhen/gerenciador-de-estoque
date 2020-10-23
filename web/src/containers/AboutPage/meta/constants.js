@@ -1,1 +1,1 @@
-export const ABOUT_DEFAULT = 'ABOUT_DEFAULT';
+export const ABOUT_DEFAULT = 'ABOUT_DEFAULT'

@@ -1,1 +1,1 @@
-export const FOOTER_DEFAULT = 'FOOTER_DEFAULT';
+export const FOOTER_DEFAULT = 'FOOTER_DEFAULT'

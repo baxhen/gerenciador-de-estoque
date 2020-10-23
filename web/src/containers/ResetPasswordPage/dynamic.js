@@ -1,7 +1,9 @@
-import DynamicComponent from 'components/Common/DynamicComponent';
+import DynamicComponent from 'components/Common/DynamicComponent'
 
 const dynamic = DynamicComponent(() =>
-  import(/* webpackChunkName: "resetPassword" */ 'containers/ResetPasswordPage')
-);
+  import(
+    /* webpackChunkName: "resetPassword" */ 'containers/ResetPasswordPage'
+  ),
+)
 
-export default dynamic;
+export default dynamic

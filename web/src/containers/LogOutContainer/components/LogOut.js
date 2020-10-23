@@ -1,10 +1,10 @@
-import React, { useEffect, memo } from 'react';
+import React, { useEffect, memo } from 'react'
 
 function LogOut({ logOut }) {
   useEffect(() => {
-    logOut();
-  }, [logOut]);
-  return <div />;
+    logOut()
+  }, [logOut])
+  return <div />
 }
 
-export default memo(LogOut);
+export default memo(LogOut)

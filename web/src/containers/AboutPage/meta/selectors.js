@@ -1,7 +1,7 @@
-import { initialState } from './reducer';
+import { initialState } from './reducer'
 /**
  * Get About
  * @param state
  * @returns {Object}
  */
-export const get = state => state.About || initialState;
+export const get = (state) => state.About || initialState

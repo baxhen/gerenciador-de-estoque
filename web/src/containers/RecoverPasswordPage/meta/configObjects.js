@@ -6,4 +6,4 @@ export const formFields = [
     className: 'input',
     noValueError: 'Digite seu email',
   },
-];
+]

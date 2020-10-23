@@ -4,8 +4,8 @@
  *
  */
 
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import styled from 'styled-components'
 
 /* eslint-disable prefer-template */
 const Wrapper = styled.div`
@@ -15,7 +15,7 @@ const Wrapper = styled.div`
   justify-content: center;
   height: 100vh;
   width: 100vw;
-`;
+`
 
 /* eslint-disable react/prefer-stateless-function */
 /* eslint-disable react/prop-types */
@@ -42,6 +42,6 @@ const PageWrapper = ({
   >
     {children}
   </Wrapper>
-);
+)
 
-export default PageWrapper;
+export default PageWrapper

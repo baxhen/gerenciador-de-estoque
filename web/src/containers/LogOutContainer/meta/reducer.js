@@ -1,16 +1,15 @@
-import produce from 'immer';
-import * as constants from './constants';
+import produce from 'immer'
 
-export const initialState = {};
+
+export const initialState = {}
 
 /* eslint-disable no-param-reassign */
 const LogOut = (state = initialState, action) =>
   produce(state, (draft) => {
-    console.log('reducer', action);
     switch (action.type) {
       default:
-        break;
+        break
     }
-  });
+  })
 
-export default LogOut;
+export default LogOut

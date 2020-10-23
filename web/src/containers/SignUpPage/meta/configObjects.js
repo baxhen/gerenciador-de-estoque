@@ -27,4 +27,4 @@ export const formFields = [
     className: 'input',
     noValueError: 'Digite a confirmação de senha',
   },
-];
+]

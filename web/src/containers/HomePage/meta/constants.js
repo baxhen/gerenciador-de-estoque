@@ -1,1 +1,1 @@
-export const HOME_DEFAULT = 'HOME_DEFAULT';
+export const HOME_DEFAULT = 'HOME_DEFAULT'

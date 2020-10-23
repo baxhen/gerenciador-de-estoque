@@ -1,7 +1,7 @@
-import DynamicComponent from 'components/Common/DynamicComponent';
+import DynamicComponent from 'components/Common/DynamicComponent'
 
 const dynamic = DynamicComponent(() =>
-  import(/* webpackChunkName: "home" */ 'containers/HomePage')
-);
+  import(/* webpackChunkName: "home" */ 'containers/HomePage'),
+)
 
-export default dynamic;
+export default dynamic

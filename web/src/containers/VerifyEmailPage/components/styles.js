@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles'
 
 export const useStyles = makeStyles((theme) => ({
   background: {
@@ -28,6 +28,4 @@ export const useStyles = makeStyles((theme) => ({
       maxWidth: 306,
     },
   },
-}));
-
-
+}))

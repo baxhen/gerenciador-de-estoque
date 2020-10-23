@@ -1,4 +1,4 @@
-export const authenticate = request => ({
+export const authenticate = (request) => ({
   email: request.username,
   password: request.password,
-});
+})

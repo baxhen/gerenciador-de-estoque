@@ -1,42 +1,35 @@
-import React, { useState, memo, useEffect } from 'react';
-import { useStyles } from './styles';
-import { useTheme } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
+import React, { useState, memo, useEffect } from 'react'
+import { useStyles } from './styles'
+import { useTheme } from '@material-ui/core/styles'
+import Grid from '@material-ui/core/Grid'
+import Typography from '@material-ui/core/Typography'
 
-import Dialog from '@material-ui/core/Dialog';
-import DialogContent from '@material-ui/core/DialogContent';
-import { useParams } from 'react-router-dom';
-import { CircularProgress, useMediaQuery } from '@material-ui/core';
+import Dialog from '@material-ui/core/Dialog'
+import DialogContent from '@material-ui/core/DialogContent'
+import { useParams } from 'react-router-dom'
+import { CircularProgress, useMediaQuery } from '@material-ui/core'
 
 function VerifyEmail(props) {
-  const classes = useStyles();
-  const theme = useTheme();
-  const { token, email } = useParams();
-  const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
-  const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
-  const matchesMD = useMediaQuery(theme.breakpoints.down('md'));
-  const {
-    verifyEmailMessage,
-    dispatchVerifyEmail,
-    history,
-  } = props;
+  const classes = useStyles()
+  const theme = useTheme()
+  const { token, email } = useParams()
+  const matchesXS = useMediaQuery(theme.breakpoints.down('xs'))
+  const matchesSM = useMediaQuery(theme.breakpoints.down('sm'))
+  const matchesMD = useMediaQuery(theme.breakpoints.down('md'))
+  const { verifyEmailMessage, dispatchVerifyEmail, history } = props
 
-  const [open, setOpen] = useState(false);
-
-
-
+  const [open, setOpen] = useState(false)
 
   const onDialogClose = () => {
-    setOpen(!open);
-    history.push('/login');
-  };
+    setOpen(!open)
+    history.push('/login')
+  }
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatchVerifyEmail({ token, email })
-    setOpen(!open);
+    setOpen(!open)
     // eslint-disable-next-line
-  },[])
+  }, [])
   return (
     <Grid
       container
@@ -106,7 +99,7 @@ function VerifyEmail(props) {
         </DialogContent>
       </Dialog>
     </Grid>
-  );
+  )
 }
 
-export default memo(VerifyEmail);
+export default memo(VerifyEmail)

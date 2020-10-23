@@ -8,18 +8,18 @@ export const URLS = {
   RECOVER_PASSWORD: { url: 'api', subUrl: 'forgot_password' },
   RESET_PASSWORD: { url: 'api', subUrl: 'reset_password' },
   VERIFY_EMAIL: { url: 'api', subUrl: 'verify_email' },
-};
+}
 
 export const getEndpointURL = (key) => {
-  let finalUrl = '';
+  let finalUrl = ''
   if (key && URLS[key]) {
-    const urlKey = URLS[key];
+    const urlKey = URLS[key]
     if (urlKey.url) {
-      finalUrl = urlKey.url;
+      finalUrl = urlKey.url
     }
     if (urlKey.subUrl && urlKey.subUrl.length > 0) {
-      finalUrl += `/${urlKey.subUrl}`;
+      finalUrl += `/${urlKey.subUrl}`
     }
   }
-  return finalUrl;
-};
+  return finalUrl
+}
