@@ -1,10 +1,10 @@
-const request = require('supertest');
+// const request = require('supertest')
 
-const app = require('../app');
+// const app = require('../app')
 
-let todos = [];
+// const todos = []
 
-it('initial', () => {});
+it('initial', () => {})
 
 // it('add a todo, return 200 status and the added todo', async () => {
 //   const todo = {
