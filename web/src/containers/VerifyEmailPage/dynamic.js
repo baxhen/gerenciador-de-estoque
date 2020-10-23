@@ -1,7 +1,7 @@
-import DynamicComponent from 'components/Common/DynamicComponent';
+import DynamicComponent from 'components/Common/DynamicComponent'
 
 const dynamic = DynamicComponent(() =>
-  import(/* webpackChunkName: "verifyEmail" */ 'containers/VerifyEmailPage')
-);
+  import(/* webpackChunkName: "verifyEmail" */ 'containers/VerifyEmailPage'),
+)
 
-export default dynamic;
+export default dynamic

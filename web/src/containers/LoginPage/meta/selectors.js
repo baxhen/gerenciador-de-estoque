@@ -1,12 +1,11 @@
-import { createSelector } from 'reselect';
-import { initialState } from './reducer';
+import { createSelector } from 'reselect'
+import { initialState } from './reducer'
 
 /**
  * Direct selector to the loginPage state domain
  */
 
-const selectLoginPageDomain = (state) =>
-  state.form.login.values || initialState;
+const selectLoginPageDomain = (state) => state.form.login.values || initialState
 
 /**
  * Other specific selectors
@@ -18,8 +17,8 @@ const selectLoginPageDomain = (state) =>
 
 const makeSelectLoginPage = () =>
   createSelector(selectLoginPageDomain, (substate) => {
-    return substate;
-  });
+    return substate
+  })
 
-export default makeSelectLoginPage;
-export { selectLoginPageDomain };
+export default makeSelectLoginPage
+export { selectLoginPageDomain }

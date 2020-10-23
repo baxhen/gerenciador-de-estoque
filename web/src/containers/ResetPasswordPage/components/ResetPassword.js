@@ -1,25 +1,25 @@
-import React, { useState, memo } from 'react';
-import useStyles from './styles';
-import { useTheme } from '@material-ui/core/styles';
-import { InputTextField } from 'components/ReduxForm/TextInput/InputTextField';
-import { Field } from 'redux-form';
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import React, { useState, memo } from 'react'
+import useStyles from './styles'
+import { useTheme } from '@material-ui/core/styles'
+import { InputTextField } from 'components/ReduxForm/TextInput/InputTextField'
+import { Field } from 'redux-form'
+import Grid from '@material-ui/core/Grid'
+import Button from '@material-ui/core/Button'
+import Typography from '@material-ui/core/Typography'
 
-import FormControl from '@material-ui/core/FormControl';
-import Dialog from '@material-ui/core/Dialog';
-import DialogContent from '@material-ui/core/DialogContent';
-import { useParams } from 'react-router-dom';
-import { CircularProgress, useMediaQuery } from '@material-ui/core';
+import FormControl from '@material-ui/core/FormControl'
+import Dialog from '@material-ui/core/Dialog'
+import DialogContent from '@material-ui/core/DialogContent'
+import { useParams } from 'react-router-dom'
+import { CircularProgress, useMediaQuery } from '@material-ui/core'
 
 function ResetPassword(props) {
-  const classes = useStyles();
-  const theme = useTheme();
-  const { token, email } = useParams();
-  const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
-  const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
-  const matchesMD = useMediaQuery(theme.breakpoints.down('md'));
+  const classes = useStyles()
+  const theme = useTheme()
+  const { token, email } = useParams()
+  const matchesXS = useMediaQuery(theme.breakpoints.down('xs'))
+  const matchesSM = useMediaQuery(theme.breakpoints.down('sm'))
+  const matchesMD = useMediaQuery(theme.breakpoints.down('md'))
   const {
     handleSubmit,
     resetPasswordMessage,
@@ -28,21 +28,21 @@ function ResetPassword(props) {
     formFields,
     dispatchResetPassword,
     history,
-  } = props;
+  } = props
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
 
   const onSubmit = (formProps) => {
-    formProps.token = token;
-    formProps.email = email;
-    dispatchResetPassword();
-    setOpen(!open);
-  };
+    formProps.token = token
+    formProps.email = email
+    dispatchResetPassword()
+    setOpen(!open)
+  }
 
   const onDialogClose = () => {
-    setOpen(!open);
-    history.push('/login');
-  };
+    setOpen(!open)
+    history.push('/login')
+  }
 
   return (
     <Grid
@@ -140,7 +140,7 @@ function ResetPassword(props) {
         </DialogContent>
       </Dialog>
     </Grid>
-  );
+  )
 }
 
-export default memo(ResetPassword);
+export default memo(ResetPassword)

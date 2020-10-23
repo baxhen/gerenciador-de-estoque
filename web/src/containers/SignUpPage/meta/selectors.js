@@ -1,11 +1,11 @@
-import { createSelector } from 'reselect';
-import { initialState } from './reducer';
+import { createSelector } from 'reselect'
+import { initialState } from './reducer'
 
 /**
  * Direct selector to the SignUp state domain
  */
 
-const selectSignUpDomain = (state) => state.form.signup.values || initialState;
+const selectSignUpDomain = (state) => state.form.signup.values || initialState
 
 /**
  * Other specific selectors
@@ -17,8 +17,8 @@ const selectSignUpDomain = (state) => state.form.signup.values || initialState;
 
 const makeSelectSignUp = () =>
   createSelector(selectSignUpDomain, (substate) => {
-    return substate;
-  });
+    return substate
+  })
 
-export default makeSelectSignUp;
-export { selectSignUpDomain };
+export default makeSelectSignUp
+export { selectSignUpDomain }

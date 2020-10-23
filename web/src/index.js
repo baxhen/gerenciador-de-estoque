@@ -1,18 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './containers/App';
-import Root from './Root';
-import { Route } from 'react-router-dom';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from './containers/App'
+import Root from './Root'
+import { Route } from 'react-router-dom'
 
-import LoginPage from './containers/LoginPage/dynamic';
-import LogOutContainer from './containers/LogOutContainer/dynamic';
-import SignUpPage from './containers/SignUpPage/dynamic';
-import FeaturePage from 'containers/FeaturePage/dynamic';
-import RecoverPasswordPage from 'containers/RecoverPasswordPage/dynamic';
-import ResetPasswordPage from 'containers/ResetPasswordPage/dynamic';
-import VerifyEmailPage from 'containers/VerifyEmailPage/dynamic';
-import HomePage from 'containers/HomePage/dynamic';
-import AboutPage from 'containers/AboutPage/dynamic';
+import LoginPage from './containers/LoginPage/dynamic'
+import LogOutContainer from './containers/LogOutContainer/dynamic'
+import SignUpPage from './containers/SignUpPage/dynamic'
+import FeaturePage from 'containers/FeaturePage/dynamic'
+import RecoverPasswordPage from 'containers/RecoverPasswordPage/dynamic'
+import ResetPasswordPage from 'containers/ResetPasswordPage/dynamic'
+import VerifyEmailPage from 'containers/VerifyEmailPage/dynamic'
+import HomePage from 'containers/HomePage/dynamic'
+import AboutPage from 'containers/AboutPage/dynamic'
 
 ReactDOM.render(
   <Root>
@@ -24,9 +24,17 @@ ReactDOM.render(
       <Route exact path="/about" component={AboutPage} />
       <Route exact path="/feature" component={FeaturePage} />
       <Route exact path="/recoverPassword" component={RecoverPasswordPage} />
-      <Route exact path="/resetPassword/:token/:email" component={ResetPasswordPage} />
-      <Route exact path="/verifyEmail/:token/:email" component={VerifyEmailPage} />
+      <Route
+        exact
+        path="/resetPassword/:token/:email"
+        component={ResetPasswordPage}
+      />
+      <Route
+        exact
+        path="/verifyEmail/:token/:email"
+        component={VerifyEmailPage}
+      />
     </App>
   </Root>,
-  document.getElementById('root')
-);
+  document.getElementById('root'),
+)

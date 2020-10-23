@@ -1,5 +1,5 @@
-import React from 'react';
-import TextField from '@material-ui/core/TextField';
+import React from 'react'
+import TextField from '@material-ui/core/TextField'
 
 export const InputTextField = ({
   input,
@@ -11,17 +11,17 @@ export const InputTextField = ({
 }) => {
   const hasError = () => {
     if (error && touched) {
-      return { error: true };
+      return { error: true }
     }
-    return undefined;
-  };
+    return undefined
+  }
 
   const showError = () => {
     if (error && touched) {
-      return error;
+      return error
     }
-    return undefined;
-  };
+    return undefined
+  }
 
   return (
     <>
@@ -37,5 +37,5 @@ export const InputTextField = ({
         className={className}
       />
     </>
-  );
-};
+  )
+}

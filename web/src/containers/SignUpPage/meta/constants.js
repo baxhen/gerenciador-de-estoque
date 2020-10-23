@@ -1,1 +1,1 @@
-export const SIGNUP_DEFAULT = 'SIGNUP_DEFAULT';
+export const SIGNUP_DEFAULT = 'SIGNUP_DEFAULT'

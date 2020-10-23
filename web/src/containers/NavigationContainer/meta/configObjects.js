@@ -19,7 +19,7 @@ export const headerConfig = [
       { label: 'Log In', to: '/login', className: 'lastTab' },
     ],
   },
-];
+]
 
 export const linksConfig = [
   { path: '/', linkValue: 0 },
@@ -29,4 +29,4 @@ export const linksConfig = [
   { path: '/signup', linkValue: 2 },
   { path: '/login', linkValue: 3 },
   { path: '/recoverPassword', linkValue: 3 },
-];
+]

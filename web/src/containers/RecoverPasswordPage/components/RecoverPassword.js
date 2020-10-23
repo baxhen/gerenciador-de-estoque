@@ -1,23 +1,23 @@
-import React, { useState, memo } from 'react';
-import useStyles from './styles';
-import { useTheme } from '@material-ui/core/styles';
-import { InputTextField } from 'components/ReduxForm/TextInput/InputTextField';
-import { Field } from 'redux-form';
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import React, { useState, memo } from 'react'
+import useStyles from './styles'
+import { useTheme } from '@material-ui/core/styles'
+import { InputTextField } from 'components/ReduxForm/TextInput/InputTextField'
+import { Field } from 'redux-form'
+import Grid from '@material-ui/core/Grid'
+import Button from '@material-ui/core/Button'
+import Typography from '@material-ui/core/Typography'
 
-import FormControl from '@material-ui/core/FormControl';
-import Dialog from '@material-ui/core/Dialog';
-import DialogContent from '@material-ui/core/DialogContent';
-import { CircularProgress, useMediaQuery } from '@material-ui/core';
+import FormControl from '@material-ui/core/FormControl'
+import Dialog from '@material-ui/core/Dialog'
+import DialogContent from '@material-ui/core/DialogContent'
+import { CircularProgress, useMediaQuery } from '@material-ui/core'
 
 function RecoverPassword(props) {
-  const classes = useStyles();
-  const theme = useTheme();
-  const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
-  const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
-  const matchesMD = useMediaQuery(theme.breakpoints.down('md'));
+  const classes = useStyles()
+  const theme = useTheme()
+  const matchesXS = useMediaQuery(theme.breakpoints.down('xs'))
+  const matchesSM = useMediaQuery(theme.breakpoints.down('sm'))
+  const matchesMD = useMediaQuery(theme.breakpoints.down('md'))
   const {
     handleSubmit,
     recoverPasswordMessage,
@@ -26,19 +26,19 @@ function RecoverPassword(props) {
     formFields,
     dispatchRecoverPassword,
     history,
-  } = props;
+  } = props
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
 
   const onSubmit = () => {
-    dispatchRecoverPassword();
-    setOpen(!open);
-  };
+    dispatchRecoverPassword()
+    setOpen(!open)
+  }
 
   const onDialogClose = () => {
-    setOpen(!open);
-    history.push('/login');
-  };
+    setOpen(!open)
+    history.push('/login')
+  }
 
   return (
     <Grid
@@ -138,7 +138,7 @@ function RecoverPassword(props) {
         </DialogContent>
       </Dialog>
     </Grid>
-  );
+  )
 }
 
-export default memo(RecoverPassword);
+export default memo(RecoverPassword)

@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({
   background: {
@@ -28,6 +28,6 @@ const useStyles = makeStyles((theme) => ({
       maxWidth: 306,
     },
   },
-}));
+}))
 
-export default useStyles;
+export default useStyles

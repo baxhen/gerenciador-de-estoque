@@ -13,4 +13,4 @@ export const formFields = [
     className: 'input',
     noValueError: 'Digite sua senha para fazer login',
   },
-];
+]

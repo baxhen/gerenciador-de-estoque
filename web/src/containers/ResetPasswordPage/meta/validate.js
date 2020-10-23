@@ -1,12 +1,12 @@
-import _ from 'lodash';
-import { formFields } from './configObjects';
+import _ from 'lodash'
+import { formFields } from './configObjects'
 
 export const validate = (values) => {
-  const errors = {};
+  const errors = {}
 
   _.each(formFields, ({ name, noValueError }) => {
-    if (!values[name]) errors[name] = noValueError;
-  });
+    if (!values[name]) errors[name] = noValueError
+  })
 
-  return errors;
-};
+  return errors
+}

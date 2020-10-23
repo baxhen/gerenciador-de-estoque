@@ -1,28 +1,28 @@
-import React, { Component } from 'react';
-import { history } from '../../history';
+import React, { Component } from 'react'
+import { history } from '../../history'
 
 export default (ChildComponent) => {
   class ComposedComponent extends Component {
     // Our component just got rendered
     componentDidMount() {
-      this.shouldNavigateAway();
+      this.shouldNavigateAway()
     }
 
     // Our component just got updated
     componentDidUpdate() {
-      this.shouldNavigateAway();
+      this.shouldNavigateAway()
     }
 
     shouldNavigateAway() {
       if (!this.props.auth) {
-        history.push('/');
+        history.push('/')
       }
     }
 
     render() {
-      return <ChildComponent {...this.props} />;
+      return <ChildComponent {...this.props} />
     }
   }
 
-  return ComposedComponent;
-};
+  return ComposedComponent
+}

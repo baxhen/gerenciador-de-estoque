@@ -1,12 +1,12 @@
-import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { connect } from 'react-redux'
+import { compose } from 'redux'
 
-import About from './components/About';
+import About from './components/About'
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({})
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {}
 
-const withConnect = connect(mapStateToProps, mapDispatchToProps);
+const withConnect = connect(mapStateToProps, mapDispatchToProps)
 
-export default compose(withConnect)(About);
+export default compose(withConnect)(About)

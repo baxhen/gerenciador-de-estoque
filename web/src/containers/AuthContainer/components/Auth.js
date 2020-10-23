@@ -1,7 +1,7 @@
-import React, { memo } from 'react';
+import React, { memo } from 'react'
 
 function Auth() {
-  return <div />;
+  return <div />
 }
 
-export default memo(Auth);
+export default memo(Auth)

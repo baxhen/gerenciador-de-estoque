@@ -1,5 +1,5 @@
-import { createSelector } from 'reselect';
-import { initialState } from './reducer';
+import { createSelector } from 'reselect'
+import { initialState } from './reducer'
 /**
  * Get RecoverPassword
  * @param state
@@ -7,12 +7,12 @@ import { initialState } from './reducer';
  */
 
 const selectResetPasswordPageDomain = (state) =>
-  state.form.resetPassword.values || initialState;
+  state.form.resetPassword.values || initialState
 
 const makeSelectResetPasswordPage = () =>
   createSelector(selectResetPasswordPageDomain, (substate) => {
-    return substate;
-  });
+    return substate
+  })
 
-export default makeSelectResetPasswordPage;
-export { selectResetPasswordPageDomain };
+export default makeSelectResetPasswordPage
+export { selectResetPasswordPageDomain }

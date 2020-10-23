@@ -4,12 +4,12 @@
  *
  */
 
-import { DEFAULT_ACTION, LOGIN_FIELD_CHANGE } from './constants';
+import { DEFAULT_ACTION, LOGIN_FIELD_CHANGE } from './constants'
 
 export function defaultAction() {
   return {
     type: DEFAULT_ACTION,
-  };
+  }
 }
 
 export function loginFieldChange(fieldName, value) {
@@ -17,5 +17,5 @@ export function loginFieldChange(fieldName, value) {
     fieldName,
     value,
     type: LOGIN_FIELD_CHANGE,
-  };
+  }
 }

@@ -1,26 +1,26 @@
-import React, { Component, memo } from 'react';
-import { InputTextField } from 'components/ReduxForm/TextInput/InputTextField';
-import { Field } from 'redux-form';
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import { Link } from '@material-ui/core';
-import { Link as RouterLink } from 'react-router-dom';
+import React, { Component, memo } from 'react'
+import { InputTextField } from 'components/ReduxForm/TextInput/InputTextField'
+import { Field } from 'redux-form'
+import Grid from '@material-ui/core/Grid'
+import Button from '@material-ui/core/Button'
+import Typography from '@material-ui/core/Typography'
+import FormHelperText from '@material-ui/core/FormHelperText'
+import FormControl from '@material-ui/core/FormControl'
+import { Link } from '@material-ui/core'
+import { Link as RouterLink } from 'react-router-dom'
 
 class LoginPage extends Component {
   state = {
     error: false,
-  };
+  }
 
   onSubmit = (formProps) => {
-    this.props.dispatchAuthenticate();
-  };
+    this.props.dispatchAuthenticate()
+  }
 
   componentDidUpdate(lastProps) {
     if (this.props.signUpErrorMessage !== lastProps.signUpErrorMessage) {
-      this.setState({ error: true });
+      this.setState({ error: true })
     }
   }
 
@@ -33,7 +33,7 @@ class LoginPage extends Component {
       submitting,
       formFields,
       theme,
-    } = this.props;
+    } = this.props
 
     return (
       <Grid
@@ -108,8 +108,8 @@ class LoginPage extends Component {
           </Grid>
         </Grid>
       </Grid>
-    );
+    )
   }
 }
 
-export default memo(LoginPage);
+export default memo(LoginPage)
