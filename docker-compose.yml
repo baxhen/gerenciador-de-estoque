@@ -10,7 +10,7 @@ services:
       - /app/node_modules
       - ./server:/app
     environment:
-      - WEB_URL=https://702e239f9a43.ngrok.io
+      - WEB_URL=https://d5765ce8526e.ngrok.io
       - MONGO_URI=mongodb+srv://admin:u901eSfoSpr4YcQy@auth.xj11d.azure.mongodb.net/auth?retryWrites=true&w=majority
       - EMAIL=leo292629@gmail.com
       - EMAIL_PASSWORD=Xuan1234
