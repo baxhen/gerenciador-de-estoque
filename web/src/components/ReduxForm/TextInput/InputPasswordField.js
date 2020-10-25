@@ -54,7 +54,7 @@ export const InputPasswordField = ({
                 aria-label="toggle password visibility"
                 onClick={handleClickShowPassword}
                 onMouseDown={handleMouseDownPassword}
-                color='primary'
+                color="primary"
                 edge="end"
               >
                 {showPassword ? <Visibility /> : <VisibilityOff />}

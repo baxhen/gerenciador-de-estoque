@@ -190,6 +190,13 @@ function Navigation({
       }
     })
   }, [linksConfig, setValue, value])
+  useEffect(() => {
+    const { pathname } = window.location
+    linksConfig.forEach(
+      ({ path, linkValue }) =>
+        pathname === path && value !== linkValue && setValue(linkValue),
+    )
+  }, [linksConfig, setValue, value])
 
   return <div className="header">{renderLinks()}</div>
 }

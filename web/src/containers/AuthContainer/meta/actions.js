@@ -17,6 +17,10 @@ export const getAuthError = (payload) => ({
   type: constants.GET_AUTH_ERROR,
   payload,
 })
+export const getLoginError = (payload) => ({
+  type: constants.GET_LOGIN_ERROR,
+  payload,
+})
 export const getAuthFeedback = (payload) => ({
   type: constants.GET_AUTH_FEEDBACK,
   payload,

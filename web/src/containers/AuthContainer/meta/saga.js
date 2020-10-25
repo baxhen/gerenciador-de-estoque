@@ -22,9 +22,9 @@ function* handleSignIn() {
   } catch (error) {
     error.response.data.message
       ? yield put(
-          actions.getAuthError({ message: error.response.data.message }),
+          actions.getLoginError({ message: error.response.data.message }),
         )
-      : yield put(actions.getAuthError({ message: 'Credenciais Inválidas' }))
+      : yield put(actions.getLoginError({ message: 'Credenciais Inválidas' }))
   }
 }
 function* handleSignUp() {

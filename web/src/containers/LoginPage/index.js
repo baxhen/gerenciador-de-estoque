@@ -13,10 +13,10 @@ import useStyles from './components/styles'
 import { validate } from './meta/validate'
 import { formFields } from './meta/configObjects'
 import { withMediaQuery } from 'components/HighOrderComponents/withMediaQuery'
-import { selectSignUpErrorMessage } from 'containers/AuthContainer/meta/selectors'
+import { selectSignInErrorMessage } from 'containers/AuthContainer/meta/selectors'
 
 const mapStateToProps = (state) => ({
-  signUpErrorMessage: selectSignUpErrorMessage(state),
+  signInErrorMessage: selectSignInErrorMessage(state),
   formFields,
 })
 

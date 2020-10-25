@@ -1,5 +1,4 @@
 import React, { Component, memo } from 'react'
-import { InputTextField } from 'components/ReduxForm/TextInput/InputTextField'
 import { Field } from 'redux-form'
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
@@ -19,7 +18,7 @@ class LoginPage extends Component {
   }
 
   componentDidUpdate(lastProps) {
-    if (this.props.signUpErrorMessage !== lastProps.signUpErrorMessage) {
+    if (this.props.signInErrorMessage !== lastProps.signInErrorMessage) {
       this.setState({ error: true })
     }
   }
@@ -28,11 +27,10 @@ class LoginPage extends Component {
     const {
       handleSubmit,
       classes,
-      signUpErrorMessage,
+      signInErrorMessage,
       pristine,
       submitting,
       formFields,
-      theme,
     } = this.props
 
     return (
@@ -100,8 +98,14 @@ class LoginPage extends Component {
                   </Button>
                 </Grid>
               </Grid>
-              <FormHelperText style={{ textAlign: 'center' }}>
-                {signUpErrorMessage}
+              <FormHelperText
+                style={{
+                  textAlign: 'center',
+                  marginBottom: '9.5px',
+                  marginTop: '9.5px',
+                }}
+              >
+                {signInErrorMessage}
               </FormHelperText>
             </FormControl>
           </Grid>

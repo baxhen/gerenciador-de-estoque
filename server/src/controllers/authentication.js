@@ -98,11 +98,12 @@ exports.signup = (req, res, next) => {
     const user = new User({ email, password, username })
 
     try {
-      return await user.save()
+      await user.save()
       // get the email and send a link to verify the email
       // res.send({ token: tokenForUser(user) });
     } catch (error) {
-      next(error)
+      // eslint-disable-next-line
+      console.log(error)
     }
     const authenticationToken = crypto.randomBytes(20).toString('hex')
 
@@ -119,7 +120,8 @@ exports.signup = (req, res, next) => {
         },
       })
     } catch (error) {
-      next(error)
+      // eslint-disable-next-line
+      console.log(error)
     }
     const link = `${webUrl}/verifyEmail/${authenticationToken}/${email}`
     const Email = new Mailer({

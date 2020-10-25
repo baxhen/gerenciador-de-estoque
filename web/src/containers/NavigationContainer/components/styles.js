@@ -3,10 +3,7 @@ import { makeStyles } from '@material-ui/core/styles'
 export const styles = makeStyles((theme) => ({
   toolbarMargin: {
     ...theme.mixins.toolbar,
-    minHeight: '10vh !important',
-    [theme.breakpoints.down('xs')]: {
-      marginBottom: '0.7em',
-    },
+    height: '10vh !important',
   },
   logoContainer: {
     marginLeft: '2.5rem',

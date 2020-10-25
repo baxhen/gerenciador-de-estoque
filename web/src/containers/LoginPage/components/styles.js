@@ -15,14 +15,17 @@ const useStyles = withStyles(
       borderRadius: 50,
       height: 45,
       width: '328px',
-      color:'white',
-      fontWeight:400,
+      color: 'white',
+      fontWeight: 400,
       fontSize: '1rem',
       backgroundColor: theme.palette.primary.main,
       '&:hover': {
         backgroundColor: theme.palette.primary.light,
       },
-      marginTop: '2em',
+      marginTop: '0.5rem',
+      [theme.breakpoints.down('xs')]: {
+        width: '100%',
+      },
     },
     title: {
       marginTop: '29px',
@@ -31,7 +34,7 @@ const useStyles = withStyles(
       fontWeight: 400,
       fontSize: 24,
       [theme.breakpoints.down('xs')]: {
-        fontSize: 50,
+        fontSize: 24,
       },
     },
     forgotPassword: {
@@ -45,22 +48,28 @@ const useStyles = withStyles(
     },
     container: {
       width: '36rem',
-      height: '24.25rem',
+      maxHeight: '24.25rem',
       backgroundColor: theme.palette.secondary.main,
       borderRadius: '16px',
+      [theme.breakpoints.down('xs')]: {
+        width: '20rem',
+      },
     },
     input: {
       '& .MuiOutlinedInput-root': {
         '& fieldset': {
           borderColor: theme.palette.primary.main,
-          borderRadius:0
+          borderRadius: 0,
         },
         '&:hover fieldset': {
           borderColor: theme.palette.primary.light,
         },
       },
       width: '328px',
-      marginBottom:'10px'
+      marginBottom: '10px',
+      [theme.breakpoints.down('xs')]: {
+        width: '100%',
+      },
     },
   }),
   { withTheme: true },

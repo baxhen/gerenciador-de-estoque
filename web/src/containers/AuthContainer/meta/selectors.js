@@ -16,6 +16,7 @@ const selectResetPasswordMessage = (state) =>
 const selectSignUpSuccessMessage = (state) =>
   selectAuth(state).signUpSuccessMessage
 const selectSignUpErrorMessage = (state) => selectAuth(state).signUpErrorMessage
+const selectSignInErrorMessage = (state) => selectAuth(state).signInErrorMessage
 const selectVerifyEmailMessage = (state) => selectAuth(state).verifyEmailMessage
 
 export {
@@ -26,4 +27,5 @@ export {
   selectSignUpSuccessMessage,
   selectSignUpErrorMessage,
   selectVerifyEmailMessage,
+  selectSignInErrorMessage,
 }

@@ -17,6 +17,7 @@ const Auth = (state = initialState, action) =>
         draft.token = action.payload.token
         draft.isAuthenticated = true
         delete draft.signUpErrorMessage
+        delete draft.signInErrorMessage
         break
       case constants.LOGOUT:
         delete draft.token
@@ -27,6 +28,9 @@ const Auth = (state = initialState, action) =>
         break
       case constants.GET_AUTH_ERROR:
         draft.signUpErrorMessage = action.payload.message
+        break
+      case constants.GET_LOGIN_ERROR:
+        draft.signInErrorMessage = action.payload.message
         break
       case constants.RECOVER_PASSWORD_SUCCESS:
         draft.recoverPasswordMessage = action.payload.message
