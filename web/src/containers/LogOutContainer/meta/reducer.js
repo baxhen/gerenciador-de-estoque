@@ -1,6 +1,5 @@
 import produce from 'immer'
 
-
 export const initialState = {}
 
 /* eslint-disable no-param-reassign */

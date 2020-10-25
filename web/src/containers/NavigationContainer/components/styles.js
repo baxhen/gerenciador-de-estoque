@@ -3,10 +3,22 @@ import { makeStyles } from '@material-ui/core/styles'
 export const styles = makeStyles((theme) => ({
   toolbarMargin: {
     ...theme.mixins.toolbar,
-    marginBottom: '0.65em',
+    minHeight: '10vh !important',
     [theme.breakpoints.down('xs')]: {
-      marginBottom: '1.1em',
+      marginBottom: '0.7em',
     },
+  },
+  logoContainer: {
+    marginLeft: '2.5rem',
+    height: '10vh',
+    '&:hover': {
+      backgroundColor: 'transparent !important',
+    },
+  },
+  logo: {
+    height: '10vh',
+    marginBottom: 0,
+    padding: 0,
   },
   tabContainer: {
     marginLeft: 'auto',
@@ -33,11 +45,10 @@ export const styles = makeStyles((theme) => ({
     width: '50px',
   },
   drawer: {
-    backgroundColor: theme.palette.common.blue,
+    backgroundColor: theme.palette.secondary,
   },
   drawerItem: {
     ...theme.typography.tab,
-    color: 'white',
     opacity: 0.7,
   },
   drawerSelectedItem: {

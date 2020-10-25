@@ -13,9 +13,9 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 
 import NavigationContainer from '../NavigationContainer'
-import FooterContainer from '../FooterContainer'
+// import FooterContainer from '../FooterContainer'
 import { ThemeProvider } from '@material-ui/core'
-import theme from './meta/theme'
+import theme from '../../store/theme'
 
 function App({ children }) {
   const [value, setValue] = useState(0)
@@ -23,7 +23,7 @@ function App({ children }) {
     <ThemeProvider theme={theme}>
       <NavigationContainer value={value} setValue={setValue} />
       {children}
-      <FooterContainer setValue={setValue} />
+      {/* <FooterContainer setValue={setValue} /> */}
     </ThemeProvider>
   )
 }

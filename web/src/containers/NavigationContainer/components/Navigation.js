@@ -15,6 +15,9 @@ import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
 
 import { styles } from './styles'
 import { Link } from 'react-router-dom'
+import logo from '../../../assets/logo.png'
+import { Button } from '@material-ui/core'
+import { history } from '../../../history'
 
 const useStyles = styles
 
@@ -73,7 +76,7 @@ function Navigation({
       value={value >= tabs.length ? 0 : value}
       onChange={handleChange}
       className={classes.tabContainer}
-      indicatorColor="primary"
+      indicatorColor="secondary"
     >
       {tabs.map(({ label, to, className }) => (
         <Tab
@@ -136,24 +139,26 @@ function Navigation({
     })
 
     const {
-      logoTab: { label, to },
+      logoTab: { to },
       tabs,
     } = headerToRender
 
     return (
       <>
         <ElevationScroll>
-          <AppBar position="fixed" className={classes.appBar}>
+          <AppBar position="fixed" className={classes.appBar} color="secondary">
             <Toolbar disableGutters>
-              <Tab
-                label={label}
+              <Button
                 component={Link}
                 to={to}
                 onClick={() => {
                   setValue(0)
                 }}
-              />
-
+                disableRipple
+                className={classes.logoContainer}
+              >
+                <img src={logo} alt="Logo" className={classes.logo} />
+              </Button>
               {matches ? renderDrawer(tabs) : renderTabs(tabs)}
             </Toolbar>
           </AppBar>
@@ -173,13 +178,18 @@ function Navigation({
   }
 
   useEffect(() => {
-    const { pathname } = window.location
+    const historyListener = history.listen((location) => {
+      const { pathname } = location
+      linksConfig.forEach(
+        ({ path, linkValue }) =>
+          pathname === path && value !== linkValue && setValue(linkValue),
+      )
 
-    linksConfig.forEach(
-      ({ path, linkValue }) =>
-        pathname === path && value !== linkValue && setValue(linkValue),
-    )
-  }, [value, setValue, linksConfig])
+      return () => {
+        historyListener()
+      }
+    })
+  }, [linksConfig, setValue, value])
 
   return <div className="header">{renderLinks()}</div>
 }
