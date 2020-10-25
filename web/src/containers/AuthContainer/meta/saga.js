@@ -18,7 +18,7 @@ function* handleSignIn() {
     const response = yield call(networkService.postData, action, request)
     yield call(saveDataToStorage, response)
     yield put(actions.getAuthSuccess(response))
-    history.push('/dashboard')
+    history.push('/dashboard-stock')
     // stock
   } catch (error) {
     error.response.data.message

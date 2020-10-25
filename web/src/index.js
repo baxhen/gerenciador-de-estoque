@@ -7,12 +7,17 @@ import { Route } from 'react-router-dom'
 import LoginPage from './containers/LoginPage/dynamic'
 import LogOutContainer from './containers/LogOutContainer/dynamic'
 import SignUpPage from './containers/SignUpPage/dynamic'
-import DashboardPage from 'containers/DashboardPage/dynamic'
 import RecoverPasswordPage from 'containers/RecoverPasswordPage/dynamic'
 import ResetPasswordPage from 'containers/ResetPasswordPage/dynamic'
 import VerifyEmailPage from 'containers/VerifyEmailPage/dynamic'
 import HomePage from 'containers/HomePage/dynamic'
-import AboutPage from 'containers/AboutPage/dynamic'
+// import AboutPage from 'containers/AboutPage/dynamic'
+import DashboardPage from 'containers/DashboardPage/dynamic'
+import StockPage from 'containers/StockPage/dynamic'
+import EntrancesPage from 'containers/EntrancesPage/dynamic'
+import ProductsPage from 'containers/ProductsPage/dynamic'
+import SuppliersPage from 'containers/SuppliersPage/dynamic'
+import TakeOffPage from 'containers/TakeOffPage/dynamic'
 
 ReactDOM.render(
   <Root>
@@ -21,8 +26,7 @@ ReactDOM.render(
       <Route exact path="/login" component={LoginPage} />
       <Route exact path="/signup" component={SignUpPage} />
       <Route exact path="/signout" component={LogOutContainer} />
-      <Route exact path="/about" component={AboutPage} />
-      <Route exact path="/dashboard" component={DashboardPage} />
+      {/* <Route exact path="/about" component={AboutPage} /> */}
       <Route exact path="/recoverPassword" component={RecoverPasswordPage} />
       <Route
         exact
@@ -34,6 +38,12 @@ ReactDOM.render(
         path="/verifyEmail/:token/:email"
         component={VerifyEmailPage}
       />
+      <Route exact path="/dashboard" component={DashboardPage} />
+      <Route exact path="/dashboard-stock" component={StockPage} />
+      <Route exact path="/dashboard-entrances" component={EntrancesPage} />
+      <Route exact path="/dashboard-products" component={ProductsPage} />
+      <Route exact path="/dashboard-suppliers" component={SuppliersPage} />
+      <Route exact path="/dashboard-take-off" component={TakeOffPage} />
     </App>
   </Root>,
   document.getElementById('root'),

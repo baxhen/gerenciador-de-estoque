@@ -1,21 +1,12 @@
 import React, { memo } from 'react'
-import PropTypes from 'prop-types'
-import AppBar from '@material-ui/core/AppBar'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Divider from '@material-ui/core/Divider'
 import Drawer from '@material-ui/core/Drawer'
 import Hidden from '@material-ui/core/Hidden'
-import IconButton from '@material-ui/core/IconButton'
-import InboxIcon from '@material-ui/icons/MoveToInbox'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
-import MailIcon from '@material-ui/icons/Mail'
-import MenuIcon from '@material-ui/icons/Menu'
-import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
-import { makeStyles, useTheme } from '@material-ui/core/styles'
+import { useTheme } from '@material-ui/core/styles'
 import { styles } from './styles'
 import { Button, Grid } from '@material-ui/core'
 
@@ -66,12 +57,32 @@ function Dashboard({ value, setValue }) {
         <Divider />
         <List>
           {[
-            { text: 'Consultar Estoque', valueActive: 0 },
-            { text: 'Consultar Entradas', valueActive: 1 },
-            { text: 'Consultar Saídas', valueActive: 2 },
-            { text: 'Consultar Fornecedores', valueActive: 3 },
-            { text: 'Consultar Produtos', valueActive: 4 },
-          ].map(({ text, valueActive }) => (
+            {
+              text: 'Consultar Estoque',
+              valueActive: 0,
+              to: 'dashboard-stock',
+            },
+            {
+              text: 'Consultar Entradas',
+              valueActive: 1,
+              to: 'dashboard-entrances',
+            },
+            {
+              text: 'Consultar Saídas',
+              valueActive: 2,
+              to: 'dashboard-take-off',
+            },
+            {
+              text: 'Consultar Fornecedores',
+              valueActive: 3,
+              to: 'dashboard-suppliers',
+            },
+            {
+              text: 'Consultar Produtos',
+              valueActive: 4,
+              to: 'dashboard-products',
+            },
+          ].map(({ text, valueActive, to }) => (
             <ListItem
               button
               key={text}
@@ -79,6 +90,8 @@ function Dashboard({ value, setValue }) {
               className={
                 classes[valueActive === value ? 'menuItemActive' : 'menuItem']
               }
+              component={Link}
+              to={to}
               onClick={() => {
                 setValue(valueActive)
               }}
