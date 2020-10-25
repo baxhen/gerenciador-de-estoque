@@ -24,7 +24,7 @@ export const headerConfig = [
 
 export const linksConfig = [
   { path: '/', linkValue: 0 },
-  { path: '/feature', linkValue: 0 },
+  { path: '/dashboard', linkValue: 0 },
   { path: '/signout', linkValue: 2 },
   // { path: '/about', linkValue: 1 },
   { path: '/signup', linkValue: 2 },

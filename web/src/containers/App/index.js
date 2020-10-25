@@ -16,12 +16,17 @@ import NavigationContainer from '../NavigationContainer'
 // import FooterContainer from '../FooterContainer'
 import { ThemeProvider } from '@material-ui/core'
 import theme from '../../store/theme'
+import DashboardPage from 'containers/DashboardPage'
 
-function App({ children }) {
+function App({ children, auth }) {
   const [value, setValue] = useState(0)
   return (
     <ThemeProvider theme={theme}>
-      <NavigationContainer value={value} setValue={setValue} />
+      {auth ? (
+        <DashboardPage value={value} setValue={setValue}></DashboardPage>
+      ) : (
+        <NavigationContainer value={value} setValue={setValue} />
+      )}
       {children}
       {/* <FooterContainer setValue={setValue} /> */}
     </ThemeProvider>
@@ -30,7 +35,9 @@ function App({ children }) {
 
 App.propTypes = {}
 
-const mapStateToProps = (state) => ({})
+const mapStateToProps = (state) => ({
+  auth: state.auth.isAuthenticated,
+})
 
 const withConnect = connect(mapStateToProps)
 

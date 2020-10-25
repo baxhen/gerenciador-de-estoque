@@ -7,7 +7,7 @@ import { Route } from 'react-router-dom'
 import LoginPage from './containers/LoginPage/dynamic'
 import LogOutContainer from './containers/LogOutContainer/dynamic'
 import SignUpPage from './containers/SignUpPage/dynamic'
-import FeaturePage from 'containers/FeaturePage/dynamic'
+import DashboardPage from 'containers/DashboardPage/dynamic'
 import RecoverPasswordPage from 'containers/RecoverPasswordPage/dynamic'
 import ResetPasswordPage from 'containers/ResetPasswordPage/dynamic'
 import VerifyEmailPage from 'containers/VerifyEmailPage/dynamic'
@@ -22,7 +22,7 @@ ReactDOM.render(
       <Route exact path="/signup" component={SignUpPage} />
       <Route exact path="/signout" component={LogOutContainer} />
       <Route exact path="/about" component={AboutPage} />
-      <Route exact path="/feature" component={FeaturePage} />
+      <Route exact path="/dashboard" component={DashboardPage} />
       <Route exact path="/recoverPassword" component={RecoverPasswordPage} />
       <Route
         exact
