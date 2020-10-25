@@ -29,6 +29,7 @@ export const InputTextField = ({
         {...input}
         {...hasError()}
         helperText={showError()}
+        variant="outlined"
         fullWidth
         type={type}
         label={label}

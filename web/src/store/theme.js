@@ -2,7 +2,7 @@ import { createMuiTheme } from '@material-ui/core/styles'
 
 const primary = '#D5362E'
 // const primaryLight = '#FF6B58'
-// const primaryDark = '#9C0005'
+const primaryDark = '#9C0005'
 const secondary = '#DEDEDE'
 // const secondaryLight = '#FFFFFF'
 // const secondaryDark = '#ACACAC'
@@ -13,6 +13,9 @@ export default createMuiTheme({
     //   blue: arcBlue,
     //   orange: arcOrange,
     // },
+    error: {
+      main: primaryDark,
+    },
     primary: {
       main: primary,
     },

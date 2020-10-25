@@ -1,3 +1,6 @@
+import { InputPasswordField } from 'components/ReduxForm/TextInput/InputPasswordField'
+import { InputTextField } from 'components/ReduxForm/TextInput/InputTextField'
+
 export const formFields = [
   {
     label: 'Email',
@@ -5,6 +8,7 @@ export const formFields = [
     type: 'email',
     className: 'input',
     noValueError: 'Digite seu email para fazer login',
+    inputType: InputTextField,
   },
   {
     label: 'Senha',
@@ -12,5 +16,6 @@ export const formFields = [
     type: 'password',
     className: 'input',
     noValueError: 'Digite sua senha para fazer login',
+    inputType: InputPasswordField,
   },
 ]

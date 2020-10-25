@@ -43,41 +43,40 @@ class LoginPage extends Component {
         direction="column"
         className={classes.background}
       >
-        <Grid item>
-          <Grid container direction="column">
-            <Grid item>
-              <Typography variant="h2" className={classes.title}>
-                Já tem conta?
-              </Typography>
-              <Typography
-                variant="body1"
-                style={{
-                  color: theme.palette.common.blue,
-                  textAlign: 'center',
-                  marginBottom: '2em',
-                }}
-              >
-                Bem vindo de Volta!
-              </Typography>
-            </Grid>
+        <Grid
+          item
+          container
+          alignItems="center"
+          justify="flex-start"
+          direction="column"
+          className={classes.container}
+        >
+          <Grid item>
+            <Typography variant="h4" color="primary" className={classes.title}>
+              Login
+            </Typography>
+          </Grid>
 
+          <Grid item>
             <FormControl
               error={this.state.error}
               component="form"
               onSubmit={handleSubmit(this.onSubmit)}
             >
               <Grid item container direction="column">
-                {formFields.map(({ label, type, name, className }) => (
-                  <Grid item key={name} style={{ marginBottom: '0.5em' }}>
-                    <Field
-                      component={InputTextField}
-                      label={label}
-                      name={name}
-                      type={type}
-                      className={classes[className]}
-                    />
-                  </Grid>
-                ))}
+                {formFields.map(
+                  ({ label, type, name, className, inputType }) => (
+                    <Grid item key={name} style={{ marginBottom: '0.5em' }}>
+                      <Field
+                        component={inputType}
+                        label={label}
+                        name={name}
+                        type={type}
+                        className={classes[className]}
+                      />
+                    </Grid>
+                  ),
+                )}
                 <Grid item container justify="flex-end">
                   <Typography className={classes.linkContainer}>
                     <Link
