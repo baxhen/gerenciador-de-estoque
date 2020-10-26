@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from 'react'
+import React, { memo } from 'react'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Divider from '@material-ui/core/Divider'
 import Drawer from '@material-ui/core/Drawer'
@@ -8,15 +8,20 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import { useTheme } from '@material-ui/core/styles'
 import { styles } from './styles'
-import { AppBar, Button, Grid, IconButton, Toolbar, useMediaQuery } from '@material-ui/core'
-import MenuIcon from '@material-ui/icons/Menu';
-import Typography from '@material-ui/core/Typography';
+import {
+  AppBar,
+  Button,
+  Grid,
+  IconButton,
+  Toolbar,
+  useMediaQuery,
+} from '@material-ui/core'
+import MenuIcon from '@material-ui/icons/Menu'
+import Typography from '@material-ui/core/Typography'
 import logo from '../../../assets/logo.png'
 import { Link } from 'react-router-dom'
 
 const useStyles = styles
-
-
 
 function Dashboard({ value, setValue, menuItems }) {
   const classes = useStyles()
@@ -72,6 +77,7 @@ function Dashboard({ value, setValue, menuItems }) {
               to={to}
               onClick={() => {
                 setValue(valueActive)
+                matches && handleDrawerToggle()
               }}
             >
               <ListItemText primary={text} style={{ textAlign: 'center' }} />
@@ -81,34 +87,28 @@ function Dashboard({ value, setValue, menuItems }) {
       </Grid>
     </div>
   )
-
-  // useEffect(()=>{
-  //   matches ? setMobileOpen(true) : setMobileOpen(false)
-  // },[matches])
-
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <Hidden smUp >
- <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar>
-          <IconButton
-            color="primary"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            className={classes.menuButton}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" color='primary' noWrap>
-            ABC Livros e Brinquedos
-          </Typography>
-        </Toolbar>
-      </AppBar>
-
+      <Hidden smUp>
+        <AppBar position="fixed" className={classes.appBar}>
+          <Toolbar>
+            <IconButton
+              color="primary"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}
+              className={classes.menuButton}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" color="primary" noWrap>
+              ABC Livros e Brinquedos
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <div className={classes.toolbarMargin}></div>
       </Hidden>
-     
       <nav className={classes.drawer} aria-label="mailbox folders">
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Hidden smUp implementation="css">

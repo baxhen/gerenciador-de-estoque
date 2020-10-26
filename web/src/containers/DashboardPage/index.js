@@ -8,7 +8,7 @@ import { menuItems } from './meta/configObjects'
 
 const mapStateToProps = (state) => ({
   auth: state.auth.isAuthenticated,
-  menuItems
+  menuItems,
 })
 
 const mapDispatchToProps = (dispatch) => ({})

@@ -17,7 +17,7 @@ export const styles = makeStyles((theme) => ({
     },
   },
   appBar: {
-    backgroundColor:'white',
+    backgroundColor: 'white',
     [theme.breakpoints.up('sm')]: {
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
@@ -95,5 +95,8 @@ export const styles = makeStyles((theme) => ({
     width: 56,
     height: '100%',
     opacity: 0.9,
+  },
+  toolbarMargin: {
+    ...theme.mixins.toolbar,
   },
 }))
