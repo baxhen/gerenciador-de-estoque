@@ -92,6 +92,7 @@ function Navigation({
   const renderDrawer = (tabs) => (
     <>
       <SwipeableDrawer
+        anchor='right'
         disableBackdropTransition={!iOS}
         disableDiscovery={iOS}
         open={openDrawer}

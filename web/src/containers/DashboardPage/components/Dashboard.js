@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, useEffect } from 'react'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Divider from '@material-ui/core/Divider'
 import Drawer from '@material-ui/core/Drawer'
@@ -20,6 +20,7 @@ import MenuIcon from '@material-ui/icons/Menu'
 import Typography from '@material-ui/core/Typography'
 import logo from '../../../assets/logo.png'
 import { Link } from 'react-router-dom'
+import {history} from '../../../history'
 
 const useStyles = styles
 
@@ -38,7 +39,7 @@ function Dashboard({ value, setValue, menuItems }) {
       <Grid container direction="column">
         <Button
           component={Link}
-          to="/dashboard"
+          to="/dashboard-stock"
           disableRipple
           className={classes.logoContainer}
         >
@@ -87,6 +88,28 @@ function Dashboard({ value, setValue, menuItems }) {
       </Grid>
     </div>
   )
+
+  useEffect(() => {
+    const historyListener = history.listen((location) => {
+      const { pathname } = location
+      menuItems.forEach(
+        ({ to, valueActive }) =>
+          pathname === "/"+to && value !== valueActive && setValue(valueActive),
+      )
+
+      return () => {
+        historyListener()
+      }
+    })
+  }, [menuItems, setValue, value])
+
+   useEffect(() => {
+    const { pathname } = window.location
+    menuItems.forEach(
+      ({ to, valueActive }) =>
+        pathname === "/"+to && value !== valueActive && setValue(valueActive),
+    )
+  }, [menuItems, setValue, value])
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -114,6 +137,7 @@ function Dashboard({ value, setValue, menuItems }) {
         <Hidden smUp implementation="css">
           <Drawer
             // container={container}
+            // anchor='right'
             variant="temporary"
             anchor={theme.direction === 'rtl' ? 'right' : 'left'}
             open={mobileOpen}
