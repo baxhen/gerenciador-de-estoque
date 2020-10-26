@@ -4,9 +4,11 @@ import { compose } from 'redux'
 import Dashboard from './components/Dashboard'
 
 import requireAuth from '../../components/HighOrderComponents/requireAuth'
+import { menuItems } from './meta/configObjects'
 
 const mapStateToProps = (state) => ({
   auth: state.auth.isAuthenticated,
+  menuItems
 })
 
 const mapDispatchToProps = (dispatch) => ({})

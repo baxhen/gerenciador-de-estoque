@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, useEffect } from 'react'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Divider from '@material-ui/core/Divider'
 import Drawer from '@material-ui/core/Drawer'
@@ -8,17 +8,21 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import { useTheme } from '@material-ui/core/styles'
 import { styles } from './styles'
-import { Button, Grid } from '@material-ui/core'
-
+import { AppBar, Button, Grid, IconButton, Toolbar, useMediaQuery } from '@material-ui/core'
+import MenuIcon from '@material-ui/icons/Menu';
+import Typography from '@material-ui/core/Typography';
 import logo from '../../../assets/logo.png'
 import { Link } from 'react-router-dom'
 
 const useStyles = styles
 
-function Dashboard({ value, setValue }) {
+
+
+function Dashboard({ value, setValue, menuItems }) {
   const classes = useStyles()
   const theme = useTheme()
   const [mobileOpen, setMobileOpen] = React.useState(false)
+  const matches = useMediaQuery(theme.breakpoints.down('xs'))
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)
@@ -56,33 +60,7 @@ function Dashboard({ value, setValue }) {
 
         <Divider />
         <List>
-          {[
-            {
-              text: 'Consultar Estoque',
-              valueActive: 0,
-              to: 'dashboard-stock',
-            },
-            {
-              text: 'Consultar Entradas',
-              valueActive: 1,
-              to: 'dashboard-entrances',
-            },
-            {
-              text: 'Consultar Saídas',
-              valueActive: 2,
-              to: 'dashboard-take-off',
-            },
-            {
-              text: 'Consultar Fornecedores',
-              valueActive: 3,
-              to: 'dashboard-suppliers',
-            },
-            {
-              text: 'Consultar Produtos',
-              valueActive: 4,
-              to: 'dashboard-products',
-            },
-          ].map(({ text, valueActive, to }) => (
+          {menuItems.map(({ text, valueActive, to }) => (
             <ListItem
               button
               key={text}
@@ -104,11 +82,33 @@ function Dashboard({ value, setValue }) {
     </div>
   )
 
-  // const container = window !== undefined ? () => window().document.body : undefined;
+  // useEffect(()=>{
+  //   matches ? setMobileOpen(true) : setMobileOpen(false)
+  // },[matches])
 
   return (
     <div className={classes.root}>
       <CssBaseline />
+      <Hidden smUp >
+ <AppBar position="fixed" className={classes.appBar}>
+        <Toolbar>
+          <IconButton
+            color="primary"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+            className={classes.menuButton}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" color='primary' noWrap>
+            ABC Livros e Brinquedos
+          </Typography>
+        </Toolbar>
+      </AppBar>
+
+      </Hidden>
+     
       <nav className={classes.drawer} aria-label="mailbox folders">
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Hidden smUp implementation="css">
@@ -128,9 +128,9 @@ function Dashboard({ value, setValue }) {
             {drawer}
           </Drawer>
         </Hidden>
-        <div className={classes.columnOne}></div>
-        <div className={classes.columnTwo}></div>
         <Hidden xsDown implementation="css">
+          <div className={classes.columnOne}></div>
+          <div className={classes.columnTwo}></div>
           <Drawer
             classes={{
               paper: classes.drawerPaper,
@@ -142,32 +142,6 @@ function Dashboard({ value, setValue }) {
           </Drawer>
         </Hidden>
       </nav>
-      {/* <main className={classes.content}>
-        <div className={classes.toolbar} />
-        <Typography paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-          ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum
-          facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
-          gravida rutrum quisque non tellus. Convallis convallis tellus id interdum velit laoreet id
-          donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-          adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras.
-          Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo quis
-          imperdiet massa tincidunt. Cras tincidunt lobortis feugiat vivamus at augue. At augue eget
-          arcu dictum varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem
-          donec massa sapien faucibus et molestie ac.
-        </Typography>
-        <Typography paragraph>
-          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper eget nulla
-          facilisi etiam dignissim diam. Pulvinar elementum integer enim neque volutpat ac
-          tincidunt. Ornare suspendisse sed nisi lacus sed viverra tellus. Purus sit amet volutpat
-          consequat mauris. Elementum eu facilisis sed odio morbi. Euismod lacinia at quis risus sed
-          vulputate odio. Morbi tincidunt ornare massa eget egestas purus viverra accumsan in. In
-          hendrerit gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem et
-          tortor. Habitant morbi tristique senectus et. Adipiscing elit duis tristique sollicitudin
-          nibh sit. Ornare aenean euismod elementum nisi quis eleifend. Commodo viverra maecenas
-          accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam ultrices sagittis orci a.
-        </Typography>
-      </main> */}
     </div>
   )
 }
