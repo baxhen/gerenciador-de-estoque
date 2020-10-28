@@ -10,8 +10,9 @@ services:
       - /app/node_modules
       - ./server:/app
     environment:
-      - WEB_URL=https://190dc9b2599b.ngrok.io
+      - WEB_URL=http://localhost:3000
       - MONGO_URI=mongodb+srv://admin:u901eSfoSpr4YcQy@auth.xj11d.azure.mongodb.net/auth?retryWrites=true&w=majority
+      - DB_NAME=gerenciamento-estoque
       - EMAIL=leo292629@gmail.com
       - EMAIL_PASSWORD=Xuan1234
       - JWT_SECRET=uyrxvzhjnkgvwquaisdozjn2qwdasxz

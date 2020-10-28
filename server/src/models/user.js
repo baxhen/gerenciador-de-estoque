@@ -41,7 +41,7 @@ userSchema.methods.comparePassword = function (candidatePassword, callback) {
 }
 // create model class
 
-const ModelClass = mongoose.model('user', userSchema)
+const ModelClass = mongoose.model('User', userSchema)
 
 // export the model
 

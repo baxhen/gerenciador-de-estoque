@@ -1,8 +1,9 @@
 const mongoose = require('mongoose')
 const app = require('./app')
-const { mongoUri } = require('./config/config')
+const { mongoUri, dbName } = require('./config/config')
 
 mongoose.connect(mongoUri, {
+  dbName,
   useNewUrlParser: true,
   useCreateIndex: true,
   useUnifiedTopology: true,
