@@ -3,6 +3,7 @@ const passport = require('passport')
 const Authentication = require('./controllers/authentication')
 const ProductController = require('./controllers/productController')
 const CategoryController = require('./controllers/categoryController')
+const SupplierController = require('./controllers/supplierController')
 require('./services/passport')
 
 const requireAuth = passport.authenticate('jwt', { session: false })
@@ -34,6 +35,25 @@ routes.delete(
   requireAuth,
   ProductController.deleteProduct,
 )
+
+// SUPPLIERS ROUTES
+
+routes.post('/add/supplier', requireAuth, SupplierController.addSupplier)
+routes.get('/get/suppliers', requireAuth, SupplierController.getSuppliers)
+routes.get('/get/supplier/:_id', requireAuth, SupplierController.getSupplier)
+routes.get(
+  '/supplier/search/by_field',
+  requireAuth,
+  SupplierController.getSupplierByField,
+)
+routes.post('/edit/supplier/:_id', requireAuth, SupplierController.editSupplier)
+routes.delete(
+  '/delete/supplier/:_id',
+  requireAuth,
+  SupplierController.deleteSupplier,
+)
+
+// CATEGORIES ROUTES
 
 routes.post('/add/category', requireAuth, CategoryController.addCategory)
 routes.get('/get/categories', requireAuth, CategoryController.getCategories)

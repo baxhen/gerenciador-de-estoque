@@ -98,12 +98,18 @@ exports.deleteProduct = (req, res) => {
   const { _id } = req.params
 
   if (!_id) {
-    res.status(422).send({ error: 'You must provide the _id' })
+    res.status(422).send({ message: 'You must provide the _id' })
   }
 
-  Product.deleteOne({ _id }, (err) => {
+  Product.deleteOne({ _id }, (err, response) => {
     if (err) {
       return res.status(500).send({ message: err.message })
+    }
+
+    if (response.n === 0) {
+      return res
+        .status(304)
+        .send({ message: 'Produto não encontrado na base de dados' })
     }
 
     return res.status(204).send()
