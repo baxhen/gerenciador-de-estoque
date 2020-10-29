@@ -5,55 +5,39 @@ const supplierSchema = new Schema({
   isCompany: { type: Boolean, required: true },
   name: {
     type: String,
-    // eslint-disable-next-line
     required: function () {
       return !this.isCompany
     },
+    index: true,
     unique: true,
-    // eslint-disable-next-line
-    default: function () {
-      // eslint-disable-next-line
-      return this._id
-    },
+    sparse: true,
   },
-  socialReason: {
+  socialReasonName: {
     type: String,
-    // eslint-disable-next-line
     required: function () {
       return this.isCompany
     },
+    index: true,
     unique: true,
-    // eslint-disable-next-line
-    default: function () {
-      // eslint-disable-next-line
-      return this._id
-    },
+    sparse: true,
   },
   CPF: {
     type: String,
-    // eslint-disable-next-line
     required: function () {
       return !this.isCompany
     },
+    index: true,
     unique: true,
-    // eslint-disable-next-line
-    default: function () {
-      // eslint-disable-next-line
-      return this._id
-    },
+    sparse: true,
   },
   CNPJ: {
     type: String,
-    // eslint-disable-next-line
     required: function () {
       return this.isCompany
     },
+    index: true,
     unique: true,
-    // eslint-disable-next-line
-    default: function () {
-      // eslint-disable-next-line
-      return this._id
-    },
+    sparse: true,
   },
   address: {
     CEP: { type: String, required: true },
