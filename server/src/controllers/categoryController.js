@@ -45,7 +45,7 @@ exports.getCategories = (req, res) => {
         return res.status(500).send({ message: err.message })
       }
 
-      return res.send({ category: categories })
+      return res.send({ categories })
     })
 }
 exports.getCategory = (req, res) => {

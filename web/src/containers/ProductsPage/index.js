@@ -1,14 +1,22 @@
 import { connect } from 'react-redux'
 import { compose } from 'redux'
+import { reduxForm } from 'redux-form'
+import { validate } from './meta/validate'
+import { formFields } from './meta/configObjects'
 import Products from './components/Products'
-import { getProductsPage } from './meta/actions'
+import { getCategories } from './meta/actions'
+import { selectCategories } from './meta/selectors'
 
-const mapStateToProps = (state) => ({})
+const mapStateToProps = (state) => ({
+  formFields,
+  categories: selectCategories(state),
+})
 
 const mapDispatchToProps = (dispatch) => ({
-  getProductsPage,
+  dispatchGetCategories: () => dispatch(getCategories()),
 })
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps)
+const searchProductForm = reduxForm({ validate, form: 'searchProduct' })
 
-export default compose(withConnect)(Products)
+export default compose(withConnect, searchProductForm)(Products)

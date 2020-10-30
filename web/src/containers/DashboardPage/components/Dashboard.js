@@ -20,7 +20,7 @@ import MenuIcon from '@material-ui/icons/Menu'
 import Typography from '@material-ui/core/Typography'
 import logo from '../../../assets/logo.png'
 import { Link } from 'react-router-dom'
-import {history} from '../../../history'
+import { history } from '../../../history'
 
 const useStyles = styles
 
@@ -94,7 +94,9 @@ function Dashboard({ value, setValue, menuItems }) {
       const { pathname } = location
       menuItems.forEach(
         ({ to, valueActive }) =>
-          pathname === "/"+to && value !== valueActive && setValue(valueActive),
+          pathname === '/' + to &&
+          value !== valueActive &&
+          setValue(valueActive),
       )
 
       return () => {
@@ -103,11 +105,11 @@ function Dashboard({ value, setValue, menuItems }) {
     })
   }, [menuItems, setValue, value])
 
-   useEffect(() => {
+  useEffect(() => {
     const { pathname } = window.location
     menuItems.forEach(
       ({ to, valueActive }) =>
-        pathname === "/"+to && value !== valueActive && setValue(valueActive),
+        pathname === '/' + to && value !== valueActive && setValue(valueActive),
     )
   }, [menuItems, setValue, value])
   return (

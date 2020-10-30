@@ -1,7 +1,7 @@
 import { createMuiTheme } from '@material-ui/core/styles'
 
-const primary = '#D5362E'
-// const primaryLight = '#FF6B58'
+export const primary = '#D5362E'
+const primaryLight = '#FF6B58'
 const primaryDark = '#9C0005'
 const secondary = '#DEDEDE'
 // const secondaryLight = '#FFFFFF'
@@ -9,10 +9,24 @@ const secondary = '#DEDEDE'
 
 export default createMuiTheme({
   palette: {
-    // common: {
-    //   blue: arcBlue,
-    //   orange: arcOrange,
-    // },
+    common: {
+      input: {
+        '& .MuiOutlinedInput-root': {
+          '& fieldset': {
+            borderColor: primary,
+            borderRadius: 0,
+          },
+          '&:hover fieldset': {
+            borderColor: primaryLight,
+          },
+        },
+        width: '328px',
+        marginBottom: '10px',
+        // [theme.breakpoints.down('xs')]: {
+        //   width: '100%',
+        // },
+      },
+    },
     error: {
       main: primaryDark,
     },

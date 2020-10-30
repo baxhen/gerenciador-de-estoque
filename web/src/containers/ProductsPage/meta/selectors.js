@@ -1,7 +1,10 @@
+// import { createSelector } from 'reselect';
 import { initialState } from './reducer'
 /**
- * Get ProductsPage
+ * Get Auth
  * @param state
  * @returns {Object}
  */
-export const get = (state) => state.ProductsPage || initialState
+const selectProductsDomain = (state) => state.productsPage || initialState
+const selectCategories = (state) => selectProductsDomain(state).categories
+export { selectProductsDomain, selectCategories }

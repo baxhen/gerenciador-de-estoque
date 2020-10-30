@@ -7,7 +7,7 @@ function network() {
   const headers = {}
 
   function setCredentials(token) {
-    headers.Authorization = `Bearer ${token}`
+    headers.authorization = `Bearer ${token}`
   }
 
   function* postData(action, body) {
