@@ -9,6 +9,7 @@ export const URLS = {
   RESET_PASSWORD: { url: 'api', subUrl: 'reset_password' },
   VERIFY_EMAIL: { url: 'api', subUrl: 'verify_email' },
   GET_CATEGORIES: { url: 'api', subUrl: 'get/categories' },
+  GET_PRODUCTS: { url: 'api', subUrl: 'get/products' },
 }
 
 export const getEndpointURL = (key) => {

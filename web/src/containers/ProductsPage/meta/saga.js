@@ -15,6 +15,16 @@ function* handleGetCategories() {
     yield put(actions.getProductsPageError(error))
   }
 }
+function* handleGetProducts() {
+  try {
+    const action = getEndpointURL('GET_PRODUCTS')
+    networkService.setCredentials(getDataFromStorage().token)
+    const response = yield call(networkService.getData, action)
+    yield put(actions.getProductsSuccess(response.products))
+  } catch (error) {
+    yield put(actions.getProductsPageError(error))
+  }
+}
 // function* handleGetProductsPage(action) {
 //   try {
 //     yield put(actions.getProductsPageSuccess())
@@ -24,5 +34,8 @@ function* handleGetCategories() {
 // }
 
 export default function* () {
-  yield all([yield takeLatest(constants.GET_CATEGORIES, handleGetCategories)])
+  yield all([
+    yield takeLatest(constants.GET_CATEGORIES, handleGetCategories),
+    yield takeLatest(constants.GET_PRODUCTS, handleGetProducts),
+  ])
 }

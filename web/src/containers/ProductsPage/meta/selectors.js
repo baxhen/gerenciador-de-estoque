@@ -7,4 +7,5 @@ import { initialState } from './reducer'
  */
 const selectProductsDomain = (state) => state.productsPage || initialState
 const selectCategories = (state) => selectProductsDomain(state).categories
-export { selectProductsDomain, selectCategories }
+const selectProducts = (state) => selectProductsDomain(state).products
+export { selectProductsDomain, selectCategories, selectProducts }

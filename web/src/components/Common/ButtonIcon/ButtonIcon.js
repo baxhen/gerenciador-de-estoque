@@ -4,7 +4,7 @@ import { Button } from '@material-ui/core'
 
 const useStyles = styles
 
-function Products({ Icon, onClick, children }) {
+function Products({ Icon, onClick, children, type }) {
   const classes = useStyles()
   return (
     <Button
@@ -13,6 +13,7 @@ function Products({ Icon, onClick, children }) {
       className={classes.button}
       startIcon={<Icon />}
       onClick={onClick}
+      type={type}
     >
       {children}
     </Button>

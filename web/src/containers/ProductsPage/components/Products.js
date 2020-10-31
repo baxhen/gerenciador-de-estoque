@@ -1,7 +1,24 @@
-import React, { memo, useEffect } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import { styles } from './styles'
-import { Grid, FormControl, FormHelperText } from '@material-ui/core'
-import { Search } from '@material-ui/icons'
+import {
+  Grid,
+  FormControl,
+  FormHelperText,
+  List,
+  ListItemAvatar,
+  Button,
+  ListItemText,
+  IconButton,
+  ListItemSecondaryAction,
+  ListItem,
+  Divider,
+} from '@material-ui/core'
+import {
+  Search,
+  Delete as DeleteIcon,
+  FindInPage as FindInPageIcon,
+  Create as CreateIcon,
+} from '@material-ui/icons'
 import ButtonIcon from 'components/Common/ButtonIcon/ButtonIcon'
 import { Field } from 'redux-form'
 import { SelectField } from 'components/ReduxForm/Select/SelectField'
@@ -12,17 +29,20 @@ function Products({
   handleSubmit,
   formFields,
   dispatchGetCategories,
+  dispatchGetProducts,
   categories,
+  products,
+  error,
 }) {
-  // const [error, setError] = useState(false)
   const classes = useStyles()
-  const onSubmit = () => {
-    // console.log('onSubmit')
+  const onSubmit = (formFields) => {
+    console.log(formFields)
   }
   useEffect(() => {
     dispatchGetCategories()
+    dispatchGetProducts()
     // es-lint-disable-next-line
-  }, [])
+  }, [dispatchGetCategories, dispatchGetProducts])
   return (
     <main className={classes.content}>
       <Grid container direction="column">
@@ -49,13 +69,14 @@ function Products({
                   component={SelectField}
                   label="Categoria"
                   name="category"
+                  type="text"
                   options={categories.map(({ _id, name }) => {
                     return { value: _id, name }
                   })}
                   className={classes.categorySelect}
                 />
               </Grid>
-              <ButtonIcon Icon={Search} submit>
+              <ButtonIcon Icon={Search} type="submit">
                 Pesquisar
               </ButtonIcon>
             </Grid>
@@ -65,10 +86,50 @@ function Products({
                 marginBottom: '9.5px',
                 marginTop: '9.5px',
               }}
-            ></FormHelperText>
+            >
+              {error?.search}
+            </FormHelperText>
           </FormControl>
         </Grid>
-        <Grid item>List</Grid>
+        <Grid item>
+          <List>
+            {products.map(({ name, description }) => (
+              <div key={name}>
+                <ListItem>
+                  <ListItemText
+                    className={classes.listItem}
+                    primary={name}
+                    secondary={description}
+                  />
+                  <ListItemSecondaryAction>
+                    <IconButton
+                      style={{ marginRight: 10 }}
+                      edge="end"
+                      aria-label="delete"
+                    >
+                      <FindInPageIcon fontSize="large" color="primary" />
+                    </IconButton>
+                    <IconButton
+                      style={{ marginRight: 10 }}
+                      edge="end"
+                      aria-label="delete"
+                    >
+                      <CreateIcon fontSize="large" color="primary" />
+                    </IconButton>
+                    <IconButton
+                      style={{ marginRight: 10 }}
+                      edge="end"
+                      aria-label="delete"
+                    >
+                      <DeleteIcon fontSize="large" color="primary" />
+                    </IconButton>
+                  </ListItemSecondaryAction>
+                </ListItem>
+                <Divider className={classes.divider} variant="inset" />
+              </div>
+            ))}
+          </List>
+        </Grid>
       </Grid>
     </main>
   )

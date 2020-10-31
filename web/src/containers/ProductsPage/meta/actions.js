@@ -7,6 +7,13 @@ export const getCategoriesSuccess = (payload) => ({
   type: constants.GET_CATEGORIES_SUCCESS,
   payload,
 })
+export const getProducts = () => ({
+  type: constants.GET_PRODUCTS,
+})
+export const getProductsSuccess = (payload) => ({
+  type: constants.GET_PRODUCTS_SUCCESS,
+  payload,
+})
 
 export const getProductsPage = () => ({
   type: constants.GET_PRODUCTSPAGE,

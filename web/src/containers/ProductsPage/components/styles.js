@@ -34,4 +34,13 @@ export const styles = makeStyles((theme) => ({
     },
   },
   productIdInput: { ...theme.palette.common.input, width: '204px' },
+  listItem: {
+    color: theme.palette.primary.main,
+    '& .MuiListItemText-secondary': {
+      color: theme.palette.primary.main,
+    },
+  },
+  divider: {
+    backgroundColor: theme.palette.primary.main,
+  },
 }))

@@ -45,6 +45,7 @@ exports.getProducts = (req, res) => {
   Product.find({ user: _id })
     .populate('category')
     .select('productId name description category')
+    .limit(7)
     .exec((err, products) => {
       if (err) {
         return res.status(500).send({ message: err.message })

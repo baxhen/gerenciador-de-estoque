@@ -80,7 +80,7 @@ export const styles = makeStyles((theme) => ({
     },
   },
   columnOne: {
-    position: 'absolute',
+    position: 'fixed',
     top: 0,
     left: drawerWidth,
     backgroundColor: theme.palette.primary.dark,
@@ -88,7 +88,7 @@ export const styles = makeStyles((theme) => ({
     height: '100%',
   },
   columnTwo: {
-    position: 'absolute',
+    position: 'fixed',
     top: 0,
     left: drawerWidth,
     backgroundColor: theme.palette.primary.main,

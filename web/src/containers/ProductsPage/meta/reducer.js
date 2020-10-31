@@ -13,6 +13,9 @@ const ProductsPage = (state = initialState, action) =>
       case constants.GET_CATEGORIES_SUCCESS:
         draft.categories = action.payload
         break
+      case constants.GET_PRODUCTS_SUCCESS:
+        draft.products = action.payload
+        break
       default:
         break
     }

@@ -19,6 +19,7 @@ export default createMuiTheme({
           '&:hover fieldset': {
             borderColor: primaryLight,
           },
+          color: primary,
         },
         width: '328px',
         marginBottom: '10px',
