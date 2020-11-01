@@ -118,10 +118,9 @@ exports.deleteProduct = (req, res) => {
 }
 
 exports.getProductByField = (req, res) => {
-  const { field } = req.body
-  const { name, value } = field
+  const { name, value } = req.query
 
-  if (!field) {
+  if (!name || !value) {
     res.status(422).send({ error: 'You must provide the field' })
   }
   const search = {}
@@ -133,13 +132,11 @@ exports.getProductByField = (req, res) => {
 
   Product.find(
     { ...search },
-    'productId name description category',
-    (err, product) => {
+    ).select('productId name description category').limit(7).exec((err, products) => {
       if (err) {
         return res.status(500).send({ message: err.message })
       }
 
-      return res.send({ product })
-    },
-  )
+      return res.send({ products })
+    })
 }

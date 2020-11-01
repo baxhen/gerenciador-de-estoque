@@ -194,10 +194,9 @@ exports.deleteSupplier = (req, res) => {
 }
 
 exports.getSupplierByField = (req, res) => {
-  const { field } = req.body
-  const { name, value } = field
+  const { name, value } = req.query
 
-  if (!field) {
+  if (!name || !value) {
     res.status(422).send({ error: 'You must provide the field' })
   }
   const search = {}
@@ -207,11 +206,11 @@ exports.getSupplierByField = (req, res) => {
     search[name] = { $regex: new RegExp(`.*${value}.*`, 'i') }
   }
 
-  Supplier.find({ ...search }, '-user', (err, supplier) => {
+  Supplier.find({ ...search }).select('-user').limit(7).exec((err, suppliers) => {
     if (err) {
       return res.status(500).send({ message: err.message })
     }
 
-    return res.send({ supplier })
+    return res.send({ suppliers })
   })
 }

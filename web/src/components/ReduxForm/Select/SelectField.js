@@ -2,12 +2,8 @@ import React, { useState } from 'react'
 import { Select, InputLabel, MenuItem, FormControl } from '@material-ui/core'
 import { primary } from 'store/theme'
 
-export const SelectField = ({
-  input,
-  label,
-  className,
-  options,
-}) => {
+
+export const SelectField = ({ input, label, className, options }) => {
   const [value, setValue] = useState('')
   const handleLocalChange = (event) => {
     setValue(event.target.value)

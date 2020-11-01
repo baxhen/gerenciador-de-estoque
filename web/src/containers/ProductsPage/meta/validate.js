@@ -25,5 +25,9 @@ export const validate = (values) => {
     errors.search = 'Filtre a pesquisa com apenas um campo'
     errors._error = { ...errors }
   }
+  // if(total === 0){
+  //   errors.search = 'Preencha pelo menos um campo para efetuar a pesquisa'
+  //   errors._error = { ...errors }
+  // }
   return errors
 }

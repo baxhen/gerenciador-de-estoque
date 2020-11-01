@@ -30,13 +30,17 @@ function Products({
   formFields,
   dispatchGetCategories,
   dispatchGetProducts,
+  dispatchGetProductsByField,
   categories,
   products,
   error,
+  pristine,
+  submitting,
 }) {
   const classes = useStyles()
   const onSubmit = (formFields) => {
-    console.log(formFields)
+    const [key] = Object.keys(formFields)
+    dispatchGetProductsByField({ name: key, value: formFields[key] })
   }
   useEffect(() => {
     dispatchGetCategories()
@@ -69,14 +73,19 @@ function Products({
                   component={SelectField}
                   label="Categoria"
                   name="category"
-                  type="text"
+                  type="select"
                   options={categories.map(({ _id, name }) => {
                     return { value: _id, name }
                   })}
                   className={classes.categorySelect}
                 />
               </Grid>
-              <ButtonIcon Icon={Search} type="submit">
+              <ButtonIcon
+                id='search-btn'
+                Icon={Search}
+                type="submit"
+                disabled={pristine || submitting}
+              >
                 Pesquisar
               </ButtonIcon>
             </Grid>

@@ -10,6 +10,7 @@ export const URLS = {
   VERIFY_EMAIL: { url: 'api', subUrl: 'verify_email' },
   GET_CATEGORIES: { url: 'api', subUrl: 'get/categories' },
   GET_PRODUCTS: { url: 'api', subUrl: 'get/products' },
+  GET_PRODUCTS_BY_FIELD: { url: 'api', subUrl: 'product/search/by_field' },
 }
 
 export const getEndpointURL = (key) => {

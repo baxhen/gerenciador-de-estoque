@@ -25,6 +25,16 @@ function* handleGetProducts() {
     yield put(actions.getProductsPageError(error))
   }
 }
+function* handleGetProductsByField({ type, payload: { name, value } }) {
+  try {
+    const action = getEndpointURL(type)
+    const request = { name, value }
+    const response = yield call(networkService.getData, action, request)
+    yield put(actions.getProductsSuccess(response.products))
+  } catch (error) {
+    yield put(actions.getProductsPageError(error))
+  }
+}
 // function* handleGetProductsPage(action) {
 //   try {
 //     yield put(actions.getProductsPageSuccess())
@@ -37,5 +47,6 @@ export default function* () {
   yield all([
     yield takeLatest(constants.GET_CATEGORIES, handleGetCategories),
     yield takeLatest(constants.GET_PRODUCTS, handleGetProducts),
+    yield takeLatest(constants.GET_PRODUCTS_BY_FIELD, handleGetProductsByField),
   ])
 }
