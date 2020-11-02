@@ -48,12 +48,12 @@ export default createMuiTheme({
     },
   },
   overrides: {
-     MuiSelect: {
+    MuiSelect: {
       select: {
-        "&:focus": {
-          backgroundColor: "white"
-        }
-      }
+        '&:focus': {
+          backgroundColor: 'white',
+        },
+      },
     },
     MuiInputLabel: {
       root: {

@@ -13,6 +13,9 @@ import VerifyEmailPage from 'containers/VerifyEmailPage/dynamic'
 import HomePage from 'containers/HomePage/dynamic'
 // import AboutPage from 'containers/AboutPage/dynamic'
 import DashboardPage from 'containers/DashboardPage/dynamic'
+import AddProductPage from 'containers/AddProductPage/dynamic'
+import EditProductPage from 'containers/EditProductPage/dynamic'
+import ProductDetailPage from 'containers/ProductDetailPage/dynamic'
 import StockPage from 'containers/StockPage/dynamic'
 import EntrancesPage from 'containers/EntrancesPage/dynamic'
 import ProductsPage from 'containers/ProductsPage/dynamic'
@@ -39,9 +42,20 @@ ReactDOM.render(
         component={VerifyEmailPage}
       />
       <Route exact path="/dashboard" component={DashboardPage} />
+      <Route exact path="/dashboard-products" component={ProductsPage} />
+      <Route exact path="/dashboard-products-add" component={AddProductPage} />
+      <Route
+        exact
+        path="/dashboard-products-edit"
+        component={EditProductPage}
+      />
+      <Route
+        exact
+        path="/dashboard-products-detail"
+        component={ProductDetailPage}
+      />
       <Route exact path="/dashboard-stock" component={StockPage} />
       <Route exact path="/dashboard-entrances" component={EntrancesPage} />
-      <Route exact path="/dashboard-products" component={ProductsPage} />
       <Route exact path="/dashboard-suppliers" component={SuppliersPage} />
       <Route exact path="/dashboard-take-off" component={TakeOffPage} />
     </App>

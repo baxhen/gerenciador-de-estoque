@@ -11,6 +11,10 @@ export const URLS = {
   GET_CATEGORIES: { url: 'api', subUrl: 'get/categories' },
   GET_PRODUCTS: { url: 'api', subUrl: 'get/products' },
   GET_PRODUCTS_BY_FIELD: { url: 'api', subUrl: 'product/search/by_field' },
+  ADD_PRODUCT: { url: 'api', subUrl: 'add/product' },
+  EDIT_PRODUCT: { url: 'api', subUrl: 'edit/product' },
+  DELETE_PRODUCT: { url: 'api', subUrl: 'delete/product/' },
+  ADD_CATEGORY: { url: 'api', subUrl: 'add/category' },
 }
 
 export const getEndpointURL = (key) => {

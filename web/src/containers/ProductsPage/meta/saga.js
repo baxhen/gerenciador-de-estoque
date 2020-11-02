@@ -4,6 +4,7 @@ import networkService from '../../../utils/network'
 import { getDataFromStorage } from '../../../utils/cookies'
 import * as constants from './constants'
 import * as actions from './actions'
+import { history } from '../../../history'
 
 function* handleGetCategories() {
   try {
@@ -35,6 +36,57 @@ function* handleGetProductsByField({ type, payload: { name, value } }) {
     yield put(actions.getProductsPageError(error))
   }
 }
+function* handleAddProduct({
+  type,
+  payload: { productId, name, category, description },
+}) {
+  try {
+    const action = getEndpointURL(type)
+    const request = { productId, name, category, description }
+    const response = yield call(networkService.postData, action, request)
+    yield put(actions.addProductSuccess(response.product))
+    history.push('dashboard-products')
+  } catch (error) {
+    const { message } = error.response.data
+    yield put(actions.addProductError({ message }))
+  }
+}
+function* handleAddCategory({ type, payload: { name } }) {
+  try {
+    const action = getEndpointURL(type)
+    const request = { name }
+    const response = yield call(networkService.postData, action, request)
+    yield put(actions.addCategorySuccess(response.category))
+  } catch (error) {
+    const { message } = error.response.data
+    yield put(actions.addProductError({ message }))
+  }
+}
+function* handleEditProduct({
+  type,
+  payload: { productId, name, category, description, _id },
+}) {
+  try {
+    const action = getEndpointURL(type)
+    const request = { productId, name, category, description, _id }
+    const response = yield call(networkService.postData, action, request)
+    yield put(actions.editProductSuccess(response.product))
+    history.push('dashboard-products')
+  } catch (error) {
+    const { message } = error.response.data
+    yield put(actions.addProductError({ message }))
+  }
+}
+function* handleDeleteProduct({ type, payload: { _id } }) {
+  try {
+    const action = getEndpointURL(type)
+    yield call(networkService.deleteData, action + _id)
+    yield put(actions.deleteProductSuccess({ _id }))
+  } catch (error) {
+    const { message } = error.response.data
+    yield put(actions.addProductError({ message }))
+  }
+}
 // function* handleGetProductsPage(action) {
 //   try {
 //     yield put(actions.getProductsPageSuccess())
@@ -48,5 +100,9 @@ export default function* () {
     yield takeLatest(constants.GET_CATEGORIES, handleGetCategories),
     yield takeLatest(constants.GET_PRODUCTS, handleGetProducts),
     yield takeLatest(constants.GET_PRODUCTS_BY_FIELD, handleGetProductsByField),
+    yield takeLatest(constants.ADD_PRODUCT, handleAddProduct),
+    yield takeLatest(constants.ADD_CATEGORY, handleAddCategory),
+    yield takeLatest(constants.EDIT_PRODUCT, handleEditProduct),
+    yield takeLatest(constants.DELETE_PRODUCT, handleDeleteProduct),
   ])
 }

@@ -4,7 +4,12 @@ import { reduxForm } from 'redux-form'
 import { validate } from './meta/validate'
 import { formFields } from './meta/configObjects'
 import Products from './components/Products'
-import { getCategories, getProducts, getProductsByField } from './meta/actions'
+import {
+  deleteProduct,
+  getCategories,
+  getProducts,
+  getProductsByField,
+} from './meta/actions'
 import { selectCategories, selectProducts } from './meta/selectors'
 
 const mapStateToProps = (state) => ({
@@ -16,6 +21,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   dispatchGetCategories: () => dispatch(getCategories()),
   dispatchGetProducts: () => dispatch(getProducts()),
+  dispatchDeleteProduct: (payload) => dispatch(deleteProduct(payload)),
   dispatchGetProductsByField: (payload) =>
     dispatch(getProductsByField(payload)),
 })

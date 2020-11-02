@@ -5,23 +5,28 @@ import {
   FormControl,
   FormHelperText,
   List,
-  ListItemAvatar,
-  Button,
   ListItemText,
   IconButton,
   ListItemSecondaryAction,
   ListItem,
   Divider,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+  Button,
 } from '@material-ui/core'
 import {
   Search,
   Delete as DeleteIcon,
   FindInPage as FindInPageIcon,
   Create as CreateIcon,
+  Add as AddIcon,
 } from '@material-ui/icons'
-import ButtonIcon from 'components/Common/ButtonIcon/ButtonIcon'
 import { Field } from 'redux-form'
 import { SelectField } from 'components/ReduxForm/Select/SelectField'
+import { history } from '../../../history'
 
 const useStyles = styles
 
@@ -31,6 +36,7 @@ function Products({
   dispatchGetCategories,
   dispatchGetProducts,
   dispatchGetProductsByField,
+  dispatchDeleteProduct,
   categories,
   products,
   error,
@@ -38,10 +44,46 @@ function Products({
   submitting,
 }) {
   const classes = useStyles()
+  const [open, setOpen] = useState(false)
+  const [selectedProduct, setSelectedProduct] = useState('')
   const onSubmit = (formFields) => {
     const [key] = Object.keys(formFields)
     dispatchGetProductsByField({ name: key, value: formFields[key] })
   }
+  const handleClickOpen = (_id) => {
+    setSelectedProduct(_id)
+    setOpen(true)
+  }
+  const handleClose = () => {
+    setOpen(false)
+  }
+  const handleDialogSubmit = () => {
+    dispatchDeleteProduct({ _id: selectedProduct })
+    setSelectedProduct('')
+    setOpen(false)
+  }
+  const renderDialog = () => (
+    <Dialog
+      open={open}
+      onClose={handleClose}
+      aria-labelledby="form-dialog-title"
+    >
+      <DialogTitle id="form-dialog-title">Excluir Produto</DialogTitle>
+      <DialogContent>
+        <DialogContentText>
+          Você tem certeza de que quer excluir esse produto?
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleClose} color="primary">
+          Cancelar
+        </Button>
+        <Button onClick={handleDialogSubmit} color="primary">
+          Excluir
+        </Button>
+      </DialogActions>
+    </Dialog>
+  )
   useEffect(() => {
     dispatchGetCategories()
     dispatchGetProducts()
@@ -80,14 +122,23 @@ function Products({
                   className={classes.categorySelect}
                 />
               </Grid>
-              <ButtonIcon
-                id='search-btn'
-                Icon={Search}
+              <IconButton
+                aria-label="search"
+                className={classes.iconButton}
                 type="submit"
                 disabled={pristine || submitting}
               >
-                Pesquisar
-              </ButtonIcon>
+                <Search />
+              </IconButton>
+              <IconButton
+                aria-label="add"
+                onClick={() => {
+                  history.push('dashboard-products-add')
+                }}
+                className={classes.iconButton}
+              >
+                <AddIcon />
+              </IconButton>
             </Grid>
             <FormHelperText
               style={{
@@ -102,7 +153,7 @@ function Products({
         </Grid>
         <Grid item>
           <List>
-            {products.map(({ name, description }) => (
+            {products.map(({ name, description, _id }) => (
               <div key={name}>
                 <ListItem>
                   <ListItemText
@@ -114,14 +165,26 @@ function Products({
                     <IconButton
                       style={{ marginRight: 10 }}
                       edge="end"
-                      aria-label="delete"
+                      aria-label="detail"
+                      onClick={() => {
+                        history.push({
+                          pathname: 'dashboard-products-detail',
+                          state: { _id },
+                        })
+                      }}
                     >
                       <FindInPageIcon fontSize="large" color="primary" />
                     </IconButton>
                     <IconButton
                       style={{ marginRight: 10 }}
                       edge="end"
-                      aria-label="delete"
+                      aria-label="edit"
+                      onClick={() => {
+                        history.push({
+                          pathname: 'dashboard-products-edit',
+                          state: { _id },
+                        })
+                      }}
                     >
                       <CreateIcon fontSize="large" color="primary" />
                     </IconButton>
@@ -129,6 +192,7 @@ function Products({
                       style={{ marginRight: 10 }}
                       edge="end"
                       aria-label="delete"
+                      onClick={() => handleClickOpen(_id)}
                     >
                       <DeleteIcon fontSize="large" color="primary" />
                     </IconButton>
@@ -139,6 +203,7 @@ function Products({
             ))}
           </List>
         </Grid>
+        {renderDialog()}
       </Grid>
     </main>
   )

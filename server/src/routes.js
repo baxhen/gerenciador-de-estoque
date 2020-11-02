@@ -29,7 +29,7 @@ routes.get(
   requireAuth,
   ProductController.getProductByField,
 )
-routes.post('/edit/product/:_id', requireAuth, ProductController.editProduct)
+routes.post('/edit/product', requireAuth, ProductController.editProduct)
 routes.delete(
   '/delete/product/:_id',
   requireAuth,
@@ -40,7 +40,7 @@ routes.delete(
 
 routes.post('/add/supplier', requireAuth, SupplierController.addSupplier)
 routes.get('/get/suppliers', requireAuth, SupplierController.getSuppliers)
-routes.get('/get/supplier/:_id', requireAuth, SupplierController.getSupplier)
+routes.get('/get/supplier', requireAuth, SupplierController.getSupplier)
 routes.get(
   '/supplier/search/by_field',
   requireAuth,

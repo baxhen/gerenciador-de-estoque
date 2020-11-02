@@ -25,7 +25,7 @@ exports.addCategory = async (req, res) => {
     try {
       await category.save()
       // get the email and send a link to verify the email
-      res.send({ category })
+      res.send({ category:{name, _id: category._id} })
     } catch (error) {
       res.status(500).send({ message: error.message })
       // eslint-disable-next-line

@@ -29,7 +29,13 @@ exports.addProduct = (req, res) => {
     try {
       await product.save()
       // get the email and send a link to verify the email
-      return res.send({ product })
+      const selectProduct = {
+      productId,
+      name,
+      description,
+      category,
+    }
+      return res.send({ product:selectProduct })
     } catch (error) {
       // eslint-disable-next-line
       console.log(error)
@@ -43,9 +49,8 @@ exports.getProducts = (req, res) => {
   } = req
 
   Product.find({ user: _id })
-    .populate('category')
     .select('productId name description category')
-    .limit(7)
+    // .limit(7)
     .exec((err, products) => {
       if (err) {
         return res.status(500).send({ message: err.message })
@@ -73,8 +78,7 @@ exports.getProduct = (req, res) => {
   )
 }
 exports.editProduct = (req, res) => {
-  const { _id } = req.params
-  const { productId, name, description, category } = req.body
+  const {_id , productId, name, description, category } = req.body
 
   if (!name || !productId || !description || !category || !_id) {
     res.status(422).send({
