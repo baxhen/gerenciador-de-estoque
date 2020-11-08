@@ -5,15 +5,14 @@ import { initialState } from './reducer'
  * @param state
  * @returns {Object}
  */
-const selectProductsDomain = (state) => state.productsPage || initialState
-const selectCategories = (state) => selectProductsDomain(state).categories
-const selectProducts = (state) => selectProductsDomain(state).products
+const get = (state) => state.productsPage || initialState
+const selectCategories = (state) => get(state).categories
+const selectProducts = (state) => get(state).products
 const selectProduct = (state, _id) =>
   selectProducts(state).filter((product) => product._id === _id)[0]
 const selectAddProductErrorMessage = (state) =>
-  selectProductsDomain(state).addProductErrorMessage
+  get(state).addProductErrorMessage
 export {
-  selectProductsDomain,
   selectCategories,
   selectProducts,
   selectAddProductErrorMessage,

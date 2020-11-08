@@ -37,7 +37,6 @@ const ProductsPage = (state = initialState, action) =>
         delete draft.addProductErrorMessage
         break
       case constants.ADD_PRODUCT_ERROR:
-        console.log(action.payload)
         draft.addProductErrorMessage = action.payload.message
         break
       default:

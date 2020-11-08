@@ -15,6 +15,11 @@ export const URLS = {
   EDIT_PRODUCT: { url: 'api', subUrl: 'edit/product' },
   DELETE_PRODUCT: { url: 'api', subUrl: 'delete/product/' },
   ADD_CATEGORY: { url: 'api', subUrl: 'add/category' },
+  GET_SUPPLIERS: { url: 'api', subUrl: 'get/suppliers' },
+  ADD_SUPPLIER: { url: 'api', subUrl: 'add/supplier' },
+  DELETE_SUPPLIER: { url: 'api', subUrl: 'delete/supplier/' },
+  EDIT_SUPPLIER: { url: 'api', subUrl: 'edit/supplier/' },
+  GET_SUPPLIERS_BY_FIELD: { url: 'api', subUrl: 'supplier/search/by_field' },
 }
 
 export const getEndpointURL = (key) => {

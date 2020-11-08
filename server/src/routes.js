@@ -46,7 +46,7 @@ routes.get(
   requireAuth,
   SupplierController.getSupplierByField,
 )
-routes.post('/edit/supplier/:_id', requireAuth, SupplierController.editSupplier)
+routes.post('/edit/supplier', requireAuth, SupplierController.editSupplier)
 routes.delete(
   '/delete/supplier/:_id',
   requireAuth,

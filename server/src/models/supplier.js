@@ -12,7 +12,7 @@ const supplierSchema = new Schema({
     unique: true,
     sparse: true,
   },
-  socialReasonName: {
+  socialReason: {
     type: String,
     required: function () {
       return this.isCompany

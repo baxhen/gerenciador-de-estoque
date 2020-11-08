@@ -6,17 +6,13 @@ export const styles = makeStyles((theme) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
     height: '100vh',
+    width: window.innerWidth - 344,
     left: 344,
     [theme.breakpoints.down('xs')]: {
       left: 0,
       padding: 0,
       width: '100vw',
     },
-  },
-  button: {
-    height: '48px',
-    width: '156px',
-    borderRadius: '50px',
   },
   input: { ...theme.palette.common.input, marginLeft: '10px' },
   categorySelect: {
@@ -33,25 +29,31 @@ export const styles = makeStyles((theme) => ({
       },
     },
   },
-  lastInput: {
-    ...theme.palette.common.input,
-    marginLeft: '10px',
-    marginRight: '50px',
-  },
-  listItem: {
-    color: theme.palette.primary.main,
-    '& .MuiListItemText-secondary': {
-      color: theme.palette.primary.main,
+  button: {
+    borderRadius: 50,
+    height: 45,
+    width: '328px',
+    color: 'white',
+    fontWeight: 400,
+    fontSize: '1rem',
+    backgroundColor: theme.palette.primary.main,
+    '&:hover': {
+      backgroundColor: theme.palette.primary.light,
+    },
+    marginTop: '0.5rem',
+    [theme.breakpoints.down('xs')]: {
+      width: '100%',
     },
   },
-  divider: {
-    backgroundColor: theme.palette.primary.main,
+  formContainer: {
+    width: '100%',
   },
   iconButton: {
     backgroundColor: theme.palette.primary.main,
     color: 'white',
     height: '48px',
     marginRight: '20px',
+    marginTop: '4px',
     '&:hover': {
       backgroundColor: theme.palette.primary.light,
     },
