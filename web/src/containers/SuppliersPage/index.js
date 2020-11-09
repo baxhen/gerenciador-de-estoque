@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { reduxForm } from 'redux-form'
+
 import { validate } from './meta/validate'
 import { formFields } from './meta/configObjects'
 import Suppliers from './components/Suppliers'

@@ -205,17 +205,30 @@ exports.getSupplierByField = (req, res) => {
   let query = {}
 
   if (name === 'name' || name === 'socialReason') {
-    query = {$or: [{name: { $regex: new RegExp(`.*${value}.*`, 'i') }}, {socialReason: { $regex: new RegExp(`.*${value}.*`, 'i') }}]}
+    query = {
+      $or: [
+        { name: { $regex: new RegExp(`.*${value}.*`, 'i') } },
+        { socialReason: { $regex: new RegExp(`.*${value}.*`, 'i') } },
+      ],
+    }
   }
   if (name === 'CPF' || name === 'CNPJ') {
-    query = {$or: [{CPF: { $regex: new RegExp(`.*${value}.*`, 'i') }}, {CNPJ: { $regex: new RegExp(`.*${value}.*`, 'i') }}]}
+    query = {
+      $or: [
+        { CPF: { $regex: new RegExp(`.*${value}.*`, 'i') } },
+        { CNPJ: { $regex: new RegExp(`.*${value}.*`, 'i') } },
+      ],
+    }
   }
 
-  Supplier.find(query).select('-user').limit(7).exec((err, suppliers) => {
-    if (err) {
-      return res.status(500).send({ message: err.message })
-    }
+  Supplier.find(query)
+    .select('-user')
+    .limit(7)
+    .exec((err, suppliers) => {
+      if (err) {
+        return res.status(500).send({ message: err.message })
+      }
 
-    return res.send({ suppliers })
-  })
+      return res.send({ suppliers })
+    })
 }

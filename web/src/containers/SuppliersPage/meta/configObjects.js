@@ -18,12 +18,4 @@ export const formFields = [
     // noValueError: 'Digite seu email para fazer login',
     fieldType: InputTextField,
   },
-  // {
-  //   label: 'Categoria',
-  //   name: 'category',
-  //   type: 'select',
-  //   className: 'categorySelect',
-  //   // noValueError: 'Digite seu email para fazer login',
-  //   fieldType: SelectField,
-  // },
 ]

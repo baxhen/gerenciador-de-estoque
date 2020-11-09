@@ -30,12 +30,12 @@ exports.addProduct = (req, res) => {
       await product.save()
       // get the email and send a link to verify the email
       const selectProduct = {
-      productId,
-      name,
-      description,
-      category,
-    }
-      return res.send({ product:selectProduct })
+        productId,
+        name,
+        description,
+        category,
+      }
+      return res.send({ product: selectProduct })
     } catch (error) {
       // eslint-disable-next-line
       console.log(error)
@@ -78,7 +78,7 @@ exports.getProduct = (req, res) => {
   )
 }
 exports.editProduct = (req, res) => {
-  const {_id , productId, name, description, category } = req.body
+  const { _id, productId, name, description, category } = req.body
 
   if (!name || !productId || !description || !category || !_id) {
     res.status(422).send({
@@ -134,9 +134,10 @@ exports.getProductByField = (req, res) => {
     search[name] = { $regex: new RegExp(`.*${value}.*`, 'i') }
   }
 
-  Product.find(
-    { ...search },
-    ).select('productId name description category').limit(7).exec((err, products) => {
+  Product.find({ ...search })
+    .select('productId name description category')
+    .limit(7)
+    .exec((err, products) => {
       if (err) {
         return res.status(500).send({ message: err.message })
       }

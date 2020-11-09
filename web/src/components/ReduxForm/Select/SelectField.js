@@ -17,11 +17,11 @@ export const SelectField = ({
     <FormControl variant="outlined" color="primary" className={className}>
       <InputLabel id="select-outlined-label">{label}</InputLabel>
       <Select
+        onChange={handleLocalChange}
+        value={value}
         {...input}
         labelId="select-outlined-label"
         id="select-outlined"
-        value={value}
-        onChange={handleLocalChange}
         label={label}
         style={{ color: primary }}
       >

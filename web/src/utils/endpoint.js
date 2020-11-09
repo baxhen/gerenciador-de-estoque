@@ -20,6 +20,7 @@ export const URLS = {
   DELETE_SUPPLIER: { url: 'api', subUrl: 'delete/supplier/' },
   EDIT_SUPPLIER: { url: 'api', subUrl: 'edit/supplier/' },
   GET_SUPPLIERS_BY_FIELD: { url: 'api', subUrl: 'supplier/search/by_field' },
+  GET_ENTRANCES: { url: 'api', subUrl: 'get/entrances' },
 }
 
 export const getEndpointURL = (key) => {

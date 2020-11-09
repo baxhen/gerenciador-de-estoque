@@ -1,31 +1,39 @@
-const Category = require('../models/category')
+const Entrance = require('../models/entrance')
 
-exports.addCategory = async (req, res) => {
-  const { name } = req.body
+exports.addEntrance = async (req, res) => {
+  const { entranceId, products, supplier, formOfPayment } = req.body
   const { user } = req
-  if (!name) {
-    res.status(422).send({ error: "You must provide the category's name" })
+  if (!entranceId || !supplier || !formOfPayment || products.length === 0) {
+    res
+      .status(422)
+      .send({
+        error:
+          "You must provide the entrance's id, supplier, formOfPayment and products should not be empty",
+      })
   }
   // eslint-disable-next-line
-  Category.findOne({ name }, async (err, existingCategory) => {
+  Entrance.findOne({ entranceId }, async (err, existingEntrance) => {
     if (err) {
       return res.status(500).send({ message: err.message })
     }
 
-    if (existingCategory) {
-      return res.status(422).send({ message: 'Categoria já cadastrada' })
+    if (existingEntrance) {
+      return res.status(422).send({ message: 'Entrada com id já cadastrado' })
     }
 
-    const category = new Category({
-      name,
+    const entrance = new Entrance({
+      entranceId,
+      products,
+      supplier,
+      formOfPayment,
       // eslint-disable-next-line
       user: user._id,
     })
 
     try {
-      await category.save()
+      await entrance.save()
       // get the email and send a link to verify the email
-      res.send({ category: { name, _id: category._id } })
+      res.send({ entrance })
     } catch (error) {
       res.status(500).send({ message: error.message })
       // eslint-disable-next-line
@@ -33,25 +41,25 @@ exports.addCategory = async (req, res) => {
     }
   })
 }
-exports.getCategories = (req, res) => {
+exports.getEntrances = (req, res) => {
   const {
     user: { _id },
   } = req
 
-  Category.find({ user: _id })
-    .select('name')
-    .exec((err, categories) => {
+  Entrance.find({ user: _id })
+    // .select('name')
+    .exec((err, entrances) => {
       if (err) {
         return res.status(500).send({ message: err.message })
       }
 
-      return res.send({ categories })
+      return res.send({ entrances })
     })
 }
 exports.getCategory = (req, res) => {
   const { _id } = req.params
 
-  Category.findOne({ _id }, 'name', (err, category) => {
+  Entrance.findOne({ _id }, 'name', (err, category) => {
     if (err) {
       return res.status(500).send({ message: err.message })
     }
@@ -69,7 +77,7 @@ exports.editCategory = (req, res) => {
     })
   }
   const category = { _id, name }
-  Category.findOneAndUpdate({ _id }, { name }, (err) => {
+  Entrance.findOneAndUpdate({ _id }, { name }, (err) => {
     if (err) {
       return res.status(500).send({ message: err.message })
     }
@@ -84,7 +92,7 @@ exports.deleteCategory = (req, res) => {
     res.status(422).send({ message: 'You must provide the _id' })
   }
 
-  Category.deleteOne({ _id }, (err, response) => {
+  Entrance.deleteOne({ _id }, (err, response) => {
     if (err) {
       return res.status(500).send({ message: err.message })
     }

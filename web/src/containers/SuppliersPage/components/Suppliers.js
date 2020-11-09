@@ -30,7 +30,7 @@ import { history } from '../../../history'
 
 const useStyles = styles
 
-function Products({
+function Suppliers({
   handleSubmit,
   formFields,
   dispatchGetSuppliers,
@@ -201,4 +201,4 @@ function Products({
   )
 }
 
-export default memo(Products)
+export default memo(Suppliers)

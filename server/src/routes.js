@@ -4,6 +4,7 @@ const Authentication = require('./controllers/authentication')
 const ProductController = require('./controllers/productController')
 const CategoryController = require('./controllers/categoryController')
 const SupplierController = require('./controllers/supplierController')
+const EntranceController = require('./controllers/entranceController')
 require('./services/passport')
 
 const requireAuth = passport.authenticate('jwt', { session: false })
@@ -64,5 +65,16 @@ routes.delete(
   requireAuth,
   CategoryController.deleteCategory,
 )
+// ENTRANCES ROUTES
+
+routes.post('/add/entrance', requireAuth, EntranceController.addEntrance)
+routes.get('/get/entrances', requireAuth, EntranceController.getEntrances)
+// routes.get('/get/category/:_id', requireAuth, EntranceController.getCategory)
+// routes.post('/edit/category/:_id', requireAuth, EntranceController.editCategory)
+// routes.delete(
+//   '/delete/category/:_id',
+//   requireAuth,
+//   EntranceController.deleteCategory,
+// )
 
 module.exports = routes
