@@ -167,7 +167,7 @@ function EditProduct({
                   disabled={pristine || submitting}
                   type="submit"
                 >
-                  Cadastrar Produto
+                  Atualizar Produto
                 </Button>
               </Grid>
             </Grid>

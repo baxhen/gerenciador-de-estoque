@@ -12,6 +12,18 @@ const Entrances = (state = initialState, action) =>
       case constants.GET_ENTRANCES_SUCCESS:
         draft.entrances = action.payload
         break
+      case constants.ADD_ENTRANCE_SUCCESS:
+        draft.entrances.push(action.payload)
+        break
+      case constants.ADD_ENTRANCE_ERROR:
+        draft.addEntranceErrorMessage = action.payload.message
+        break
+      case constants.DELETE_ENTRANCE_SUCCESS:
+        draft.entrances = draft.entrances.filter(
+          (entrance) => entrance._id !== action.payload._id,
+        )
+        delete draft.addEntranceErrorMessage
+        break
       default:
         break
     }

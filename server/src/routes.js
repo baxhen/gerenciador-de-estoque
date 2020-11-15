@@ -69,12 +69,13 @@ routes.delete(
 
 routes.post('/add/entrance', requireAuth, EntranceController.addEntrance)
 routes.get('/get/entrances', requireAuth, EntranceController.getEntrances)
-// routes.get('/get/category/:_id', requireAuth, EntranceController.getCategory)
-// routes.post('/edit/category/:_id', requireAuth, EntranceController.editCategory)
-// routes.delete(
-//   '/delete/category/:_id',
-//   requireAuth,
-//   EntranceController.deleteCategory,
-// )
+routes.get('/get/entrance', requireAuth, EntranceController.getEntrance)
+routes.get('/get/entrances/by_field', requireAuth, EntranceController.getEntrancesByField)
+routes.post('/edit/entrance', requireAuth, EntranceController.editEntrance)
+routes.delete(
+  '/delete/entrance/:_id',
+  requireAuth,
+  EntranceController.deleteEntrance,
+)
 
 module.exports = routes

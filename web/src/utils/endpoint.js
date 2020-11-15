@@ -18,9 +18,13 @@ export const URLS = {
   GET_SUPPLIERS: { url: 'api', subUrl: 'get/suppliers' },
   ADD_SUPPLIER: { url: 'api', subUrl: 'add/supplier' },
   DELETE_SUPPLIER: { url: 'api', subUrl: 'delete/supplier/' },
-  EDIT_SUPPLIER: { url: 'api', subUrl: 'edit/supplier/' },
+  EDIT_SUPPLIER: { url: 'api', subUrl: 'edit/supplier' },
+  EDIT_ENTRANCE: { url: 'api', subUrl: 'edit/entrance' },
   GET_SUPPLIERS_BY_FIELD: { url: 'api', subUrl: 'supplier/search/by_field' },
   GET_ENTRANCES: { url: 'api', subUrl: 'get/entrances' },
+  ADD_ENTRANCE: { url: 'api', subUrl: 'add/entrance' },
+  DELETE_ENTRANCE: { url: 'api', subUrl: 'delete/entrance/' },
+  GET_ENTRANCES_BY_FIELD: { url: 'api', subUrl: 'get/entrances/by_field' },
 }
 
 export const getEndpointURL = (key) => {

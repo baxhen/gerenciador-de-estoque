@@ -7,9 +7,10 @@ export const validate = (values) => {
   const errors = {}
 
   const isDirty = {
-    productId: 0,
-    name: 0,
-    category: 0,
+    entranceId: 0,
+    startDate: 0,
+    endDate: 0,
+    supplier: 0,
   }
 
   _.each(formattedFormFields, ({ name }) => {
@@ -20,7 +21,10 @@ export const validate = (values) => {
     }
   })
 
-  const total = isDirty.category + isDirty.name + isDirty.productId
+  const total =
+    isDirty.entranceId +
+    isDirty.supplier +
+    (isDirty.startDate + isDirty.endDate - 1)
   if (total > 1) {
     errors.search = 'Filtre a pesquisa com apenas um campo'
     errors._error = { ...errors }

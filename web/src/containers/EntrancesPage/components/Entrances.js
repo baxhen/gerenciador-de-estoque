@@ -26,6 +26,7 @@ import {
 } from '@material-ui/icons'
 import { Field } from 'redux-form'
 import { history } from '../../../history'
+import { SelectField } from 'components/ReduxForm/Select/SelectField'
 
 const useStyles = styles
 
@@ -33,39 +34,79 @@ function Entrances({
   handleSubmit,
   formFields,
   dispatchGetEntrances,
-  dispatchGetSuppliersByField,
+  dispatchGetEntrancesByField,
   dispatchDeleteEntrance,
+  dispatchGetSuppliers,
   entrances,
+  suppliers,
   error,
   pristine,
   submitting,
 }) {
   const classes = useStyles()
   const [open, setOpen] = useState(false)
-  const [selectedSupplier, setSelectedSupplier] = useState('')
+  const [selectedEntrance, setSelectedEntrance] = useState('')
 
-  const onSubmit = ({ endDate, startDate, entranceId }) => {
+  const onSubmit = ({ endDate, startDate, entranceId, supplier }) => {
     const formFields = {}
+    var today = new Date()
+    var myStart = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      today.getDate(),
+      0,
+      0,
+      0,
+    )
+    var myEnd = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      today.getDate() + 1,
+      0,
+      0,
+      0,
+    )
     if (entranceId) {
       formFields.entranceId = entranceId
+    } else if (supplier) {
+      formFields.supplier = supplier
     } else {
-      formFields.startDate = startDate ? startDate : new Date(Date.now())
-      formFields.endDate = endDate ? endDate : new Date(Date.now())
+      formFields.startDate = startDate
+        ? new Date(
+            startDate.getFullYear(),
+            startDate.getMonth(),
+            startDate.getDate(),
+            0,
+            0,
+            0,
+          )
+        : myStart
+      formFields.endDate = endDate
+        ? new Date(
+            endDate.getFullYear(),
+            endDate.getMonth(),
+            endDate.getDate() + 1,
+            0,
+            0,
+            0,
+          )
+        : myEnd
     }
 
-    dispatchGetSuppliersByField(formFields)
+    // console.log(formFields.startDate.toString(),formFields.endDate)
+    dispatchGetEntrancesByField(formFields)
   }
 
   const handleClickOpen = (_id) => {
-    setSelectedSupplier(_id)
+    setSelectedEntrance(_id)
     setOpen(true)
   }
   const handleClose = () => {
     setOpen(false)
   }
   const handleDialogSubmit = () => {
-    dispatchDeleteEntrance({ _id: selectedSupplier })
-    setSelectedSupplier('')
+    dispatchDeleteEntrance({ _id: selectedEntrance })
+    setSelectedEntrance('')
     setOpen(false)
   }
   const renderDialog = () => (
@@ -74,10 +115,10 @@ function Entrances({
       onClose={handleClose}
       aria-labelledby="form-dialog-title"
     >
-      <DialogTitle id="form-dialog-title">Excluir Fornecedor</DialogTitle>
+      <DialogTitle id="form-dialog-title">Excluir Entrada</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          Você tem certeza de que quer excluir esse fornecedor?
+          Você tem certeza de que quer excluir essa entrada?
         </DialogContentText>
       </DialogContent>
       <DialogActions>
@@ -92,8 +133,11 @@ function Entrances({
   )
   useEffect(() => {
     dispatchGetEntrances()
-    // es-lint-disable-next-line
-  }, [dispatchGetEntrances])
+    if (suppliers.length === 0) {
+      dispatchGetSuppliers()
+    }
+    // eslint-disable-next-line
+  }, [])
   return (
     <main className={classes.content}>
       <Grid container direction="column">
@@ -115,6 +159,21 @@ function Entrances({
                   />
                 </Grid>
               ))}
+              <Grid item key="supplier" style={{ marginBottom: '0.5em' }}>
+                <Field
+                  component={SelectField}
+                  label="Fornecedor"
+                  name="supplier"
+                  type="select"
+                  options={suppliers.map(({ _id, name, socialReason }) => {
+                    return {
+                      value: _id,
+                      name: socialReason ? socialReason : name,
+                    }
+                  })}
+                  className={classes.categorySelect}
+                />
+              </Grid>
               <IconButton
                 aria-label="search"
                 className={classes.iconButton}
@@ -126,7 +185,7 @@ function Entrances({
               <IconButton
                 aria-label="add"
                 onClick={() => {
-                  history.push('dashboard-suppliers-add')
+                  history.push('dashboard-entrances-add')
                 }}
                 className={classes.iconButton}
               >
@@ -163,7 +222,7 @@ function Entrances({
                       aria-label="detail"
                       onClick={() => {
                         history.push({
-                          pathname: 'dashboard-suppliers-detail',
+                          pathname: 'dashboard-entrances-detail',
                           state: { _id },
                         })
                       }}
@@ -176,7 +235,7 @@ function Entrances({
                       aria-label="edit"
                       onClick={() => {
                         history.push({
-                          pathname: 'dashboard-suppliers-edit',
+                          pathname: 'dashboard-entrances-edit',
                           state: { _id },
                         })
                       }}

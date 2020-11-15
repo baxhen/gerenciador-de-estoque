@@ -56,36 +56,79 @@ exports.getEntrances = (req, res) => {
       return res.send({ entrances })
     })
 }
-exports.getCategory = (req, res) => {
-  const { _id } = req.params
 
-  Entrance.findOne({ _id }, 'name', (err, category) => {
-    if (err) {
-      return res.status(500).send({ message: err.message })
-    }
+exports.getEntrancesByField = (req, res) => {
+  const { entranceId, startDate, endDate, supplier } = req.query
 
-    return res.send({ category })
-  })
-}
-exports.editCategory = (req, res) => {
-  const { _id } = req.params
-  const { name } = req.body
-
-  if (!name || !_id) {
-    res.status(422).send({
-      error: 'You must provide the name and _id',
-    })
+  if (!entranceId && !startDate && !endDate && !supplier) {
+    res.status(422).send({ error: 'You must provide at least entranceId or startDate and endDate' })
   }
-  const category = { _id, name }
-  Entrance.findOneAndUpdate({ _id }, { name }, (err) => {
+  const search = {}
+
+  if (entranceId) {
+    search.entranceId = { $regex: new RegExp(`.*${entranceId}.*`, 'i') }
+  }
+  if (supplier) {
+    search.supplier = supplier
+  }
+  if(startDate && endDate){
+    search.date = { $gte: new Date(startDate), $lte:new Date(endDate) }
+  }
+  console.log(search)
+
+  Entrance.find({ ...search })
+    .exec((err, entrances) => {
+      if (err) {
+        return res.status(500).send({ message: err.message })
+      }
+
+      return res.send({ entrances })
+    })
+}
+exports.getEntrance = (req, res) => {
+  const { _id } = req.params
+
+  Entrance.findOne({ _id }, (err, entrance) => {
     if (err) {
       return res.status(500).send({ message: err.message })
     }
 
-    return res.send({ category })
+    return res.send({ entrance })
   })
 }
-exports.deleteCategory = (req, res) => {
+exports.editEntrance = (req, res) => {
+  const { _id, entranceId, products, supplier, formOfPayment } = req.body
+
+  if (!entranceId || !supplier || !formOfPayment || products.length === 0) {
+    res
+      .status(422)
+      .send({
+        error:
+          "You must provide the entrance's id, supplier, formOfPayment and products should not be empty",
+      })
+  }
+  const totalPrice = () =>{
+    if (products.length === 1) {
+        return products[0].quantity * products[0].unitPrice
+      }
+      return products.reduce((accumulator, currentValue) => {
+        if (typeof accumulator !== 'number') {
+          accumulator = accumulator.unitPrice * accumulator.quantity
+        }
+        return accumulator + currentValue.unitPrice * currentValue.quantity
+      })
+  }
+  console.log(totalPrice)
+  const entrance = { _id, entranceId, products, supplier, formOfPayment }
+  Entrance.findOneAndUpdate({ _id }, { entranceId, products, supplier, formOfPayment, totalPrice: totalPrice()}, (err) => {
+    if (err) {
+      return res.status(500).send({ message: err.message })
+    }
+
+    return res.send({ entrance })
+  })
+}
+exports.deleteEntrance = (req, res) => {
   const { _id } = req.params
 
   if (!_id) {
@@ -100,7 +143,7 @@ exports.deleteCategory = (req, res) => {
     if (response.n === 0) {
       return res
         .status(304)
-        .send({ message: 'Categoria não encontrado na base de dados' })
+        .send({ message: 'Entrada não encontrado na base de dados' })
     }
 
     return res.status(204).send()

@@ -6,11 +6,7 @@ import {
 } from '@material-ui/pickers'
 import DateFnsUtils from '@date-io/date-fns'
 
-export const DatePickerField = ({
-  input: { onChange },
-  label,
-  className,
-}) => {
+export const DatePickerField = ({ input: { onChange }, label, className }) => {
   const [selectedDate, setSelectedDate] = React.useState(new Date(Date.now()))
   const handleDateChange = (date) => {
     setSelectedDate(new Date(date))

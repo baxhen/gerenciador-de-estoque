@@ -18,9 +18,12 @@ import EditSupplierPage from 'containers/EditSupplierPage/dynamic'
 import SupplierDetailPage from 'containers/SupplierDetailPage/dynamic'
 import AddProductPage from 'containers/AddProductPage/dynamic'
 import EditProductPage from 'containers/EditProductPage/dynamic'
+import EditEntrancePage from 'containers/EditEntrancePage/dynamic'
 import ProductDetailPage from 'containers/ProductDetailPage/dynamic'
+import EntranceDetailPage from 'containers/EntranceDetailPage/dynamic'
 import StockPage from 'containers/StockPage/dynamic'
 import EntrancesPage from 'containers/EntrancesPage/dynamic'
+import AddEntrancePage from 'containers/AddEntrancePage/dynamic'
 import ProductsPage from 'containers/ProductsPage/dynamic'
 import SuppliersPage from 'containers/SuppliersPage/dynamic'
 import TakeOffPage from 'containers/TakeOffPage/dynamic'
@@ -59,6 +62,21 @@ ReactDOM.render(
       />
       <Route exact path="/dashboard-stock" component={StockPage} />
       <Route exact path="/dashboard-entrances" component={EntrancesPage} />
+      <Route
+        exact
+        path="/dashboard-entrances-detail"
+        component={EntranceDetailPage}
+      />
+      <Route
+        exact
+        path="/dashboard-entrances-edit"
+        component={EditEntrancePage}
+      />
+      <Route
+        exact
+        path="/dashboard-entrances-add"
+        component={AddEntrancePage}
+      />
       <Route exact path="/dashboard-suppliers" component={SuppliersPage} />
       <Route
         exact

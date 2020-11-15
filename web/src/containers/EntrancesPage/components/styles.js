@@ -22,6 +22,7 @@ export const styles = makeStyles((theme) => ({
     ...theme.palette.common.input,
     marginLeft: '10px',
     marginRight: '10px',
+    width: '180px',
   },
   listItem: {
     color: theme.palette.primary.main,
@@ -51,5 +52,19 @@ export const styles = makeStyles((theme) => ({
     width: '164px',
     marginRight: '30px',
     '& .MuiInputBase-input': { color: theme.palette.primary.main },
+  },
+  categorySelect: {
+    width: '150px',
+    marginLeft: '10px',
+    marginRight: '40px',
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: theme.palette.primary.main,
+        borderRadius: 0,
+      },
+      '&:hover fieldset': {
+        borderColor: theme.palette.primary.light,
+      },
+    },
   },
 }))
