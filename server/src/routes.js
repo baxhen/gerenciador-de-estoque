@@ -4,7 +4,9 @@ const Authentication = require('./controllers/authentication')
 const ProductController = require('./controllers/productController')
 const CategoryController = require('./controllers/categoryController')
 const SupplierController = require('./controllers/supplierController')
+const ClientController = require('./controllers/clientController')
 const EntranceController = require('./controllers/entranceController')
+const TakeOffController = require('./controllers/takeOffController')
 require('./services/passport')
 
 const requireAuth = passport.authenticate('jwt', { session: false })
@@ -53,6 +55,22 @@ routes.delete(
   requireAuth,
   SupplierController.deleteSupplier,
 )
+// CLIENTS ROUTES
+
+routes.post('/add/client', requireAuth, ClientController.addClient)
+routes.get('/get/clients', requireAuth, ClientController.getClients)
+routes.get('/get/client', requireAuth, ClientController.getClient)
+routes.get(
+  '/client/search/by_field',
+  requireAuth,
+  ClientController.getClientByField,
+)
+routes.post('/edit/client', requireAuth, ClientController.editClient)
+routes.delete(
+  '/delete/client/:_id',
+  requireAuth,
+  ClientController.deleteClient,
+)
 
 // CATEGORIES ROUTES
 
@@ -76,6 +94,18 @@ routes.delete(
   '/delete/entrance/:_id',
   requireAuth,
   EntranceController.deleteEntrance,
+)
+// TAKEOFF ROUTES
+
+routes.post('/add/take-off', requireAuth, TakeOffController.addTakeOff)
+routes.get('/get/take-offs', requireAuth, TakeOffController.getTakeOffs)
+routes.get('/get/take-off', requireAuth, TakeOffController.getTakeOff)
+routes.get('/get/take-offs/by_field', requireAuth, TakeOffController.getTakeOffsByField)
+routes.post('/edit/take-off', requireAuth, TakeOffController.editTakeOff)
+routes.delete(
+  '/delete/take-off/:_id',
+  requireAuth,
+  TakeOffController.deleteTakeOff,
 )
 
 module.exports = routes

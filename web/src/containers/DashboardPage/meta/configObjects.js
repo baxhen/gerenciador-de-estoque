@@ -20,8 +20,13 @@ export const menuItems = [
     to: 'dashboard-suppliers',
   },
   {
-    text: 'Consultar Produtos',
+    text: 'Consultar Clientes',
     valueActive: 4,
+    to: 'dashboard-clients',
+  },
+  {
+    text: 'Consultar Produtos',
+    valueActive: 5,
     to: 'dashboard-products',
   },
 ]

@@ -26,6 +26,7 @@ import EntrancesPage from 'containers/EntrancesPage/dynamic'
 import AddEntrancePage from 'containers/AddEntrancePage/dynamic'
 import ProductsPage from 'containers/ProductsPage/dynamic'
 import SuppliersPage from 'containers/SuppliersPage/dynamic'
+import ClientsPage from 'containers/ClientsPage/dynamic'
 import TakeOffPage from 'containers/TakeOffPage/dynamic'
 
 ReactDOM.render(
@@ -77,6 +78,7 @@ ReactDOM.render(
         path="/dashboard-entrances-add"
         component={AddEntrancePage}
       />
+      <Route exact path="/dashboard-clients" component={ClientsPage} />
       <Route exact path="/dashboard-suppliers" component={SuppliersPage} />
       <Route
         exact
