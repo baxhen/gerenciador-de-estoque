@@ -44,11 +44,11 @@ exports.addProduct = (req, res) => {
   })
 }
 exports.getProducts = (req, res) => {
-  const {
-    user: { _id },
-  } = req
+  // const {
+  //   user: { _id },
+  // } = req
 
-  Product.find({ user: _id })
+  Product.find(/*{ user: _id }*/)
     .select('productId name description category')
     // .limit(7)
     .exec((err, products) => {
@@ -123,6 +123,9 @@ exports.deleteProduct = (req, res) => {
 
 exports.getProductByField = (req, res) => {
   const { name, value } = req.query
+  // const {
+  //   user: { _id },
+  // } = req
 
   if (!name || !value) {
     res.status(422).send({ error: 'You must provide the field' })
@@ -134,7 +137,7 @@ exports.getProductByField = (req, res) => {
     search[name] = { $regex: new RegExp(`.*${value}.*`, 'i') }
   }
 
-  Product.find({ ...search })
+  Product.find({ ...search, /*user: _id*/ })
     .select('productId name description category')
     .limit(7)
     .exec((err, products) => {

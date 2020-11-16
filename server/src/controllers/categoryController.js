@@ -34,11 +34,11 @@ exports.addCategory = async (req, res) => {
   })
 }
 exports.getCategories = (req, res) => {
-  const {
-    user: { _id },
-  } = req
+  // const {
+  //   user: { _id },
+  // } = req
 
-  Category.find({ user: _id })
+  Category.find(/*{ user: _id }*/)
     .select('name')
     .exec((err, categories) => {
       if (err) {

@@ -42,11 +42,11 @@ exports.addEntrance = async (req, res) => {
   })
 }
 exports.getEntrances = (req, res) => {
-  const {
-    user: { _id },
-  } = req
+  // const {
+  //   user: { _id },
+  // } = req
 
-  Entrance.find({ user: _id })
+  Entrance.find(/*{ user: _id }*/)
     // .select('name')
     .exec((err, entrances) => {
       if (err) {
@@ -59,7 +59,9 @@ exports.getEntrances = (req, res) => {
 
 exports.getEntrancesByField = (req, res) => {
   const { entranceId, startDate, endDate, supplier } = req.query
-
+  // const {
+  //     user: { _id },
+  //   } = req
   if (!entranceId && !startDate && !endDate && !supplier) {
     res.status(422).send({ error: 'You must provide at least entranceId or startDate and endDate' })
   }
@@ -76,7 +78,7 @@ exports.getEntrancesByField = (req, res) => {
   }
   console.log(search)
 
-  Entrance.find({ ...search })
+  Entrance.find({ ...search, /*user: _id*/ })
     .exec((err, entrances) => {
       if (err) {
         return res.status(500).send({ message: err.message })
@@ -118,7 +120,6 @@ exports.editEntrance = (req, res) => {
         return accumulator + currentValue.unitPrice * currentValue.quantity
       })
   }
-  console.log(totalPrice)
   const entrance = { _id, entranceId, products, supplier, formOfPayment }
   Entrance.findOneAndUpdate({ _id }, { entranceId, products, supplier, formOfPayment, totalPrice: totalPrice()}, (err) => {
     if (err) {
