@@ -213,7 +213,7 @@ function Entrances({
                     primary={`Data da entrada: ${new Date(
                       date,
                     ).toLocaleDateString('pt-BR')}`}
-                    secondary={`Preço da total da entrada: R$ ${totalPrice}`}
+                    secondary={`Preço total da entrada: R$ ${totalPrice}`}
                   />
                   <ListItemSecondaryAction>
                     <IconButton
