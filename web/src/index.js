@@ -19,11 +19,14 @@ import SupplierDetailPage from 'containers/SupplierDetailPage/dynamic'
 import AddProductPage from 'containers/AddProductPage/dynamic'
 import EditProductPage from 'containers/EditProductPage/dynamic'
 import EditEntrancePage from 'containers/EditEntrancePage/dynamic'
+import EditClientPage from 'containers/EditClientPage/dynamic'
 import ProductDetailPage from 'containers/ProductDetailPage/dynamic'
 import EntranceDetailPage from 'containers/EntranceDetailPage/dynamic'
+import ClientDetailPage from 'containers/ClientDetailPage/dynamic'
 import StockPage from 'containers/StockPage/dynamic'
 import EntrancesPage from 'containers/EntrancesPage/dynamic'
 import AddEntrancePage from 'containers/AddEntrancePage/dynamic'
+import AddClientPage from 'containers/AddClientPage/dynamic'
 import ProductsPage from 'containers/ProductsPage/dynamic'
 import SuppliersPage from 'containers/SuppliersPage/dynamic'
 import ClientsPage from 'containers/ClientsPage/dynamic'
@@ -79,6 +82,9 @@ ReactDOM.render(
         component={AddEntrancePage}
       />
       <Route exact path="/dashboard-clients" component={ClientsPage} />
+      <Route exact path="/dashboard-clients-add" component={AddClientPage} />
+      <Route exact path="/dashboard-clients-edit" component={EditClientPage} />
+      <Route exact path="/dashboard-clients-detail" component={ClientDetailPage} />
       <Route exact path="/dashboard-suppliers" component={SuppliersPage} />
       <Route
         exact
