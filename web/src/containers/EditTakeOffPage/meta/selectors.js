@@ -1,7 +1,7 @@
 import { initialState } from './reducer'
 /**
- * Get TakeOffPage
+ * Get EditTakeOff
  * @param state
  * @returns {Object}
  */
-export const get = (state) => state.TakeOffPage || initialState
+export const get = (state) => state.EditTakeOff || initialState

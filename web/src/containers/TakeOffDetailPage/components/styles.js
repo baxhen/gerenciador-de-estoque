@@ -6,6 +6,7 @@ export const styles = makeStyles((theme) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
     height: '100vh',
+    width: window.innerWidth - 344,
     left: 344,
     [theme.breakpoints.down('xs')]: {
       left: 0,

@@ -1,7 +1,7 @@
 import DynamicComponent from 'components/Common/DynamicComponent'
 
 const dynamic = DynamicComponent(() =>
-  import(/* webpackChunkName: "takeOff" */ 'containers/TakeOffPage'),
+  import(/* webpackChunkName: "addTakeOff" */ 'containers/AddTakeOffPage'),
 )
 
 export default dynamic

@@ -12,7 +12,7 @@ export const menuItems = [
   {
     text: 'Consultar Saídas',
     valueActive: 2,
-    to: 'dashboard-take-off',
+    to: 'dashboard-take-offs',
   },
   {
     text: 'Consultar Fornecedores',
