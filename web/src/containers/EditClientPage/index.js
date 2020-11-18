@@ -17,7 +17,6 @@ const mapStateToProps = (state, ownProps) => ({
   addClientErrorMessage: selectAddClientErrorMessage(state),
 })
 
-
 function mapDispatchToProps(dispatch) {
   return {
     dispatchEditClient: (payload) => dispatch(editClient(payload)),
@@ -30,4 +29,4 @@ const clientForm = reduxForm({
   form: 'client',
 })
 
-export default compose(withConnect,clientForm)(EditClient)
+export default compose(withConnect, clientForm)(EditClient)

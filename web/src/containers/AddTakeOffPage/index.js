@@ -31,4 +31,4 @@ const takeOffForm = reduxForm({
   form: 'takeOff',
 })
 
-export default compose(withConnect,takeOffForm)(AddTakeOff)
+export default compose(withConnect, takeOffForm)(AddTakeOff)

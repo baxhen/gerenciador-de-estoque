@@ -76,7 +76,6 @@ exports.getEntrancesByField = (req, res) => {
   if(startDate && endDate){
     search.date = { $gte: new Date(startDate), $lte:new Date(endDate) }
   }
-  console.log(search)
 
   Entrance.find({ ...search, /*user: _id*/ })
     .exec((err, entrances) => {

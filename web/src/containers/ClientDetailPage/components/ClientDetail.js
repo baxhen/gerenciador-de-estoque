@@ -7,9 +7,7 @@ import { history } from '../../../history'
 
 const useStyles = styles
 
-function ClientDetail({
-  client: { name, socialReason, contacts, CPF, CNPJ },
-}) {
+function ClientDetail({ client: { name, socialReason, contacts, CPF, CNPJ } }) {
   const classes = useStyles()
   return (
     <main className={classes.content}>

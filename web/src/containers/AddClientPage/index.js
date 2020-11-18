@@ -23,5 +23,4 @@ const clientForm = reduxForm({
   form: 'client',
 })
 
-
-export default compose(withConnect,clientForm)(AddClient)
+export default compose(withConnect, clientForm)(AddClient)

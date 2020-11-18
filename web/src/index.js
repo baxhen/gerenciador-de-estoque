@@ -87,7 +87,11 @@ ReactDOM.render(
       <Route exact path="/dashboard-clients" component={ClientsPage} />
       <Route exact path="/dashboard-clients-add" component={AddClientPage} />
       <Route exact path="/dashboard-clients-edit" component={EditClientPage} />
-      <Route exact path="/dashboard-clients-detail" component={ClientDetailPage} />
+      <Route
+        exact
+        path="/dashboard-clients-detail"
+        component={ClientDetailPage}
+      />
       <Route exact path="/dashboard-suppliers" component={SuppliersPage} />
       <Route
         exact
@@ -106,8 +110,16 @@ ReactDOM.render(
       />
       <Route exact path="/dashboard-take-offs" component={TakeOffPage} />
       <Route exact path="/dashboard-take-offs-add" component={AddTakeOffPage} />
-      <Route exact path="/dashboard-take-offs-edit" component={EditTakeOffPage} />
-      <Route exact path="/dashboard-take-offs-detail" component={TakeOffDetailPage} />
+      <Route
+        exact
+        path="/dashboard-take-offs-edit"
+        component={EditTakeOffPage}
+      />
+      <Route
+        exact
+        path="/dashboard-take-offs-detail"
+        component={TakeOffDetailPage}
+      />
     </App>
   </Root>,
   document.getElementById('root'),

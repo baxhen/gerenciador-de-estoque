@@ -139,60 +139,58 @@ function Clients({
         </Grid>
         <Grid item>
           <List>
-            {clients.map(
-              ({ name, socialReason, CPF, CNPJ, contacts, _id }) => (
-                <div key={name || socialReason}>
-                  <ListItem>
-                    <ListItemText
-                      className={classes.listItem}
-                      primary={
-                        name
-                          ? `${name} - CPF: ${CPF}`
-                          : `${socialReason} - CNPJ: ${CNPJ}`
-                      }
-                      secondary={contacts.email}
-                    />
-                    <ListItemSecondaryAction>
-                      <IconButton
-                        style={{ marginRight: 10 }}
-                        edge="end"
-                        aria-label="detail"
-                        onClick={() => {
-                          history.push({
-                            pathname: 'dashboard-clients-detail',
-                            state: { _id },
-                          })
-                        }}
-                      >
-                        <FindInPageIcon fontSize="large" color="primary" />
-                      </IconButton>
-                      <IconButton
-                        style={{ marginRight: 10 }}
-                        edge="end"
-                        aria-label="edit"
-                        onClick={() => {
-                          history.push({
-                            pathname: 'dashboard-clients-edit',
-                            state: { _id },
-                          })
-                        }}
-                      >
-                        <CreateIcon fontSize="large" color="primary" />
-                      </IconButton>
-                      <IconButton
-                        style={{ marginRight: 10 }}
-                        edge="end"
-                        aria-label="delete"
-                        onClick={() => handleClickOpen(_id)}
-                      >
-                        <DeleteIcon fontSize="large" color="primary" />
-                      </IconButton>
-                    </ListItemSecondaryAction>
-                  </ListItem>
-                  <Divider className={classes.divider} variant="inset" />
-                </div>
-              ),
-            )}
+            {clients.map(({ name, socialReason, CPF, CNPJ, contacts, _id }) => (
+              <div key={name || socialReason}>
+                <ListItem>
+                  <ListItemText
+                    className={classes.listItem}
+                    primary={
+                      name
+                        ? `${name} - CPF: ${CPF}`
+                        : `${socialReason} - CNPJ: ${CNPJ}`
+                    }
+                    secondary={contacts.email}
+                  />
+                  <ListItemSecondaryAction>
+                    <IconButton
+                      style={{ marginRight: 10 }}
+                      edge="end"
+                      aria-label="detail"
+                      onClick={() => {
+                        history.push({
+                          pathname: 'dashboard-clients-detail',
+                          state: { _id },
+                        })
+                      }}
+                    >
+                      <FindInPageIcon fontSize="large" color="primary" />
+                    </IconButton>
+                    <IconButton
+                      style={{ marginRight: 10 }}
+                      edge="end"
+                      aria-label="edit"
+                      onClick={() => {
+                        history.push({
+                          pathname: 'dashboard-clients-edit',
+                          state: { _id },
+                        })
+                      }}
+                    >
+                      <CreateIcon fontSize="large" color="primary" />
+                    </IconButton>
+                    <IconButton
+                      style={{ marginRight: 10 }}
+                      edge="end"
+                      aria-label="delete"
+                      onClick={() => handleClickOpen(_id)}
+                    >
+                      <DeleteIcon fontSize="large" color="primary" />
+                    </IconButton>
+                  </ListItemSecondaryAction>
+                </ListItem>
+                <Divider className={classes.divider} variant="inset" />
+              </div>
+            ))}
           </List>
         </Grid>
         {renderDialog()}

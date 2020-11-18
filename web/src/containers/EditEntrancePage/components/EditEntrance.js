@@ -2,7 +2,7 @@ import React, { memo, useState, useEffect } from 'react'
 import { Field, FieldArray } from 'redux-form'
 import { styles } from './styles'
 import ButtonIcon from 'components/Common/ButtonIcon/ButtonIcon'
-import { ArrowBack, Clear} from '@material-ui/icons'
+import { ArrowBack, Clear } from '@material-ui/icons'
 import {
   Grid,
   FormControl,

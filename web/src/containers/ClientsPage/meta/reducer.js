@@ -2,7 +2,7 @@ import produce from 'immer'
 import * as constants from './constants'
 
 export const initialState = {
-  clients:[]
+  clients: [],
 }
 
 /* eslint-disable no-param-reassign */

@@ -70,9 +70,6 @@ export default function* () {
     yield takeLatest(constants.ADD_CLIENT, handleAddClient),
     yield takeLatest(constants.DELETE_CLIENT, handleDeleteClient),
     yield takeLatest(constants.EDIT_CLIENT, handleEditClient),
-    yield takeLatest(
-      constants.GET_CLIENTS_BY_FIELD,
-      handleGetClientsByField,
-    ),
+    yield takeLatest(constants.GET_CLIENTS_BY_FIELD, handleGetClientsByField),
   ])
 }

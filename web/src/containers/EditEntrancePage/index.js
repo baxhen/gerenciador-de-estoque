@@ -6,9 +6,7 @@ import EditEntrance from './components/EditEntrance'
 import { formFields } from './meta/configObjects'
 import { validate } from './meta/validate'
 import { selectSuppliers } from 'containers/SuppliersPage/meta/selectors'
-import {
-  editEntrance,
-} from 'containers/EntrancesPage/meta/actions'
+import { editEntrance } from 'containers/EntrancesPage/meta/actions'
 import { selectAddEntranceErrorMessage } from 'containers/EntrancesPage/meta/selectors'
 import { selectEntrance } from 'containers/EntrancesPage/meta/selectors'
 import { getProducts } from 'containers/ProductsPage/meta/actions'

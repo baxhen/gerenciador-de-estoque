@@ -130,14 +130,12 @@ function AddTakeOff({
                       <Field
                         component={inputType}
                         label={label}
-                        options={clients.map(
-                          ({ _id, name, socialReason }) => {
-                            return {
-                              value: _id,
-                              name: socialReason ? socialReason : name,
-                            }
-                          },
-                        )}
+                        options={clients.map(({ _id, name, socialReason }) => {
+                          return {
+                            value: _id,
+                            name: socialReason ? socialReason : name,
+                          }
+                        })}
                         name={name}
                         type={type}
                         className={classes[className]}

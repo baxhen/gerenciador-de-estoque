@@ -67,9 +67,6 @@ export default function* () {
     yield takeLatest(constants.ADD_TAKEOFF, handleAddTakeOff),
     yield takeLatest(constants.DELETE_TAKEOFF, handleDeleteTakeOff),
     yield takeLatest(constants.EDIT_TAKEOFF, handleEditTakeOff),
-    yield takeLatest(
-      constants.GET_TAKEOFFS_BY_FIELD,
-      handleGetTakeOffsByField,
-    ),
+    yield takeLatest(constants.GET_TAKEOFFS_BY_FIELD, handleGetTakeOffsByField),
   ])
 }

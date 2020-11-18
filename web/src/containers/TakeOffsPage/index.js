@@ -5,11 +5,7 @@ import { reduxForm } from 'redux-form'
 import TakeOff from './components/TakeOff'
 import { validate } from './meta/validate'
 import { formFields } from './meta/configObjects'
-import {
-  getTakeOffs,
-  getTakeOffsByField,
-  deleteTakeOff,
-} from './meta/actions'
+import { getTakeOffs, getTakeOffsByField, deleteTakeOff } from './meta/actions'
 import { selectTakeOffs } from './meta/selectors'
 import { getClients } from 'containers/ClientsPage/meta/actions'
 import { selectClients } from 'containers/ClientsPage/meta/selectors'
@@ -28,8 +24,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(getTakeOffsByField(payload)),
 })
 
-
 const withConnect = connect(mapStateToProps, mapDispatchToProps)
 const searchTakeOffForm = reduxForm({ validate, form: 'searchTakeOff' })
 
-export default compose(withConnect,searchTakeOffForm)(TakeOff)
+export default compose(withConnect, searchTakeOffForm)(TakeOff)

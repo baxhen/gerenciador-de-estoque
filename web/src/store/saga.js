@@ -7,5 +7,12 @@ import entrancesSaga from 'containers/EntrancesPage/meta/saga'
 import takeOffsSaga from 'containers/TakeOffsPage/meta/saga'
 
 export default function* saga() {
-  yield all([authSaga(), productsSaga(), suppliersSaga(), entrancesSaga(), clientsSaga(),takeOffsSaga()])
+  yield all([
+    authSaga(),
+    productsSaga(),
+    suppliersSaga(),
+    entrancesSaga(),
+    clientsSaga(),
+    takeOffsSaga(),
+  ])
 }

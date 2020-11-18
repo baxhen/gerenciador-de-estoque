@@ -81,14 +81,7 @@ function AddClient({
                 />
               </Grid>
               {formFields.map(
-                ({
-                  label,
-                  type,
-                  name,
-                  className,
-                  inputType,
-                  contacts,
-                }) => {
+                ({ label, type, name, className, inputType, contacts }) => {
                   if (
                     (isCompany && name === 'CPF') ||
                     (isCompany && name === 'name')

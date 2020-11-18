@@ -58,14 +58,7 @@ function EditClient({
           >
             <Grid item container direction="column">
               {formFields.map(
-                ({
-                  label,
-                  type,
-                  name,
-                  className,
-                  inputType,
-                  contacts,
-                }) => {
+                ({ label, type, name, className, inputType, contacts }) => {
                   if (
                     (client.isCompany && name === 'CPF') ||
                     (client.isCompany && name === 'name')

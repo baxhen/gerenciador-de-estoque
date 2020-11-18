@@ -6,9 +6,7 @@ import EditTakeOff from './components/EditTakeOff'
 import { formFields } from './meta/configObjects'
 import { validate } from './meta/validate'
 import { selectClients } from 'containers/ClientsPage/meta/selectors'
-import {
-  editTakeOff,
-} from 'containers/TakeOffsPage/meta/actions'
+import { editTakeOff } from 'containers/TakeOffsPage/meta/actions'
 import { selectAddTakeOffErrorMessage } from 'containers/TakeOffsPage/meta/selectors'
 import { selectTakeOff } from 'containers/TakeOffsPage/meta/selectors'
 import { getProducts } from 'containers/ProductsPage/meta/actions'
@@ -35,4 +33,4 @@ const takeOffForm = reduxForm({
   validate,
   form: 'takeOff',
 })
-export default compose(withConnect,takeOffForm)(EditTakeOff)
+export default compose(withConnect, takeOffForm)(EditTakeOff)
