@@ -10,15 +10,15 @@ services:
       - /app/node_modules
       - ./server:/app
     environment:
-      - WEB_URL=http://localhost:3000
-      - MONGO_URI=mongodb+srv://admin:u901eSfoSpr4YcQy@auth.xj11d.azure.mongodb.net/auth?retryWrites=true&w=majority
-      - DB_NAME=gerenciamento-estoque
-      - EMAIL=leo292629@gmail.com
-      - EMAIL_PASSWORD=Xuan1234
-      - JWT_SECRET=uyrxvzhjnkgvwquaisdozjn2qwdasxz
-      - COMPANY_NAME=ABC Livros e Brinquedos
-      - FACEBOOK_URL=https://pt-br.facebook.com/www.abclivrosebrinquedos.com.br/
-      - CENTRAL_AJUDA_URL=https://pt-br.facebook.com/www.abclivrosebrinquedos.com.br/
+      - WEB_URL=${WEB_URL}
+      - MONGO_URI=${MONGO_URI}
+      - DB_NAME=${DB_NAME}
+      - EMAIL=${EMAIL}
+      - EMAIL_PASSWORD=${EMAIL_PASSWORD}
+      - JWT_SECRET=${JWT_SECRET}
+      - COMPANY_NAME=${COMPANY_NAME}
+      - FACEBOOK_URL=${FACEBOOK_URL}
+      - CENTRAL_AJUDA_URL=${CENTRAL_AJUDA_URL}
   web:
     stdin_open: true
     restart: always
@@ -28,6 +28,8 @@ services:
     volumes:
       - /app/node_modules
       - ./web:/app
+    environment:
+      - WEB_URL=${WEB_URL}
   nginx-proxy:
     depends_on:
       - api
