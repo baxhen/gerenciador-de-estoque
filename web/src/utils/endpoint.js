@@ -8,6 +8,7 @@ export const URLS = {
   RECOVER_PASSWORD: { url: 'api', subUrl: 'forgot_password' },
   RESET_PASSWORD: { url: 'api', subUrl: 'reset_password' },
   VERIFY_EMAIL: { url: 'api', subUrl: 'verify_email' },
+  GET_STOCK: { url: 'api', subUrl: 'get/stock' },
   GET_CATEGORIES: { url: 'api', subUrl: 'get/categories' },
   GET_CLIENTS: { url: 'api', subUrl: 'get/clients' },
   GET_TAKEOFFS: { url: 'api', subUrl: 'get/take-offs' },

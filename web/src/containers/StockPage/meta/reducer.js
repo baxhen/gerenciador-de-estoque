@@ -1,14 +1,16 @@
 import produce from 'immer'
 import * as constants from './constants'
 
-export const initialState = {}
+export const initialState = {
+  stock: [],
+}
 
 /* eslint-disable no-param-reassign */
 const Stock = (state = initialState, action) =>
   produce(state, (draft) => {
     switch (action.type) {
       case constants.GET_STOCK_SUCCESS:
-        draft.items = action.payload
+        draft.stock = action.payload
         break
       case constants.GET_STOCK_ERROR:
         break

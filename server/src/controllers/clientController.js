@@ -1,14 +1,7 @@
 const Client = require('../models/client')
 
 exports.addClient = (req, res) => {
-  const {
-    isCompany,
-    name,
-    socialReason,
-    CPF,
-    CNPJ,
-    contacts,
-  } = req.body
+  const { isCompany, name, socialReason, CPF, CNPJ, contacts } = req.body
   const { user } = req
   if (
     typeof isCompany !== 'boolean' ||
@@ -198,7 +191,7 @@ exports.getClientByField = (req, res) => {
     }
   }
 
-  Client.find({...query, /*user: _id*/})
+  Client.find({ ...query /*user: _id*/ })
     .select('-user')
     .limit(7)
     .exec((err, clients) => {

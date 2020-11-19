@@ -4,4 +4,5 @@ import { initialState } from './reducer'
  * @param state
  * @returns {Object}
  */
-export const get = (state) => state.Stock || initialState
+export const get = (state) => state.stockPage || initialState
+export const selectStock = (state) => get(state).stock

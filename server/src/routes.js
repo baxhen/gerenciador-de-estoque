@@ -7,6 +7,7 @@ const SupplierController = require('./controllers/supplierController')
 const ClientController = require('./controllers/clientController')
 const EntranceController = require('./controllers/entranceController')
 const TakeOffController = require('./controllers/takeOffController')
+const StockController = require('./controllers/stockController')
 require('./services/passport')
 
 const requireAuth = passport.authenticate('jwt', { session: false })
@@ -21,6 +22,9 @@ routes.post('/forgot_password', Authentication.forgotPassword)
 routes.post('/signup', Authentication.signup)
 routes.post('/reset_password', Authentication.resetPassword)
 routes.post('/verify_email', Authentication.verifyEmail)
+
+// STOCK ROUTES
+routes.get('/get/stock', requireAuth, StockController.getStock)
 
 // PRODUCTS ROUTES
 
@@ -66,11 +70,7 @@ routes.get(
   ClientController.getClientByField,
 )
 routes.post('/edit/client', requireAuth, ClientController.editClient)
-routes.delete(
-  '/delete/client/:_id',
-  requireAuth,
-  ClientController.deleteClient,
-)
+routes.delete('/delete/client/:_id', requireAuth, ClientController.deleteClient)
 
 // CATEGORIES ROUTES
 
@@ -88,7 +88,11 @@ routes.delete(
 routes.post('/add/entrance', requireAuth, EntranceController.addEntrance)
 routes.get('/get/entrances', requireAuth, EntranceController.getEntrances)
 routes.get('/get/entrance', requireAuth, EntranceController.getEntrance)
-routes.get('/get/entrances/by_field', requireAuth, EntranceController.getEntrancesByField)
+routes.get(
+  '/get/entrances/by_field',
+  requireAuth,
+  EntranceController.getEntrancesByField,
+)
 routes.post('/edit/entrance', requireAuth, EntranceController.editEntrance)
 routes.delete(
   '/delete/entrance/:_id',
@@ -100,7 +104,11 @@ routes.delete(
 routes.post('/add/take-off', requireAuth, TakeOffController.addTakeOff)
 routes.get('/get/take-offs', requireAuth, TakeOffController.getTakeOffs)
 routes.get('/get/take-off', requireAuth, TakeOffController.getTakeOff)
-routes.get('/get/take-offs/by_field', requireAuth, TakeOffController.getTakeOffsByField)
+routes.get(
+  '/get/take-offs/by_field',
+  requireAuth,
+  TakeOffController.getTakeOffsByField,
+)
 routes.post('/edit/take-off', requireAuth, TakeOffController.editTakeOff)
 routes.delete(
   '/delete/take-off/:_id',

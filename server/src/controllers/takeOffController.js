@@ -4,12 +4,10 @@ exports.addTakeOff = async (req, res) => {
   const { takeOffId, products, client, formOfPayment } = req.body
   const { user } = req
   if (!takeOffId || !client || !formOfPayment || products.length === 0) {
-    res
-      .status(422)
-      .send({
-        error:
-          "You must provide the entrance's id, client, formOfPayment and products should not be empty",
-      })
+    res.status(422).send({
+      error:
+        "You must provide the entrance's id, client, formOfPayment and products should not be empty",
+    })
   }
   // eslint-disable-next-line
   TakeOff.findOne({ takeOffId }, async (err, existingEntrance) => {
@@ -20,7 +18,6 @@ exports.addTakeOff = async (req, res) => {
     if (existingEntrance) {
       return res.status(422).send({ message: 'Entrada com id já cadastrado' })
     }
-
 
     const takeOff = new TakeOff({
       takeOffId,
@@ -64,7 +61,9 @@ exports.getTakeOffsByField = (req, res) => {
   //     user: { _id },
   //   } = req
   if (!takeOffId && !startDate && !endDate && !client) {
-    res.status(422).send({ error: 'You must provide at least takeOffId or startDate and endDate' })
+    res.status(422).send({
+      error: 'You must provide at least takeOffId or startDate and endDate',
+    })
   }
   const search = {}
 
@@ -74,18 +73,17 @@ exports.getTakeOffsByField = (req, res) => {
   if (client) {
     search.client = client
   }
-  if(startDate && endDate){
-    search.date = { $gte: new Date(startDate), $lte:new Date(endDate) }
+  if (startDate && endDate) {
+    search.date = { $gte: new Date(startDate), $lte: new Date(endDate) }
   }
 
-  TakeOff.find({ ...search, /*user: _id*/ })
-    .exec((err, entrances) => {
-      if (err) {
-        return res.status(500).send({ message: err.message })
-      }
+  TakeOff.find({ ...search /*user: _id*/ }).exec((err, entrances) => {
+    if (err) {
+      return res.status(500).send({ message: err.message })
+    }
 
-      return res.send({ entrances })
-    })
+    return res.send({ entrances })
+  })
 }
 exports.getTakeOff = (req, res) => {
   const { _id } = req.params
@@ -102,32 +100,34 @@ exports.editTakeOff = (req, res) => {
   const { _id, takeOffId, products, client, formOfPayment } = req.body
 
   if (!takeOffId || !client || !formOfPayment || products.length === 0) {
-    res
-      .status(422)
-      .send({
-        error:
-          "You must provide the entrance's id, client, formOfPayment and products should not be empty",
-      })
+    res.status(422).send({
+      error:
+        "You must provide the entrance's id, client, formOfPayment and products should not be empty",
+    })
   }
-  const totalPrice = () =>{
+  const totalPrice = () => {
     if (products.length === 1) {
-        return products[0].quantity * products[0].unitPrice
+      return products[0].quantity * products[0].unitPrice
+    }
+    return products.reduce((accumulator, currentValue) => {
+      if (typeof accumulator !== 'number') {
+        accumulator = accumulator.unitPrice * accumulator.quantity
       }
-      return products.reduce((accumulator, currentValue) => {
-        if (typeof accumulator !== 'number') {
-          accumulator = accumulator.unitPrice * accumulator.quantity
-        }
-        return accumulator + currentValue.unitPrice * currentValue.quantity
-      })
+      return accumulator + currentValue.unitPrice * currentValue.quantity
+    })
   }
   const entrance = { _id, takeOffId, products, client, formOfPayment }
-  TakeOff.findOneAndUpdate({ _id }, { takeOffId, products, client, formOfPayment, totalPrice: totalPrice()}, (err) => {
-    if (err) {
-      return res.status(500).send({ message: err.message })
-    }
+  TakeOff.findOneAndUpdate(
+    { _id },
+    { takeOffId, products, client, formOfPayment, totalPrice: totalPrice() },
+    (err) => {
+      if (err) {
+        return res.status(500).send({ message: err.message })
+      }
 
-    return res.send({ entrance })
-  })
+      return res.send({ entrance })
+    },
+  )
 }
 exports.deleteTakeOff = (req, res) => {
   const { _id } = req.params

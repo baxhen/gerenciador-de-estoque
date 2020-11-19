@@ -13,4 +13,48 @@ export const styles = makeStyles((theme) => ({
       width: '100vw',
     },
   },
+  button: {
+    height: '48px',
+    width: '156px',
+    borderRadius: '50px',
+  },
+  input: { ...theme.palette.common.input, marginLeft: '10px' },
+  categorySelect: {
+    width: '150px',
+    marginLeft: '10px',
+    marginRight: '40px',
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: theme.palette.primary.main,
+        borderRadius: 0,
+      },
+      '&:hover fieldset': {
+        borderColor: theme.palette.primary.light,
+      },
+    },
+  },
+  lastInput: {
+    ...theme.palette.common.input,
+    marginLeft: '10px',
+    marginRight: '50px',
+  },
+  listItem: {
+    color: theme.palette.primary.main,
+    '& .MuiListItemText-secondary': {
+      color: theme.palette.primary.main,
+    },
+    width: '850px',
+  },
+  divider: {
+    backgroundColor: theme.palette.primary.main,
+  },
+  iconButton: {
+    backgroundColor: theme.palette.primary.main,
+    color: 'white',
+    height: '48px',
+    marginRight: '20px',
+    '&:hover': {
+      backgroundColor: theme.palette.primary.light,
+    },
+  },
 }))

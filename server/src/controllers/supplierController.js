@@ -229,7 +229,7 @@ exports.getSupplierByField = (req, res) => {
     }
   }
 
-  Supplier.find({...query, /*user: _id*/})
+  Supplier.find({ ...query /*user: _id*/ })
     .select('-user')
     .limit(7)
     .exec((err, suppliers) => {
