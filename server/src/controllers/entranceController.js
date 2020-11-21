@@ -46,6 +46,7 @@ exports.getEntrances = (req, res) => {
 
   Entrance.find(/*{ user: _id }*/)
     // .select('name')
+    .sort({date:-1})
     .exec((err, entrances) => {
       if (err) {
         return res.status(500).send({ message: err.message })
@@ -77,7 +78,7 @@ exports.getEntrancesByField = (req, res) => {
     search.date = { $gte: new Date(startDate), $lte: new Date(endDate) }
   }
 
-  Entrance.find({ ...search /*user: _id*/ }).exec((err, entrances) => {
+  Entrance.find({ ...search /*user: _id*/ }).sort({date: -1}).exec((err, entrances) => {
     if (err) {
       return res.status(500).send({ message: err.message })
     }

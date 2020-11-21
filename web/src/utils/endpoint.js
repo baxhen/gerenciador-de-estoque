@@ -15,7 +15,7 @@ export const URLS = {
   GET_PRODUCTS: { url: 'api', subUrl: 'get/products' },
   GET_PRODUCTS_BY_FIELD: { url: 'api', subUrl: 'product/search/by_field' },
   GET_CLIENTS_BY_FIELD: { url: 'api', subUrl: 'client/search/by_field' },
-  GET_TAKEOFFS_BY_FIELD: { url: 'api', subUrl: 'take-off/search/by_field' },
+  GET_TAKEOFFS_BY_FIELD: { url: 'api', subUrl: 'take-offs/search/by_field' },
   GET_SUPPLIERS: { url: 'api', subUrl: 'get/suppliers' },
   GET_SUPPLIERS_BY_FIELD: { url: 'api', subUrl: 'supplier/search/by_field' },
   GET_ENTRANCES: { url: 'api', subUrl: 'get/entrances' },

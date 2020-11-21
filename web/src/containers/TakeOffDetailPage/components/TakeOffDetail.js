@@ -57,7 +57,7 @@ function TakeOffDetail({
         <Grid item>
           <Chip label={`ID da saída: ${takeOffId}`} color="primary" className={classes.chips}/>
           <Chip
-            label={`Data da Saída: ${new Date(date).toLocaleDateString()}`}
+            label={`Data da Saída: ${new Date(date).toLocaleDateString('pt-BR')}`}
             color="primary"
             className={classes.chips}
           />

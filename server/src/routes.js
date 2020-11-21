@@ -105,7 +105,7 @@ routes.post('/add/take-off', requireAuth, TakeOffController.addTakeOff)
 routes.get('/get/take-offs', requireAuth, TakeOffController.getTakeOffs)
 routes.get('/get/take-off', requireAuth, TakeOffController.getTakeOff)
 routes.get(
-  '/get/take-offs/by_field',
+  '/take-offs/search/by_field',
   requireAuth,
   TakeOffController.getTakeOffsByField,
 )

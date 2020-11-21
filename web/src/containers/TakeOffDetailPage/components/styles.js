@@ -18,7 +18,7 @@ export const styles = makeStyles((theme) => ({
     width: '36rem',
     backgroundColor: theme.palette.secondary.main,
     borderRadius: '16px',
-    margin: '3rem auto auto auto',
+    margin: 'auto',
     [theme.breakpoints.down('xs')]: {
       width: '20rem',
     },

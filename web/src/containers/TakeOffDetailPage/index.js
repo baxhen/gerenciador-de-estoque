@@ -5,7 +5,6 @@ import TakeOffDetail from './components/TakeOffDetail'
 import { selectTakeOff } from 'containers/TakeOffsPage/meta/selectors'
 import { selectProducts } from 'containers/ProductsPage/meta/selectors'
 import { getProducts } from 'containers/ProductsPage/meta/actions'
-import { getClients } from 'containers/ClientsPage/meta/actions'
 import { selectClients } from 'containers/ClientsPage/meta/selectors'
 
 const mapStateToProps = (state, ownProps) => ({
