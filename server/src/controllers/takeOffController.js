@@ -46,7 +46,7 @@ exports.getTakeOffs = (req, res) => {
 
   TakeOff.find(/*{ user: _id }*/)
     // .select('name')
-    .sort({date:-1})
+    .sort({ date: -1 })
     .exec((err, takeOffs) => {
       if (err) {
         return res.status(500).send({ message: err.message })
@@ -78,13 +78,15 @@ exports.getTakeOffsByField = (req, res) => {
     search.date = { $gte: new Date(startDate), $lte: new Date(endDate) }
   }
 
-  TakeOff.find({ ...search /*user: _id*/ }).sort({date:-1}).exec((err, takeOffs) => {
-    if (err) {
-      return res.status(500).send({ message: err.message })
-    }
+  TakeOff.find({ ...search /*user: _id*/ })
+    .sort({ date: -1 })
+    .exec((err, takeOffs) => {
+      if (err) {
+        return res.status(500).send({ message: err.message })
+      }
 
-    return res.send({ takeOffs })
-  })
+      return res.send({ takeOffs })
+    })
 }
 exports.getTakeOff = (req, res) => {
   const { _id } = req.params

@@ -45,6 +45,7 @@ exports.getStock = async (req, res) => {
       $project: {
         _id: 1,
         name: '$product.name',
+        productId: '$product.productId',
         quantity: 1,
       },
     },

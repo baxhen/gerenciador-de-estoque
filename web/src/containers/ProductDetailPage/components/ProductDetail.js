@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from 'react'
+import React, { memo } from 'react'
 import { styles } from './styles'
 import ButtonIcon from 'components/Common/ButtonIcon/ButtonIcon'
 import { ArrowBack } from '@material-ui/icons'
@@ -8,7 +8,7 @@ import { history } from '../../../history'
 const useStyles = styles
 
 function ProductDetail({
-  product:{ productId, name, description, category},
+  product: { productId, name, description, category },
   categories,
 }) {
   const classes = useStyles()
@@ -40,23 +40,24 @@ function ProductDetail({
         className={classes.container}
       >
         <Grid item>
-          <Chip label={`ID do Produto: ${productId}`} color="primary" className={classes.chips}/>
-                <Card className={classes.root}>
-                  <CardContent>
-                    <Typography variant="h5" component="h2">
-                      {name}
-                    </Typography>
-                    <Typography
-                      className={classes.title}
-                      gutterBottom
-                    >
-                      {`Categoria: ${selectCategory(category).name}`}
-                    </Typography>
-                    <Typography variant="body2" component="p">
-                      {description}
-                    </Typography>
-                  </CardContent>
-                </Card>
+          <Chip
+            label={`ID do Produto: ${productId}`}
+            color="primary"
+            className={classes.chips}
+          />
+          <Card className={classes.root}>
+            <CardContent>
+              <Typography variant="h5" component="h2">
+                {name}
+              </Typography>
+              <Typography className={classes.title} gutterBottom>
+                {`Categoria: ${selectCategory(category).name}`}
+              </Typography>
+              <Typography variant="body2" component="p">
+                {description}
+              </Typography>
+            </CardContent>
+          </Card>
         </Grid>
       </Grid>
     </main>

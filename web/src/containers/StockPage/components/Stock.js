@@ -19,13 +19,13 @@ function Stock({ dispatchGetStock, stock }) {
       <Grid container direction="column">
         <Grid item>
           <List>
-            {stock.map(({ name, quantity }) => (
+            {stock.map(({ name, quantity, productId }) => (
               <div key={name}>
                 <ListItem>
                   <ListItemText
                     className={classes.listItem}
-                    primary={name}
-                    secondary={`Quantidade em estoque: ${quantity}`}
+                    primary={`${name} `}
+                    secondary={`ID do Produto: ${productId} - Quantidade em estoque: ${quantity}`}
                   />
                 </ListItem>
                 <Divider className={classes.divider} variant="inset" />
