@@ -19,7 +19,7 @@ spec:
             - containerPort: 5000
           env:
             - name: MONGO_URI
-              value: mongodb+srv://admin:u901eSfoSpr4YcQy@auth.xj11d.azure.mongodb.net/auth?retryWrites=true&w=majority
+              value: mongodb+srv://vtrGuerra:flamengo81@cluster0.gi3tf.mongodb.net/Warriors?retryWrites=true&w=majority
             - name: EMAIL
               value: suporte.abclivros@gmail.com
             - name: JWT_SECRET
