@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: web
-          image: baxhenbasicarchjs.azurecr.io/basic-arch-js-web:v0
+          image: baxhen/gde-web
           ports:
             - containerPort: 3000

@@ -14,6 +14,31 @@ spec:
     spec:
       containers:
         - name: server
-          image: baxhenbasicarchjs.azurecr.io/basic-arch-js-server
+          image: baxhen/gde-server
           ports:
             - containerPort: 5000
+          env:
+            - name: MONGO_URI
+              value: mongodb+srv://admin:u901eSfoSpr4YcQy@auth.xj11d.azure.mongodb.net/auth?retryWrites=true&w=majority
+            - name: EMAIL
+              value: leo292629@gmail.com
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: jwtsecret
+                  key: JWT_SECRET
+            - name: EMAIL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: emailpassword
+                  key: EMAIL_PASSWORD
+            - name: DB_NAME
+              value: gerenciamento-estoque
+            - name: COMPANY_NAME
+              value: ABC Livros e Brinquedos
+            - name: FACEBOOK_URL
+              value: https://pt-br.facebook.com/www.abclivrosebrinquedos.com.br/
+            - name: CENTRAL_AJUDA_URL
+              value: https://pt-br.facebook.com/www.abclivrosebrinquedos.com.br/
+            - name: WEB_URL
+              value: http://172.29.127.135

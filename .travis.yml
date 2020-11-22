@@ -11,13 +11,13 @@ before_install:
   - sudo mv ./kubectl /usr/local/bin/kubectl
   - az login --service-principal -u $AZ_APP_ID -p $AZ_PASS --tenant $AZ_TENANT
   - echo "$AZ_CR_PASSWORD" | docker login -u "$AZ_CR_USERNAME" --password-stdin "$AZ_CR_LOGIN_URL"
-  - az aks get-credentials --resource-group basicArchJs --name basicArchJsCluster
-  - docker build -t baxhenbasicarchjs.azurecr.io/basic-arch-js-web -f ./web/Dockerfile.dev ./web
-  - docker build -t baxhenbasicarchjs.azurecr.io/basic-arch-js-server -f ./server/Dockerfile.dev ./server
+  - az aks get-credentials --resource-group gerenciamento_de_estoque --name myGDECluster
+  - docker build -t gdeimpacta.azurecr.io/ged-web -f ./web/Dockerfile.dev ./web
+  - docker build -t gdeimpacta.azurecr.io/gde-server -f ./server/Dockerfile.dev ./server
 
 script:
-  - docker run -e CI=true baxhenbasicarchjs.azurecr.io/basic-arch-js-web npm run test
-  - docker run -e CI=true baxhenbasicarchjs.azurecr.io/basic-arch-js-server npm run test
+  - docker run -e CI=true gdeimpacta.azurecr.io/ged-web npm run test
+  - docker run -e CI=true gdeimpacta.azurecr.io/gde-server npm run test
 
 deploy:
   provider: script

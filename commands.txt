@@ -1,4 +1,4 @@
 # create a cluster
-az aks create --resource-group basicArchJs --name basicArchJsCluster --node-count 1 --generate-ssh-keys --attach-acr baxhenBasicArchJs
+az aks create --resource-group gerenciamento_de_estoque --name myGDECluster --node-count 1 --generate-ssh-keys --attach-acr gdeImpacta
 # use remote cluster as context
-az aks get-credentials --resource-group basicArchJs --name basicArchJsCluster
+az aks get-credentials --resource-group gerenciamento_de_estoque --name myGDECluster
