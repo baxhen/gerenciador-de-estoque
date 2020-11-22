@@ -138,9 +138,10 @@ exports.signup = (req, res, next) => {
 
     return Email.sendEmail().then((e) => {
       if (e) {
+        console.log(e)
         return res
-          .status(400)
-          .send({ message: 'could not send verify account email' })
+          .status(500)
+          .send({ message: e })
       }
 
       return res.send({

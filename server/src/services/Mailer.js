@@ -2,29 +2,32 @@ const nodemailer = require('nodemailer')
 const path = require('path')
 const EmailTemplate = require('email-templates')
 const config = require('../config/config')
-const { user, pass } = config
+const sgMail = require('@sendgrid/mail');
+const { pass, email } = config
+
+sgMail.setApiKey(pass);
 
 class Mailer {
   constructor(data) {
-    this.user = user
+    this.email = email
     this.pass = pass
     this.local = data.local
     this.templateName = data.templateName
-    this.createTransport = this.createTransport.bind(this)
+    this.options = {
+      auth: {
+        api_user: this.user,
+        api_key: this.pass,
+      },
+    }
+    // this.createTransport = this.createTransport.bind(this)
     this.sendEmail = this.sendEmail.bind(this)
 
-    this.createTransport()
+    // this.createTransport()
   }
 
-  createTransport() {
-    this.transport = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: this.user,
-        pass: this.pass,
-      },
-    })
-  }
+  // createTransport() {
+  //   this.transport = nodemailer.createTransport(sgTransport(this.options))
+  // }
 
   async sendEmail() {
     try {
@@ -49,14 +52,16 @@ class Mailer {
         this.local,
       )
 
-      await this.transport.sendMail({
+      sgMail.send({
+        from: this.email,
         to: this.local.email,
         html,
         subject,
         text,
+      },(err)=>{
+        if(err) return err
+        return null
       })
-
-      return null
     } catch (error) {
       // console.log(error)
       return error.message

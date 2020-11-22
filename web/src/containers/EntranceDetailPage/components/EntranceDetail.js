@@ -94,7 +94,7 @@ function EntranceDetail({
             ))}
           </Typography>
           <Chip
-            label={`Cliente: ${
+            label={`Fornecedor: ${
               selectSupplier(supplier).isCompany
                 ? selectSupplier(supplier).socialReason
                 : selectSupplier(supplier).name

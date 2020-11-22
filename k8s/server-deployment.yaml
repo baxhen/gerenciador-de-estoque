@@ -14,24 +14,24 @@ spec:
     spec:
       containers:
         - name: server
-          image: baxhen/gde-server
+          image: baxhen/gde-server:latest
           ports:
             - containerPort: 5000
           env:
             - name: MONGO_URI
               value: mongodb+srv://admin:u901eSfoSpr4YcQy@auth.xj11d.azure.mongodb.net/auth?retryWrites=true&w=majority
             - name: EMAIL
-              value: leo292629@gmail.com
+              value: 'leo292629@gmail.com'
             - name: JWT_SECRET
               valueFrom:
                 secretKeyRef:
                   name: jwtsecret
                   key: JWT_SECRET
-            - name: EMAIL_PASSWORD
+            - name: SEND_GRID_API_KEY
               valueFrom:
                 secretKeyRef:
-                  name: emailpassword
-                  key: EMAIL_PASSWORD
+                  name: sendgridapikey
+                  key: SEND_GRID_API_KEY
             - name: DB_NAME
               value: gerenciamento-estoque
             - name: COMPANY_NAME
@@ -41,4 +41,4 @@ spec:
             - name: CENTRAL_AJUDA_URL
               value: https://pt-br.facebook.com/www.abclivrosebrinquedos.com.br/
             - name: WEB_URL
-              value: http://172.29.127.135
+              value: http://191.234.192.49
