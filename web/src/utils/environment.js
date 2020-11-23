@@ -3,7 +3,7 @@
 // const BASE_URL = 'http://localhost:5000/';
 
 // quando rodar com docker-compose
-const BASE_URL = 'http://191.234.192.49/'
-// const BASE_URL = 'http://localhost:3000/'
+// const BASE_URL = 'http://191.234.192.49/'
+const BASE_URL = 'http://localhost:3000/'
 
 export { BASE_URL }

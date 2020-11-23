@@ -1,4 +1,3 @@
-const nodemailer = require('nodemailer')
 const path = require('path')
 const EmailTemplate = require('email-templates')
 const config = require('../config/config')
@@ -6,7 +5,6 @@ const sgMail = require('@sendgrid/mail');
 const { pass, email } = config
 
 sgMail.setApiKey(pass);
-
 class Mailer {
   constructor(data) {
     this.email = email
@@ -19,15 +17,8 @@ class Mailer {
         api_key: this.pass,
       },
     }
-    // this.createTransport = this.createTransport.bind(this)
     this.sendEmail = this.sendEmail.bind(this)
-
-    // this.createTransport()
   }
-
-  // createTransport() {
-  //   this.transport = nodemailer.createTransport(sgTransport(this.options))
-  // }
 
   async sendEmail() {
     try {
@@ -63,7 +54,6 @@ class Mailer {
         return null
       })
     } catch (error) {
-      // console.log(error)
       return error.message
     }
   }

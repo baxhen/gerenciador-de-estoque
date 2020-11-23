@@ -14,14 +14,14 @@ spec:
     spec:
       containers:
         - name: server
-          image: baxhen/gde-server
+          image: baxhen/gde-server:latest
           ports:
             - containerPort: 5000
           env:
             - name: MONGO_URI
               value: mongodb+srv://vtrGuerra:flamengo81@cluster0.gi3tf.mongodb.net/Warriors?retryWrites=true&w=majority
             - name: EMAIL
-              value: suporte.abclivros@gmail.com
+              value: leo292629@gmail.com
             - name: JWT_SECRET
               valueFrom:
                 secretKeyRef:
