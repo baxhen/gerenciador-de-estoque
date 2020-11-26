@@ -7,6 +7,5 @@ export const validate = (values) => {
   _.each(formFields, ({ name, noValueError }) => {
     if (!values[name]) errors[name] = noValueError
   })
-
   return errors
 }

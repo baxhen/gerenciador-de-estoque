@@ -142,11 +142,7 @@ function Entrances({
     <main className={classes.content}>
       <Grid container direction="column">
         <Grid item>
-          <FormControl
-            // error={this.state.error}
-            component="form"
-            onSubmit={handleSubmit(onSubmit)}
-          >
+          <FormControl component="form" onSubmit={handleSubmit(onSubmit)}>
             <Grid item container>
               {formFields.map(({ label, type, name, className, fieldType }) => (
                 <Grid item key={name} style={{ marginBottom: '0.5em' }}>

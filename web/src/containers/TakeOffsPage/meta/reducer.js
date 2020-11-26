@@ -16,7 +16,7 @@ const TakeOffs = (state = initialState, action) =>
         draft.takeOffs.push(action.payload)
         break
       case constants.ADD_TAKEOFF_ERROR:
-        draft.addTakeOffErrorMessage = action.payload.message
+        draft.addTakeOffErrorMessage = action.payload
         break
       case constants.DELETE_TAKEOFF_SUCCESS:
         draft.takeOffs = draft.takeOffs.filter(

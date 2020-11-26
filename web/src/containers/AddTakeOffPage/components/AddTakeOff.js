@@ -28,33 +28,10 @@ function AddTakeOff({
   dispatchAddTakeOff,
   dispatchGetStockProducts,
   addTakeOffErrorMessage,
-  stock,
   initialize,
 }) {
   const classes = useStyles()
   const [error, setError] = useState(false)
-  const [maxQuantities, setMaxQuantities] = useState({})
-  const validate = (value, allSelectedProducts) => {
-    const [product] = stock.filter((item) => item._id === value)
-    const currentProductValue = allSelectedProducts.products.filter(
-      (prod) => prod.product === value,
-    )[0]
-    const index = allSelectedProducts.products.indexOf(currentProductValue)
-    if (product) {
-      const newQuantity = {}
-      newQuantity[`products[${index}]`] = product.quantity
-      const doesNotExistTheValueOnMaxQuantities =
-        Object.keys(maxQuantities).includes(`products[${index}]`) === false
-      const theProductQuantityIsDifferentFromProductStockQuantity =
-        maxQuantities[`products[${index}]`] !== product.quantity
-      if (
-        doesNotExistTheValueOnMaxQuantities ||
-        theProductQuantityIsDifferentFromProductStockQuantity
-      ) {
-        setMaxQuantities({ ...maxQuantities, ...newQuantity })
-      }
-    }
-  }
 
   const onSubmit = (formValues) => {
     dispatchAddTakeOff(formValues)
@@ -81,7 +58,6 @@ function AddTakeOff({
                 })}
                 label="Produto"
                 className={classes.productSelect}
-                validate={validate}
               />
               <IconButton
                 aria-label="clear"
@@ -109,12 +85,6 @@ function AddTakeOff({
                 label="Quantidade"
                 className={classes.input}
                 minValue={0}
-                validate={[
-                  (value) =>
-                    value > maxQuantities[product]
-                      ? `Quantidade máxima para esse produto é ${maxQuantities[product]}`
-                      : undefined,
-                ]}
               />
             </Grid>
           </Grid>
@@ -123,7 +93,9 @@ function AddTakeOff({
     )
   }
   useEffect(() => {
-    initialize({ takeOffId: generateTakeOffId() })
+    initialize({
+      takeOffId: generateTakeOffId(),
+    })
     dispatchGetStockProducts()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -211,7 +183,12 @@ function AddTakeOff({
                 marginTop: '9.5px',
               }}
             >
-              {addTakeOffErrorMessage}
+              {addTakeOffErrorMessage &&
+                addTakeOffErrorMessage.map((error) => (
+                  <>
+                    <p>{error}</p>
+                  </>
+                ))}
             </FormHelperText>
           </FormControl>
         </Grid>

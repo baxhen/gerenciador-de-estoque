@@ -74,6 +74,7 @@ function AddEntrance({
                 component={InputTextField}
                 label="Preço Unitário"
                 className={classes.input}
+                minValue={0}
               />
             </Grid>
             <Grid item>
@@ -83,6 +84,7 @@ function AddEntrance({
                 component={InputTextField}
                 label="Quantidade"
                 className={classes.input}
+                minValue={0}
               />
             </Grid>
           </Grid>

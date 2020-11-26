@@ -11,7 +11,7 @@ import {
   FormControl,
   FormHelperText,
 } from '@material-ui/core'
-import { Search, Add as AddIcon } from '@material-ui/icons'
+import { Search } from '@material-ui/icons'
 import { SelectField } from 'components/ReduxForm/Select/SelectField'
 
 const useStyles = styles

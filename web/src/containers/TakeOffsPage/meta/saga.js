@@ -1,10 +1,11 @@
-import { all, takeLatest, put, call } from 'redux-saga/effects'
+import { all, takeLatest, put, call, select } from 'redux-saga/effects'
 import { getEndpointURL } from '../../../utils/endpoint'
 import networkService from '../../../utils/network'
 import { getDataFromStorage } from '../../../utils/cookies'
 import * as constants from './constants'
 import * as actions from './actions'
 import { history } from '../../../history'
+import { selectStock } from 'containers/StockPage/meta/selectors'
 
 function* handleGetTakeOffs() {
   try {
@@ -28,13 +29,32 @@ function* handleGetTakeOffsByField({ type, payload }) {
 }
 function* handleAddTakeOff({ type, payload }) {
   try {
-    const action = getEndpointURL(type)
-    const response = yield call(networkService.postData, action, payload)
-    console.log(response)
-    yield put(actions.addTakeOffSuccess(response.takeOff))
-    history.push('dashboard-take-offs')
+    const { products } = payload
+    const stockProducts = yield select(selectStock)
+    let productsError = []
+    products.forEach((product) => {
+      stockProducts.forEach((stock) => {
+        if (
+          product.product === stock._id &&
+          product.quantity > stock.quantity
+        ) {
+          productsError.push(
+            `Saída máxima para ${stock.name} é ${stock.quantity}`,
+          )
+        }
+      })
+    })
+
+    if (productsError.length > 0) {
+      yield put(actions.addTakeOffError(productsError))
+    } else {
+      const action = getEndpointURL(type)
+      const response = yield call(networkService.postData, action, payload)
+      yield put(actions.addTakeOffSuccess(response.takeOff))
+      history.push('dashboard-take-offs')
+    }
   } catch (error) {
-    yield put(actions.getTakeOffsError(error))
+    yield put(actions.addTakeOffError([error.message]))
   }
 }
 
