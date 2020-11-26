@@ -3,7 +3,7 @@ import * as constants from './constants'
 import * as actions from './actions'
 import networkService from '../../../utils/network'
 import makeSelectLoginPage from '../../LoginPage/meta/selectors'
-import makeSelectSignUp from '../../SignUpPage/meta/selectors'
+import selectSignUpFormValues from '../../SignUpPage/meta/selectors'
 import makeSelectRecoverPasswordPage from '../../RecoverPasswordPage/meta/selectors'
 import makeSelectResetPasswordPage from '../../ResetPasswordPage/meta/selectors'
 import { getEndpointURL } from '../../../utils/endpoint'
@@ -18,31 +18,23 @@ function* handleSignIn() {
     const response = yield call(networkService.postData, action, request)
     yield call(saveDataToStorage, response)
     yield put(actions.getAuthSuccess(response))
-    history.push('/dashboard-stock')
-    // stock
+    history.push('/feature')
   } catch (error) {
     error.response.data.message
-      ? yield put(
-          actions.getLoginError({ message: error.response.data.message }),
-        )
-      : yield put(actions.getLoginError({ message: 'Credenciais Inválidas' }))
+      ? yield put(actions.getLoginError(error.response.data.message))
+      : yield put(actions.getLoginError('Credenciais Inválidas'))
   }
 }
 function* handleSignUp() {
   try {
-    const signUpPage = yield select(makeSelectSignUp())
-    const request = {
-      email: signUpPage.email,
-      password: signUpPage.password,
-      username: signUpPage.username,
-    }
+    const request = yield select(selectSignUpFormValues())
     const action = getEndpointURL('SIGN_UP')
     const response = yield call(networkService.postData, action, request)
     const { message } = response
-    yield put(actions.getAuthFeedback({ message }))
+    yield put(actions.getAuthFeedback(message))
   } catch (error) {
     const { message } = error.response.data
-    yield put(actions.getAuthError({ message }))
+    yield put(actions.getAuthError(message))
   }
 }
 
@@ -58,18 +50,14 @@ function* handleRecoverPassword() {
     yield call(networkService.postData, action, request)
 
     yield put(
-      actions.recoverPasswordSuccess({
-        message: `Email de redefinição de senha enviado com sucesso para o email ${email}, verifique a sua caixa de entrada.`,
-      }),
+      actions.recoverPasswordSuccess(
+        `Email de redefinição de senha enviado com sucesso para o email ${email}, verifique a sua caixa de entrada.`,
+      ),
     )
   } catch (error) {
     console.log(error)
     const message = error.response.data.message
-    yield put(
-      actions.recoverPasswordError({
-        message,
-      }),
-    )
+    yield put(actions.recoverPasswordError(message))
   }
 }
 function* handleResetPassword() {
@@ -81,18 +69,10 @@ function* handleResetPassword() {
     const action = getEndpointURL('RESET_PASSWORD')
     const { message } = yield call(networkService.postData, action, request)
 
-    yield put(
-      actions.resetPasswordFeedback({
-        message,
-      }),
-    )
+    yield put(actions.resetPasswordFeedback(message))
   } catch (error) {
     console.log(error.response)
-    yield put(
-      actions.resetPasswordFeedback({
-        message: error.response.data.message,
-      }),
-    )
+    yield put(actions.resetPasswordFeedback(error.response.data.message))
   }
 }
 function* handleVerifyEmail(payload) {
@@ -102,24 +82,16 @@ function* handleVerifyEmail(payload) {
     const action = getEndpointURL('VERIFY_EMAIL')
     const { message } = yield call(networkService.postData, action, request)
 
-    yield put(
-      actions.verifyEmailFeedback({
-        message,
-      }),
-    )
+    yield put(actions.verifyEmailFeedback(message))
   } catch (error) {
     console.log(error.response)
-    yield put(
-      actions.verifyEmailFeedback({
-        message: error.response.data.message,
-      }),
-    )
+    yield put(actions.verifyEmailFeedback(error.response.data.message))
   }
 }
 
 export default function* () {
   yield all([
-    yield takeLatest(constants.GET_AUTH, handleSignIn),
+    yield takeLatest(constants.LOGIN, handleSignIn),
     yield takeLatest(constants.LOGOUT, handleLogOut),
     yield takeLatest(constants.SIGN_UP, handleSignUp),
     yield takeLatest(constants.RECOVER_PASSWORD, handleRecoverPassword),

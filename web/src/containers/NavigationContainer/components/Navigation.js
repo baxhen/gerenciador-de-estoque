@@ -10,8 +10,10 @@ import ListItemText from '@material-ui/core/ListItemText'
 import useScrollTrigger from '@material-ui/core/useScrollTrigger'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
+import Grid from '@material-ui/core/Grid'
+import Drawer from '@material-ui/core/Drawer'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
-import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
+import Hidden from '@material-ui/core/Hidden'
 
 import { styles } from './styles'
 import { Link } from 'react-router-dom'
@@ -44,9 +46,8 @@ function Navigation({
   const classes = useStyles()
   const theme = useTheme()
   const matches = useMediaQuery(theme.breakpoints.down('xs'))
-  const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent)
 
-  const [openDrawer, setOpenDrawer] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false)
 
   /***************************************** Config Objects **********************************************/
   const headerConditions = [
@@ -66,7 +67,9 @@ function Navigation({
     },
   ]
   /*******************************************************************************************************/
-
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen)
+  }
   const handleChange = (e, value) => {
     setValue(value)
   }
@@ -89,50 +92,73 @@ function Navigation({
       ))}
     </Tabs>
   )
-  const renderDrawer = (tabs) => (
-    <>
-      <SwipeableDrawer
-        anchor="right"
-        disableBackdropTransition={!iOS}
-        disableDiscovery={iOS}
-        open={openDrawer}
-        onClose={() => setOpenDrawer(false)}
-        onOpen={() => setOpenDrawer(true)}
-        classes={{ paper: classes.drawer }}
-      >
-        <div className={classes.toolbarMargin}></div>
-
-        <List disablePadding>
-          {tabs.map(({ label, to }, i) => (
-            <ListItem
-              divider
-              button
-              key={label}
-              component={Link}
-              to={to}
-              onClick={() => {
-                setOpenDrawer(false)
-                setValue(i)
-              }}
-              selected={value === i}
-              classes={{ selected: classes.drawerSelectedItem }}
-            >
-              <ListItemText className={classes.drawerItem} disableTypography>
-                {label}
-              </ListItemText>
-            </ListItem>
-          ))}
-        </List>
-      </SwipeableDrawer>
-      <IconButton
-        onClick={() => setOpenDrawer(!openDrawer)}
-        disableRipple
-        className={classes.drawerIconContainer}
-      >
-        <MenuIcon className={classes.drawerIcon} />
-      </IconButton>
-    </>
+  const drawer = (tabs) => (
+    <Grid container direction="column">
+      <List>
+        {tabs.map(({ label, valueActive, to }) => (
+          <ListItem
+            button
+            key={label}
+            justify="center"
+            className={
+              classes[valueActive === value ? 'menuItemActive' : 'menuItem']
+            }
+            component={Link}
+            to={to}
+            onClick={() => {
+              setValue(valueActive)
+              matches && handleDrawerToggle()
+            }}
+          >
+            <ListItemText primary={label} style={{ textAlign: 'center' }} />
+          </ListItem>
+        ))}
+      </List>
+    </Grid>
   )
+  // const renderDrawer = (tabs) => (
+  //   <>
+  //     <SwipeableDrawer
+  //       disableBackdropTransition={!iOS}
+  //       disableDiscovery={iOS}
+  //       open={openDrawer}
+  //       onClose={() => setOpenDrawer(false)}
+  //       onOpen={() => setOpenDrawer(true)}
+  //       classes={{ paper: classes.drawer }}
+  //     >
+  //       <div className={classes.toolbarMargin}></div>
+
+  //       <List disablePadding>
+  //         {tabs.map(({ label, to }, i) => (
+  //           <ListItem
+  //             divider
+  //             button
+  //             key={label}
+  //             component={Link}
+  //             to={to}
+  //             onClick={() => {
+  //               setOpenDrawer(false)
+  //               setValue(i)
+  //             }}
+  //             selected={value === i}
+  //             classes={{ selected: classes.drawerSelectedItem }}
+  //           >
+  //             <ListItemText className={classes.drawerItem} disableTypography>
+  //               {label}
+  //             </ListItemText>
+  //           </ListItem>
+  //         ))}
+  //       </List>
+  //     </SwipeableDrawer>
+  //     <IconButton
+  //       onClick={() => setOpenDrawer(!openDrawer)}
+  //       disableRipple
+  //       className={classes.drawerIconContainer}
+  //     >
+  //       <MenuIcon className={classes.drawerIcon} />
+  //     </IconButton>
+  //   </>
+  // )
 
   const renderHeader = (condition) => {
     const [headerToRender] = headerConfig.filter(({ cond }) => {
@@ -160,11 +186,45 @@ function Navigation({
               >
                 <img src={logo} alt="Logo" className={classes.logo} />
               </Button>
-              {matches ? renderDrawer(tabs) : renderTabs(tabs)}
+              {matches ? (
+                <IconButton
+                  color="primary"
+                  aria-label="open drawer"
+                  edge="start"
+                  onClick={handleDrawerToggle}
+                  className={classes.menuButton}
+                >
+                  <MenuIcon />
+                </IconButton>
+              ) : (
+                <></>
+              )}
+              {matches ? <></> : renderTabs(tabs)}
             </Toolbar>
           </AppBar>
         </ElevationScroll>
         <div className={classes.toolbarMargin}></div>
+        <nav className={classes.drawer} aria-label="mailbox folders">
+          {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+          <Hidden smUp implementation="css">
+            <Drawer
+              // container={container}
+              // anchor='right'
+              variant="temporary"
+              anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+              open={mobileOpen}
+              onClose={handleDrawerToggle}
+              classes={{
+                paper: classes.drawerPaper,
+              }}
+              ModalProps={{
+                keepMounted: true, // Better open performance on mobile.
+              }}
+            >
+              {drawer(tabs)}
+            </Drawer>
+          </Hidden>
+        </nav>
       </>
     )
   }

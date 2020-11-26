@@ -3,14 +3,22 @@ import { compose } from 'redux'
 import { reduxForm } from 'redux-form'
 
 import ResetPassword from './components/ResetPassword'
-import { selectResetPasswordMessage } from 'containers/AuthContainer/meta/selectors'
+import {
+  selectResetPasswordSuccessMessage,
+  selectResetPasswordErrorMessage,
+  selectHasError,
+  selectIsLoading,
+} from 'containers/AuthContainer/meta/selectors'
 import { resetPassword } from 'containers/AuthContainer/meta/actions'
 import { formFields } from './meta/configObjects'
 import { validate } from './meta/validate'
 
 const mapStateToProps = (state) => ({
   formFields,
-  resetPasswordMessage: selectResetPasswordMessage(state),
+  resetPasswordSuccessMessage: selectResetPasswordSuccessMessage(state),
+  resetPasswordErrorMessage: selectResetPasswordErrorMessage(state),
+  loading: selectIsLoading(state),
+  error: selectHasError(state),
 })
 
 const mapDispatchToProps = (dispatch) => {

@@ -47,6 +47,7 @@ exports.getStock = async (req, res) => {
         name: '$product.name',
         productId: '$product.productId',
         quantity: 1,
+        category: '$product.category',
       },
     },
   ]

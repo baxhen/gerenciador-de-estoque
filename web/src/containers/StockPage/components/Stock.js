@@ -12,7 +12,7 @@ import {
   FormHelperText,
 } from '@material-ui/core'
 import { Search, Add as AddIcon } from '@material-ui/icons'
-import { history } from '../../../history'
+import { SelectField } from 'components/ReduxForm/Select/SelectField'
 
 const useStyles = styles
 
@@ -24,6 +24,8 @@ function Stock({
   submitting,
   pristine,
   error,
+  categories,
+  dispatchGetCategories,
 }) {
   const classes = useStyles()
   const [filter, setFilter] = useState({ key: '', value: '' })
@@ -48,6 +50,7 @@ function Stock({
   }, [filter, stock])
   useEffect(() => {
     dispatchGetStock()
+    dispatchGetCategories()
     // eslint-disable-next-line
   }, [])
   return (
@@ -67,6 +70,18 @@ function Stock({
                   />
                 </Grid>
               ))}
+              <Grid item key={'category'} style={{ marginBottom: '0.5em' }}>
+                <Field
+                  component={SelectField}
+                  label="Categoria"
+                  name="category"
+                  type="select"
+                  options={categories.map(({ _id, name }) => {
+                    return { value: _id, name }
+                  })}
+                  className={classes.categorySelect}
+                />
+              </Grid>
               <IconButton
                 aria-label="search"
                 className={classes.iconButton}
@@ -74,15 +89,6 @@ function Stock({
                 disabled={pristine || submitting}
               >
                 <Search />
-              </IconButton>
-              <IconButton
-                aria-label="add"
-                onClick={() => {
-                  history.push('dashboard-products-add')
-                }}
-                className={classes.iconButton}
-              >
-                <AddIcon />
               </IconButton>
             </Grid>
             <FormHelperText

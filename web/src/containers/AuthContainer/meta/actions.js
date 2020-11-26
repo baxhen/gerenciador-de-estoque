@@ -1,11 +1,11 @@
 import * as constants from './constants'
 
 export const getAuth = () => ({
-  type: constants.GET_AUTH,
+  type: constants.LOGIN,
 })
 
 export const getAuthSuccess = (payload) => ({
-  type: constants.GET_AUTH_SUCCESS,
+  type: constants.LOGIN_SUCCESS,
   payload,
 })
 
@@ -14,15 +14,15 @@ export const signUserUp = () => ({
 })
 
 export const getAuthError = (payload) => ({
-  type: constants.GET_AUTH_ERROR,
+  type: constants.SIGN_UP_ERROR,
   payload,
 })
 export const getLoginError = (payload) => ({
-  type: constants.GET_LOGIN_ERROR,
+  type: constants.LOGIN_ERROR,
   payload,
 })
 export const getAuthFeedback = (payload) => ({
-  type: constants.GET_AUTH_FEEDBACK,
+  type: constants.SIGN_UP_SUCCESS,
   payload,
 })
 export const logOut = () => {
@@ -48,7 +48,7 @@ export const resetPassword = () => ({
 })
 
 export const resetPasswordFeedback = (payload) => ({
-  type: constants.RESET_PASSWORD_FEEDBACK,
+  type: constants.RESET_PASSWORD_SUCCESS,
   payload,
 })
 export const verifyEmail = (payload) => ({
@@ -57,6 +57,6 @@ export const verifyEmail = (payload) => ({
 })
 
 export const verifyEmailFeedback = (payload) => ({
-  type: constants.VERIFY_EMAIL_FEEDBACK,
+  type: constants.VERIFY_EMAIL_SUCCESS,
   payload,
 })

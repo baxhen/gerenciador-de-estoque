@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: web
-          image: baxhen/gde-web
+          image: baxhen/gde-web:latest
           ports:
             - containerPort: 3000

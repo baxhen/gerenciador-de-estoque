@@ -1,12 +1,20 @@
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 
-import { selectVerifyEmailMessage } from 'containers/AuthContainer/meta/selectors'
+import {
+  selectVerifyEmailSuccessMessage,
+  selectVerifyEmailErrorMessage,
+  selectIsLoading,
+  selectHasError,
+} from 'containers/AuthContainer/meta/selectors'
 import { verifyEmail } from 'containers/AuthContainer/meta/actions'
 import VerifyEmail from './components/VerifyEmail'
 
 const mapStateToProps = (state) => ({
-  verifyEmailMessage: selectVerifyEmailMessage(state),
+  verifyEmailSuccessMessage: selectVerifyEmailSuccessMessage(state),
+  verifyEmailErrorMessage: selectVerifyEmailErrorMessage(state),
+  loading: selectIsLoading(state),
+  error: selectHasError(state),
 })
 
 const mapDispatchToProps = (dispatch) => {

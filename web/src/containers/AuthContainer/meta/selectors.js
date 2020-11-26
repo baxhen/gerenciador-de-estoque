@@ -8,24 +8,42 @@ import { initialState } from './reducer'
 const selectAuth = (state) => state.auth || initialState
 
 const selectIsAuthenticated = (state) => selectAuth(state).isAuthenticated
+const selectIsLoading = (state) => selectAuth(state).loading
+const selectHasError = (state) => selectAuth(state).error
 
-const selectRecoverPasswordMessage = (state) =>
-  selectAuth(state).recoverPasswordMessage
-const selectResetPasswordMessage = (state) =>
-  selectAuth(state).resetPasswordMessage
+const selectRecoverPasswordSuccessMessage = (state) =>
+  selectAuth(state).recoverPasswordSuccessMessage
+const selectRecoverPasswordErrorMessage = (state) =>
+  selectAuth(state).recoverPasswordErrorMessage
+
+const selectResetPasswordSuccessMessage = (state) =>
+  selectAuth(state).resetPasswordSuccessMessage
+const selectResetPasswordErrorMessage = (state) =>
+  selectAuth(state).resetPasswordErrorMessage
+
 const selectSignUpSuccessMessage = (state) =>
   selectAuth(state).signUpSuccessMessage
 const selectSignUpErrorMessage = (state) => selectAuth(state).signUpErrorMessage
+
 const selectSignInErrorMessage = (state) => selectAuth(state).signInErrorMessage
-const selectVerifyEmailMessage = (state) => selectAuth(state).verifyEmailMessage
+
+const selectVerifyEmailSuccessMessage = (state) =>
+  selectAuth(state).verifyEmailSuccessMessage
+const selectVerifyEmailErrorMessage = (state) =>
+  selectAuth(state).verifyEmailErrorMessage
 
 export {
   selectAuth,
   selectIsAuthenticated,
-  selectRecoverPasswordMessage,
-  selectResetPasswordMessage,
+  selectRecoverPasswordSuccessMessage,
+  selectRecoverPasswordErrorMessage,
+  selectResetPasswordSuccessMessage,
+  selectResetPasswordErrorMessage,
   selectSignUpSuccessMessage,
   selectSignUpErrorMessage,
-  selectVerifyEmailMessage,
+  selectVerifyEmailSuccessMessage,
+  selectVerifyEmailErrorMessage,
   selectSignInErrorMessage,
+  selectIsLoading,
+  selectHasError,
 }

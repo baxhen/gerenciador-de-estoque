@@ -2,27 +2,34 @@ import React, { useState, memo, useEffect } from 'react'
 import { useStyles } from './styles'
 import { useTheme } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
+import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 
 import Dialog from '@material-ui/core/Dialog'
 import DialogContent from '@material-ui/core/DialogContent'
+import DialogActions from '@material-ui/core/DialogActions'
+
 import { useParams } from 'react-router-dom'
-import { CircularProgress, useMediaQuery } from '@material-ui/core'
+import { CircularProgress } from '@material-ui/core'
 
 function VerifyEmail(props) {
   const classes = useStyles()
   const theme = useTheme()
   const { token, email } = useParams()
-  const matchesXS = useMediaQuery(theme.breakpoints.down('xs'))
-  const matchesSM = useMediaQuery(theme.breakpoints.down('sm'))
-  const matchesMD = useMediaQuery(theme.breakpoints.down('md'))
-  const { verifyEmailMessage, dispatchVerifyEmail, history } = props
+  const {
+    verifyEmailSuccessMessage,
+    verifyEmailErrorMessage,
+    loading,
+    error,
+    dispatchVerifyEmail,
+    history,
+  } = props
 
   const [open, setOpen] = useState(false)
 
   const onDialogClose = () => {
     setOpen(!open)
-    history.push('/login')
+    !error && history.push('/login')
   }
 
   useEffect(() => {
@@ -62,27 +69,12 @@ function VerifyEmail(props) {
         onClose={onDialogClose}
         PaperProps={{
           style: {
-            paddingTop: matchesXS ? '1em' : '5em',
-            paddingBottom: matchesXS ? '1em' : '5em',
-            paddingRight: matchesXS
-              ? 0
-              : matchesSM
-              ? '5em'
-              : matchesMD
-              ? '10em'
-              : '10em',
-            paddingLeft: matchesXS
-              ? 0
-              : matchesSM
-              ? '5em'
-              : matchesMD
-              ? '10em'
-              : '10em',
+            padding: 'auto',
           },
         }}
       >
         <DialogContent>
-          {verifyEmailMessage ? (
+          {verifyEmailSuccessMessage && !loading ? (
             <Grid container direction="column">
               <Grid item>
                 <Typography variant="h4" gutterBottom>
@@ -90,8 +82,33 @@ function VerifyEmail(props) {
                 </Typography>
               </Grid>
               <Grid item>
-                <Typography variant="body1">{verifyEmailMessage}</Typography>
+                <Typography variant="body1">
+                  {verifyEmailSuccessMessage}
+                </Typography>
               </Grid>
+              <DialogActions>
+                <Button onClick={onDialogClose} color="primary" autoFocus>
+                  Ok
+                </Button>
+              </DialogActions>
+            </Grid>
+          ) : verifyEmailErrorMessage && !loading ? (
+            <Grid container direction="column">
+              <Grid item>
+                <Typography variant="h4" gutterBottom>
+                  Verificação De Email Falhou
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography variant="body1">
+                  {verifyEmailErrorMessage}
+                </Typography>
+              </Grid>
+              <DialogActions>
+                <Button onClick={onDialogClose} color="primary" autoFocus>
+                  Ok
+                </Button>
+              </DialogActions>
             </Grid>
           ) : (
             <CircularProgress />
