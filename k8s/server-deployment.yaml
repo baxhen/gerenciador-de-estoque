@@ -21,7 +21,7 @@ spec:
             - name: MONGO_URI
               value: mongodb+srv://vtrGuerra:flamengo81@cluster0.gi3tf.mongodb.net/Warriors?retryWrites=true&w=majority
             - name: EMAIL
-              value: leo292629@gmail.com
+              value: suporte.abclivros@gmail.com
             - name: JWT_SECRET
               valueFrom:
                 secretKeyRef:

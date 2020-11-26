@@ -4,6 +4,7 @@ import * as constants from './constants'
 export const initialState = {
   categories: [],
   products: [],
+  stockProducts: [],
 }
 
 /* eslint-disable no-param-reassign */
@@ -15,6 +16,9 @@ const ProductsPage = (state = initialState, action) =>
         break
       case constants.GET_PRODUCTS_SUCCESS:
         draft.products = action.payload
+        break
+      case constants.GET_STOCK_PRODUCTS_SUCCESS:
+        draft.stockProducts = action.payload
         break
       case constants.ADD_PRODUCT_SUCCESS:
         draft.products.push(action.payload)

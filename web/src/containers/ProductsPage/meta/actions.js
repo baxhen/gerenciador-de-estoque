@@ -35,12 +35,19 @@ export const editProductSuccess = (payload) => ({
 export const getProducts = () => ({
   type: constants.GET_PRODUCTS,
 })
+export const getStockProducts = () => ({
+  type: constants.GET_STOCK_PRODUCTS,
+})
 export const getProductsByField = (payload) => ({
   type: constants.GET_PRODUCTS_BY_FIELD,
   payload,
 })
 export const getProductsSuccess = (payload) => ({
   type: constants.GET_PRODUCTS_SUCCESS,
+  payload,
+})
+export const getStockProductsSuccess = (payload) => ({
+  type: constants.GET_STOCK_PRODUCTS_SUCCESS,
   payload,
 })
 export const addProduct = (payload) => ({

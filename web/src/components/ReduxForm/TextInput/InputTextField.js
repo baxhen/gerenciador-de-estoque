@@ -8,6 +8,8 @@ export const InputTextField = ({
   meta: { error, touched },
   className,
   name,
+  minValue,
+  maxValue,
 }) => {
   const hasError = () => {
     if (error && touched) {
@@ -31,6 +33,7 @@ export const InputTextField = ({
         helperText={showError()}
         variant="outlined"
         fullWidth
+        InputProps={{ inputProps: { min: minValue, max: maxValue } }}
         type={type}
         label={label}
         id={name}

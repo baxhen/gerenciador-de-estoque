@@ -26,17 +26,40 @@ function AddTakeOff({
   clients,
   products,
   dispatchAddTakeOff,
-  dispatchGetProducts,
+  dispatchGetStockProducts,
   addTakeOffErrorMessage,
+  stock,
   initialize,
 }) {
   const classes = useStyles()
   const [error, setError] = useState(false)
+  const [maxQuantities, setMaxQuantities] = useState({})
+  const validate = (value, allSelectedProducts) => {
+    const [product] = stock.filter((item) => item._id === value)
+    const currentProductValue = allSelectedProducts.products.filter(
+      (prod) => prod.product === value,
+    )[0]
+    const index = allSelectedProducts.products.indexOf(currentProductValue)
+    if (product) {
+      const newQuantity = {}
+      newQuantity[`products[${index}]`] = product.quantity
+      const doesNotExistTheValueOnMaxQuantities =
+        Object.keys(maxQuantities).includes(`products[${index}]`) === false
+      const theProductQuantityIsDifferentFromProductStockQuantity =
+        maxQuantities[`products[${index}]`] !== product.quantity
+      if (
+        doesNotExistTheValueOnMaxQuantities ||
+        theProductQuantityIsDifferentFromProductStockQuantity
+      ) {
+        setMaxQuantities({ ...maxQuantities, ...newQuantity })
+      }
+    }
+  }
 
   const onSubmit = (formValues) => {
     dispatchAddTakeOff(formValues)
   }
-  const renderProducts = ({ fields, meta: { error, submitFailed } }) => {
+  const renderProducts = ({ fields }) => {
     return (
       <>
         <Button
@@ -58,6 +81,7 @@ function AddTakeOff({
                 })}
                 label="Produto"
                 className={classes.productSelect}
+                validate={validate}
               />
               <IconButton
                 aria-label="clear"
@@ -74,6 +98,7 @@ function AddTakeOff({
                 component={InputTextField}
                 label="Preço Unitário"
                 className={classes.input}
+                minValue={0}
               />
             </Grid>
             <Grid item>
@@ -83,6 +108,13 @@ function AddTakeOff({
                 component={InputTextField}
                 label="Quantidade"
                 className={classes.input}
+                minValue={0}
+                validate={[
+                  (value) =>
+                    value > maxQuantities[product]
+                      ? `Quantidade máxima para esse produto é ${maxQuantities[product]}`
+                      : undefined,
+                ]}
               />
             </Grid>
           </Grid>
@@ -92,7 +124,7 @@ function AddTakeOff({
   }
   useEffect(() => {
     initialize({ takeOffId: generateTakeOffId() })
-    dispatchGetProducts()
+    dispatchGetStockProducts()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   useEffect(() => {
@@ -156,7 +188,11 @@ function AddTakeOff({
                   )
                 }
               })}
-              <FieldArray name="products" component={renderProducts} />
+              <FieldArray
+                // validate={validate}
+                name="products"
+                component={renderProducts}
+              />
               <Grid item container justify="center">
                 <Button
                   variant="contained"

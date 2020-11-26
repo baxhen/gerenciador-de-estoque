@@ -6,7 +6,7 @@ import * as constants from './constants'
 import * as actions from './actions'
 // import { history } from '../../../history'
 
-function* handleGetStock() {
+export function* handleGetStock() {
   try {
     const action = getEndpointURL('GET_STOCK')
     networkService.setCredentials(getDataFromStorage().token)

@@ -8,20 +8,22 @@ import { validate } from './meta/validate'
 import { selectClients } from 'containers/ClientsPage/meta/selectors'
 import { addTakeOff } from 'containers/TakeOffsPage/meta/actions'
 import { selectAddTakeOffErrorMessage } from 'containers/TakeOffsPage/meta/selectors'
-import { selectProducts } from 'containers/ProductsPage/meta/selectors'
-import { getProducts } from 'containers/ProductsPage/meta/actions'
+import { selectStockProducts } from 'containers/ProductsPage/meta/selectors'
+import { getStockProducts } from 'containers/ProductsPage/meta/actions'
+import { selectStock } from 'containers/StockPage/meta/selectors'
 
 const mapStateToProps = (state) => ({
   formFields,
   clients: selectClients(state),
-  products: selectProducts(state),
+  products: selectStockProducts(state),
+  stock: selectStock(state),
   addTakeOffErrorMessage: selectAddTakeOffErrorMessage(state),
 })
 
 function mapDispatchToProps(dispatch) {
   return {
     dispatchAddTakeOff: (payload) => dispatch(addTakeOff(payload)),
-    dispatchGetProducts: () => dispatch(getProducts()),
+    dispatchGetStockProducts: () => dispatch(getStockProducts()),
   }
 }
 

@@ -1,10 +1,13 @@
-import { all, takeLatest, put, call } from 'redux-saga/effects'
+import { all, takeLatest, put, call, select } from 'redux-saga/effects'
 import { getEndpointURL } from '../../../utils/endpoint'
 import networkService from '../../../utils/network'
 import { getDataFromStorage } from '../../../utils/cookies'
 import * as constants from './constants'
 import * as actions from './actions'
 import { history } from '../../../history'
+import { selectStockProducts } from 'containers/StockPage/meta/selectors'
+import { handleGetStock } from 'containers/StockPage/meta/saga'
+import { selectProductsById } from './selectors'
 
 function* handleGetCategories() {
   try {
@@ -22,6 +25,18 @@ function* handleGetProducts() {
     networkService.setCredentials(getDataFromStorage().token)
     const response = yield call(networkService.getData, action)
     yield put(actions.getProductsSuccess(response.products))
+  } catch (error) {
+    yield put(actions.getProductsPageError(error))
+  }
+}
+
+function* handleGetStockProducts() {
+  try {
+    yield call(handleGetProducts)
+    yield call(handleGetStock)
+    const products = yield select(selectStockProducts)
+    const productsIds = yield select(selectProductsById(products))
+    yield put(actions.getStockProductsSuccess(productsIds))
   } catch (error) {
     yield put(actions.getProductsPageError(error))
   }
@@ -99,6 +114,7 @@ export default function* () {
   yield all([
     yield takeLatest(constants.GET_CATEGORIES, handleGetCategories),
     yield takeLatest(constants.GET_PRODUCTS, handleGetProducts),
+    yield takeLatest(constants.GET_STOCK_PRODUCTS, handleGetStockProducts),
     yield takeLatest(constants.GET_PRODUCTS_BY_FIELD, handleGetProductsByField),
     yield takeLatest(constants.ADD_PRODUCT, handleAddProduct),
     yield takeLatest(constants.ADD_CATEGORY, handleAddCategory),

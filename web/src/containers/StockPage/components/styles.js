@@ -52,7 +52,7 @@ export const styles = makeStyles((theme) => ({
     backgroundColor: theme.palette.primary.main,
     color: 'white',
     height: '48px',
-    marginRight: '20px',
+    marginLeft: '20px',
     '&:hover': {
       backgroundColor: theme.palette.primary.light,
     },
